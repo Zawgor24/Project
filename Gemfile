@@ -7,6 +7,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'activeadmin'
+gem 'devise'
+gem 'slim'
+gem 'bootstrap'
+gem 'carrierwave', '~> 1.0'
+gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
+gem 'figaro'
+gem 'rmagick'
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'pg', '~> 0.18'
