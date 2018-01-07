@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
+  belongs_to :category, required: false
   belongs_to :user
-  belongs_to :category
 
   has_many :comments, as: :commentable, dependent: :destroy
 

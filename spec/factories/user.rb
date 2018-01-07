@@ -9,7 +9,7 @@ FactoryBot.define do
     birthday { Faker::Date.birthday(18, 65) }
     info { Faker::Lorem.sentence(3) }
     address { Faker::Address.city }
-    sex 'Male'
+    sex { User.sexes.keys.sample }
     avatar { Faker::Avatar.image }
   end
 end

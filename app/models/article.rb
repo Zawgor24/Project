@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class News < ApplicationRecord
-  belongs_to :category
+class Article < ApplicationRecord
+  belongs_to :user
 
   has_many :comments, as: :commentable, dependent: :destroy
 

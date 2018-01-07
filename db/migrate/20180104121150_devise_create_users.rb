@@ -22,7 +22,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.date :birthday
       t.text :info
       t.string :address
-      t.string :sex
+      t.integer :sex
       t.string :avatar
 
       t.timestamps null: false
