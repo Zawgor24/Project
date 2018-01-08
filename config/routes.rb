@@ -5,12 +5,21 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
 
-  resources :users, shallow: true, except: [:index] do
-    resources :posts, except: [:index]
-    resources :articles, except: [:index]
+  resources :users, shallow: true, except: :index do
+    resources :posts, except: :index do
+      resources :comments, except: :show
+    end
+
+    resources :articles, except: :index do
+      resources :comments
+    end
   end
 
-  resources :posts, :articles, only: [:index]
+  resources :articles, only: :index
+
+  resources :categories do
+    resources :posts, only: :index
+  end
 
   root 'posts#index'
 end

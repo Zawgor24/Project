@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   enum sex: %i[male female]
 
+  has_many :articles, dependent: :destroy
   has_many :posts, dependent: :destroy
 
   validates :info, length: { maximum: 256 }
