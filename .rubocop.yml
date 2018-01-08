@@ -20,6 +20,9 @@ Metrics/MethodLength:
 Rails:
   Enabled: true
 
+Rails/InverseOf:
+  Enabled: false
+
 Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
