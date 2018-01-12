@@ -2,7 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :find_comment, only: %i[edit update destroy]
-  before_action :find_commentable, only: %i[create update destroy]
+  before_action :find_commentable, only: %i[create update destroy edit]
 
   def new
     @comment = Comment.new
@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.new(comment_params_with_user)
-    if @comments.save
+    if @comment.save
       redirect_to @commentable
     else
       render :new
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to @commentable
+      redirect_to @comment.commentable
     else
       render :edit
     end
@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
 
-    redirect_to @commentable
+    redirect_to @comment.commentable
   end
 
   private

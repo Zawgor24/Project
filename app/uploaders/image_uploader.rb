@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AvatarUploader < CarrierWave::Uploader::Base
+class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   storage :file
@@ -10,6 +10,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   version :thumb do
-    process resize_to_fit: [250, 250]
+    process resize_to_fit: [400, 250]
   end
 end

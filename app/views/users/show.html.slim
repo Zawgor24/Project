@@ -1,0 +1,36 @@
+.container
+  .row.profile
+    .col-md-3
+      .profile-sidebar
+        .profile-userpic
+          = show_image(@user)
+        .profile-usertitle
+          .profile-usertitle-name
+            | #{ @user.first_name.titleize } #{ @user.last_name.titleize }
+          .profile-usertitle-job
+            | Status
+        .profile-userbuttons
+          button.btn.btn-success.btn-sm type="button" Follow
+          button.btn.btn-danger.btn-sm type="button" Message
+        .profile-usermenu
+          ul.nav
+            li
+              = link_to 'Edit profile||', edit_user_path(@user)
+            li
+              = link_to 'Create post||', new_user_post_path(@user)
+            li
+              = link_to 'Create news', new_user_article_path(@user)
+            li
+              = link_to 'Delete account', @user, method: :delete,
+                                                 data: {confirm: 'Sure?'}
+    .col-md-9
+      .profile-content
+        | Full name: #{ @user.first_name.titleize } #{ @user.last_name.titleize }
+        br/
+        | Birthday: #{ @user.birthday }
+        br/
+        | Address: #{ @user.address }
+        br/
+        | Gender: #{ @user.sex.humanize }
+        br/
+        | Additional information: #{ @user.info }

@@ -1,0 +1,25 @@
+= form_for [current_user, @post] do |f|
+  - if @post.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@post.errors.count, "error")
+        | prohibited
+        | this post from being saved:
+      ul
+        - @post.errors.full_messages.each do |msg|
+          li= msg
+
+  p
+    = f.label :title
+    = f.text_field :title
+
+  p
+    = f.label :body
+    = f.text_field :body
+
+  p
+    = f.label :avatar
+    = f.file_field :avatar
+
+  p
+    = f.submit

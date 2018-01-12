@@ -1,0 +1,13 @@
+.container
+  | News №#{article.id}
+  .row
+    .col
+      div.leftimg
+        = show_image(article)
+
+      h3
+        | #{ link_to article.title, article }:
+
+      h5
+        | #{ article.body }
+      br/

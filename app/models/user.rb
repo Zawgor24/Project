@@ -16,7 +16,7 @@ class User < ApplicationRecord
   validate :birthday_more_that_current_date,
     :user_older_than_minimum_age, if: -> { birthday.present? }
 
-  mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, ImageUploader
 
   private
 

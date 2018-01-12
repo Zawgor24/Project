@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
+    @categories = Category.all
   end
 
   def show; end
@@ -42,7 +43,7 @@ class ArticlesController < ApplicationController
   private
 
   def find_article
-    @article = article.find(params[:id])
+    @article = Article.find(params[:id])
   end
 
   def article_params

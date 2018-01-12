@@ -21,5 +21,5 @@ Rails.application.routes.draw do
     resources :posts, only: :index
   end
 
-  root 'posts#index'
+  root 'articles#index'
 end

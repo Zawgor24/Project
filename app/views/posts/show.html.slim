@@ -1,0 +1,18 @@
+h1
+  | Post №#{ @post.id }
+
+div.leftimg
+  = show_image(@post)
+
+h3
+  |<strong> #{ @post.title }: </strong>
+
+h5
+  | #{ @post.body }
+
+h3 Comments
+
+= render @post.comments
+= render partial: 'comments/form', locals: { commentable: @post }
+
+= link_to 'Back', :back

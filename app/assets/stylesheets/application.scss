@@ -1,6 +1,39 @@
 /*
- *= require_tree .
  *= require_self
  */
+
+@import 'user';
 @import 'bootstrap';
 @import 'toastr';
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+body {
+  background-color: PapayaWhip;
+}
+
+.post {
+  margin-bottom: 80px;
+}
+
+.comment {
+  margin: 7px 20px 20px 20px;
+
+  background-color: Lavender;
+}
+
+.news {
+  margin-left: 15%;
+  margin-right: 15%;
+
+  background-color: Lavender;
+}
+
+.leftimg {
+  float: left;
+  margin: 7px 20px 7px 20px;
+}
+
+body {
+  background: #F1F3FA;
+}
