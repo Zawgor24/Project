@@ -1,4 +1,4 @@
-= form_for @article do |f|
+= form_for [current_user, @article] do |f|
   - if @article.errors.any?
     #error_explanation
       h2
@@ -8,18 +8,35 @@
       ul
         - @article.errors.full_messages.each do |msg|
           li= msg
-
-  p
-    = f.label :title
-    = f.text_field :title
-
-  p
-    = f.label :body
-    = f.text_field :body
-
-  p
-    = f.label :avatar
-    = f.file_field :avatar
-
-  p
-    = f.submit
+  .col-md-8.offset-md-2 
+    hr.my-5/
+    .card.card-outline-secondary
+      .card-header 
+        h3.mb-0  Create article
+      .card-block
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Title
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-info-circle aria-hidden="true"
+              = f.text_field :title, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Title'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Body
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-info-circle aria-hidden="true"
+              = f.text_field :body, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Body'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Image
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-info-circle aria-hidden="true"
+              = f.file_field :avatar, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Image'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label
+          .col-lg-9
+            input.btn.btn-secondary type="reset" value="Reset" /
+            input.btn.btn-success type="submit" value="Submit" 

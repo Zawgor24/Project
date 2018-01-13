@@ -1,21 +1,36 @@
-h2 Sign up
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = devise_error_messages!
-  .field
-    = f.label :email
-    br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      em
-        | (#{@minimum_password_length} characters minimum)
-    br/
-    = f.password_field :password, autocomplete: "off"
-  .field
-    = f.label :password_confirmation
-    br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+  .container align='center' 
+    .panel.panel-info
+      .panel-heading
+        .panel-title Sign Up
+        div style=("float:right; font-size: 85%; position: relative; top:-10px") 
+          = link_to "Log in", new_session_path(resource_name)
+      .panel-body
+        form#signupform.form-horizontal role="form" 
+          #signupalert.alert.alert-danger style="display:none" 
+            p Error:
+            span
+          .form-group
+            label.col-md-3.control-label for="email"
+            .col-md-9
+              .input-group style=("margin-bottom: 25px")
+                span.input-group-addon
+                  i.fa.fa-user-circle aria-hidden="true"
+                = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email'
+          .form-group
+            label.col-md-3.control-label for="password"
+            .col-md-9
+              .input-group style=("margin-bottom: 25px") 
+                span.input-group-addon
+                  i.fa.fa-briefcase aria-hidden="true" 
+                = f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control', placeholder: 'Password'
+          .form-group
+            .col-md-offset-3.col-md-9
+              input.btn.btn-success type="submit" value="Submit" 
+              span style="margin-left:8px;"
+          .form-group style=("border-top: 1px solid #999; padding-top:20px") 
+            .col-md-offset-3.col-md-9
+              button#btn-fbsignup.btn.btn-primary type="button" 
+                i.icon-facebook
+                |   Sign Up with Facebook

@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
 
-  resources :users, shallow: true, except: :index do
+  resources :users, shallow: true, except: %i[index create new] do
     resources :posts, except: :index do
-      resources :comments, except: :show
+      resources :comments, except: %i[index show]
     end
 
     resources :articles, except: :index do
-      resources :comments
+      resources :comments, except: %i[index show]
     end
   end
 

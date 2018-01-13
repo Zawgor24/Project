@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = current_user.article.create(article_params)
+    @article = current_user.articles.new(article_params)
 
     if @article.save
       redirect_to @article

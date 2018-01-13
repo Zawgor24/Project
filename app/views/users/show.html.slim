@@ -6,7 +6,8 @@
           = show_image(@user)
         .profile-usertitle
           .profile-usertitle-name
-            | #{ @user.first_name.titleize } #{ @user.last_name.titleize }
+            - if @user.first_name.present?
+              | #{ @user.first_name.titleize } #{ @user.last_name.titleize }
           .profile-usertitle-job
             | Status
         .profile-userbuttons
@@ -25,12 +26,12 @@
                                                  data: {confirm: 'Sure?'}
     .col-md-9
       .profile-content
-        | Full name: #{ @user.first_name.titleize } #{ @user.last_name.titleize }
+        | Full name: #{ @user.first_name } #{ @user.last_name }
         br/
         | Birthday: #{ @user.birthday }
         br/
         | Address: #{ @user.address }
         br/
-        | Gender: #{ @user.sex.humanize }
+        | Gender: #{ @user.sex.humanize if @user.sex }
         br/
         | Additional information: #{ @user.info }

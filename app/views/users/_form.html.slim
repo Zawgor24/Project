@@ -1,49 +1,82 @@
-= form_for @user do |f|
-  - if @user.errors.any?
-    #error_explanation
-      h2
-        = pluralize(@user.errors.count, "error")
-        | prohibited
-        | this user from being saved:
-      ul
-        - @user.errors.full_messages.each do |msg|
-          li= msg
-
-  p
-    = f.label :email
-    = f.email_field :email
-
-  p
-    = f.label :password
-    = f.password_field :password
-
-  p
-    = f.label :first_name
-    = f.text_field :first_name
-
-  p
-    = f.label :last_name
-    = f.text_field :last_name 
-
-  p
-    = f.label :birthday
-    = f.date_field :birthday
-
-  p
-    = f.label :address
-    = f.text_field :address
-  
-  p
-    = f.label :sex
-    = f.select :sex, User.sexes.keys
-
-  p
-    = f.label :avatar
-    = f.file_field :avatar
-  
-  p
-    = f.label :Additional_information
-    = f.text_field :info
-
-  p
-    = f.submit
+.col-md-8.offset-md-2 
+  span#formUserEdit.anchor 
+  hr.my-5/
+  .card.card-outline-secondary
+    .card-header 
+      h3.mb-0  User Information
+    .card-block
+      = form_for @user do |f|
+        - if @user.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@user.errors.count, "error")
+              | prohibited
+              | this user from being saved:
+            ul
+              - @user.errors.full_messages.each do |msg|
+                li= msg
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label First name
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-info-circle aria-hidden="true"
+              = f.text_field :first_name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'First name'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Last name
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-info aria-hidden="true"
+              = f.text_field :last_name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Last name'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Additional information
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-address-card aria-hidden="true" 
+              = f.text_field :info, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Additional information'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Birthday
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-birthday-cake aria-hidden="true" 
+              = f.date_field :birthday, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Birthday'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Address
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-address-book-o aria-hidden="true" 
+              = f.text_field :address, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Address'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Gender
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-transgender aria-hidden="true" 
+              = f.select :sex, User.sexes.keys
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Avatar
+          .col-lg-9
+            = f.file_field :avatar, class: 'form-control', placeholder: 'Avatar'
+        .form-group.row 
+          label.col-lg-3.col-form-label.form-control-label Email
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-user-circle aria-hidden="true"
+              = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Email'    
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Password
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-bomb aria-hidden="true"
+              = f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control', placeholder: 'Password'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label
+          .col-lg-9
+            input.btn.btn-secondary type="reset" value="Reset" /
+            input.btn.btn-success type="submit" value="Submit" 

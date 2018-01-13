@@ -5,6 +5,7 @@ AllCops:
     - 'db/migrate/*'
     - 'vendor/**/*'
     - 'config/environments/*'
+    - 'config/environment.rb'
   TargetRubyVersion: 2.4
 
 Metrics/BlockLength:

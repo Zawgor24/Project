@@ -2,13 +2,37 @@ h3
   | Editing comment №#{ @comment.id }
 
 = form_for @comment do |f|
-  div.form-group
-    p
-      = f.label :title
-      = f.text_field :title
-
-    p
-      = f.label :body
-      = f.text_field :body
-
-    = f.submit
+  - if @comment.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@comment.errors.count, "error")
+        | prohibited
+        | this comment from being saved:
+      ul
+        - @comment.errors.full_messages.each do |msg|
+          li= msg
+  .col-md-8.offset-md-2 
+    hr.my-5/
+    .card.card-outline-secondary
+      .card-header 
+        h3.mb-0  Create comment
+      .card-block
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Title
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-info-circle aria-hidden="true"
+              = f.text_field :title, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Title'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label Body
+          .col-lg-9
+            .input-group style=("margin-bottom: 25px")
+              span.input-group-addon
+                i.fa.fa-info-circle aria-hidden="true"
+              = f.text_field :body, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Body'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label
+          .col-lg-9
+            input.btn.btn-secondary type="reset" value="Reset" /
+            input.btn.btn-success type="submit" value="Submit" 

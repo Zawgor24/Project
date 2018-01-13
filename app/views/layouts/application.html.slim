@@ -1,17 +1,31 @@
 doctype html
 html
   head
-    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    meta content=('text/html; charset=UTF-8') http-equiv='Content-Type' /
     title MyProject
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     - if current_user.present?
-      = link_to 'Profile', current_user
-      = link_to 'Log out', destroy_user_session_path, method: :delete
-      = link_to 'Create post', new_user_post_path(current_user)
-      = link_to 'Create News', new_user_article_path(current_user)
-    - else
-      = link_to 'Sign in', new_user_session_path
+      nav.navbar.fixed-top.navbar-expand-sm.navbar-dark.bg-dark
+        button.navbar-toggler aria-controls='nav-content' aria-expanded='false' aria-label=('Toggle navigation') data-target='#nav-content' data-toggle='collapse' type='button' 
+          span.navbar-toggler-icon
+        a.navbar-brand href='/'  Project
+        #nav-content.collapse.navbar-collapse
+          ul.navbar-nav
+            li.nav-item
+              a.nav-link href='/users/4'  Profile
+            li.nav-item
+              a.nav-link href='/users/4/edit'  Edit profile
+            .dropdown
+              button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
+                | Dropdown button
+              .dropdown-menu aria-labelledby="dropdownMenuButton" 
+                a.dropdown-item href="#"  Action
+                a.dropdown-item href="#"  Another action
+                a.dropdown-item href="#"  Something else here
+
+
+            button.logout.btn.btn-danger.navbar-btn= link_to 'Log out', destroy_user_session_path, method: :delete
     = yield

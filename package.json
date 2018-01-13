@@ -1,5 +1,7 @@
 {
   "name": "my_project",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "popper.js": "^1.11.0"
+  }
 }
