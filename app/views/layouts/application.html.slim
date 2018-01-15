@@ -15,17 +15,8 @@ html
         #nav-content.collapse.navbar-collapse
           ul.navbar-nav
             li.nav-item
-              a.nav-link href='/users/4'  Profile
+              = link_to 'Profile', current_user, class: 'nav-link'
             li.nav-item
-              a.nav-link href='/users/4/edit'  Edit profile
-            .dropdown
-              button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
-                | Dropdown button
-              .dropdown-menu aria-labelledby="dropdownMenuButton" 
-                a.dropdown-item href="#"  Action
-                a.dropdown-item href="#"  Another action
-                a.dropdown-item href="#"  Something else here
-
-
-            button.logout.btn.btn-danger.navbar-btn= link_to 'Log out', destroy_user_session_path, method: :delete
+              = link_to 'Edit profile', edit_user_path(current_user), class: 'nav-link'
+            button.logout.btn.navbar-btn= link_to 'Log out', destroy_user_session_path, method: :delete
     = yield

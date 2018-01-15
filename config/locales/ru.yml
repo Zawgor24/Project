@@ -1,0 +1,9 @@
+ukr:
+  hello: 'Привет мир'
+  member: 'Владелец'
+  required_info: 'Необходимая информация'
+  additional_info: 'Дополнительная информация'
+  editing_user: 'Редагировани пользователя'
+  categories: 'Категории'
+  news: 'Вовости'
+  log_out: 'Выход'

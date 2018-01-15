@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-if Rails.env.development?
-  AdminUser.create!(email: 'admin@example.com', password: 'password',
-                    password_confirmation: 'password')
-end
-
 user1 = User.create(email: '1@1.com', password: 123_123)
 
 post1 = user1.posts.create(title: 'first', body: 'post')
@@ -21,3 +16,6 @@ news1.comments.create(title: 'second', body: 'comment',
                       user_id: news1.user_id)
 news2.comments.create(title: 'second', body: 'comment',
                       user_id: news2.user_id)
+
+AdminUser.create!(email: 'admin@example.com', password: 'password',
+                  password_confirmation: 'password')

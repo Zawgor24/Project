@@ -3,7 +3,8 @@
   hr.my-5/
   .card.card-outline-secondary
     .card-header 
-      h3.mb-0  User Information
+      h3.mb-0 align='center'  
+        = t(:editing_user)
     .card-block
       = form_for @user do |f|
         - if @user.errors.any?
