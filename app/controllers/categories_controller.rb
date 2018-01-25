@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
-  before_action :find_category, only: %i[show edit update destroy]
+  before_action :find_category, only: %i[edit update destroy]
 
   def index
     @categories = Category.all
   end
-
-  def show; end
 
   def new
     @category = Category.new
@@ -46,6 +44,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:name)
+    params.require(:category).permit(:name, :parent_id)
   end
 end

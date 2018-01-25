@@ -6,13 +6,12 @@
           = show_image(@user)
         .profile-usertitle
           .profile-usertitle-name
-            - if @user.first_name.present?
-              | #{ @user.first_name.titleize } #{ @user.last_name.titleize }
+            | #{ @user.first_name.titleize } #{ @user.last_name.titleize }
           .profile-usertitle-job
             | Status
         .profile-userbuttons
-          button.btn.btn-success.btn-sm type="button" Follow
-          button.btn.btn-danger.btn-sm type="button" Message
+          button.btn.btn-success.btn-sm type='button' Follow
+          button.btn.btn-danger.btn-sm type='button' Message
         .profile-usermenu
           ul.nav
             li
@@ -26,7 +25,7 @@
                                                  data: {confirm: 'Sure?'}
     .col-md-9
       .profile-content
-        | Full name: #{ @user.first_name } #{ @user.last_name }
+        | Full name: #{ @user.first_name.titleize } #{ @user.last_name.titleize }
         br/
         | Birthday: #{ @user.birthday }
         br/

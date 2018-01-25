@@ -4,33 +4,52 @@
     .panel.panel-info
       .panel-heading
         .panel-title Sign Up
-        div style=("float:right; font-size: 85%; position: relative; top:-10px") 
-          = link_to "Log in", new_session_path(resource_name)
+        div style=('float:right; font-size: 85%; position: relative; top:-10px') 
+          = link_to 'Log in', new_session_path(resource_name)
       .panel-body
-        form#signupform.form-horizontal role="form" 
-          #signupalert.alert.alert-danger style="display:none" 
+        form#signupform.form-horizontal role='form' 
+          #signupalert.alert.alert-danger style='display:none' 
             p Error:
             span
           .form-group
-            label.col-md-3.control-label for="email"
+            label.col-md-3.control-label for='first_name'
             .col-md-9
-              .input-group style=("margin-bottom: 25px")
+              .input-group style=('margin-bottom: 25px')
                 span.input-group-addon
-                  i.fa.fa-user-circle aria-hidden="true"
-                = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email'
+                  i.fa.fa-user-circle aria-hidden='true'
+                = f.text_field :first_name, autofocus: true, autocomplete: false, class: 'form-control', placeholder: 'Name'
           .form-group
-            label.col-md-3.control-label for="password"
+            label.col-md-3.control-label for='last_name'
             .col-md-9
-              .input-group style=("margin-bottom: 25px") 
+              .input-group style=('margin-bottom: 25px')
                 span.input-group-addon
-                  i.fa.fa-briefcase aria-hidden="true" 
-                = f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control', placeholder: 'Password'
+                  i.fa.fa-user-circle aria-hidden='true'
+                = f.text_field :last_name, autofocus: true, autocomplete: false, class: 'form-control', placeholder: 'Last name'
+          .form-group
+            label.col-md-3.control-label for='email'
+            .col-md-9
+              .input-group style=('margin-bottom: 25px')
+                span.input-group-addon
+                  i.fa.fa-user-circle aria-hidden='true'
+                = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Email'
+          .form-group
+            label.col-md-3.control-label for='password'
+            .col-md-9
+              .input-group style=('margin-bottom: 25px') 
+                span.input-group-addon
+                  i.fa.fa-briefcase aria-hidden='true' 
+                = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Password'
           .form-group
             .col-md-offset-3.col-md-9
-              input.btn.btn-success type="submit" value="Submit" 
-              span style="margin-left:8px;"
-          .form-group style=("border-top: 1px solid #999; padding-top:20px") 
+              input.btn.btn-success type='submit' value='Submit' 
+              span style='margin-left:8px;'
+          .form-group 
             .col-md-offset-3.col-md-9
-              button#btn-fbsignup.btn.btn-primary type="button" 
+              button#btn-fbsignup.btn.btn-primary type='button' 
                 i.icon-facebook
                 |   Sign Up with Facebook
+          .form-group style=('border-top: 1px solid #999; padding-top:20px') 
+            .col-md-12.control
+              | Click 
+              = link_to 'Log in', new_session_path(resource_name)
+              |  if you have an account!

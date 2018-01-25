@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  before_action :find_category, only: %i[index]
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.where(category_id: find_category)
+    @posts = Post.where(category_id: @category.subtree_ids).order(
+      updated_at: :desc
+    )
   end
 
   def show; end
@@ -17,9 +20,9 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     if @post.save
-      redirect_to @post
+      redirect_to @post, notice: I18n.t('posts.notice.success')
     else
-      render :new
+      render :new, notice: I18n.t('posts.notice.error')
     end
   end
 
@@ -36,7 +39,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
 
-    redirect_to root_path
+    redirect_to root_path, I18n.t('posts.notice.delete')
   end
 
   private
@@ -46,7 +49,7 @@ class PostsController < ApplicationController
   end
 
   def find_category
-    Category.find(params[:category_id])
+    @category ||= Category.find(params[:category_id])
   end
 
   def post_params

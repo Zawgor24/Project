@@ -10,10 +10,11 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.new(comment_params_with_user)
+
     if @comment.save
-      redirect_to @commentable
+      redirect_to request.referer, notice: I18n.t('comments.notice.success')
     else
-      render :new
+      redirect_to request.referer, notice: I18n.t('comments.notice.error')
     end
   end
 
@@ -30,7 +31,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
 
-    redirect_to @comment.commentable
+    redirect_to request.referer, notice: I18n.t('comments.notice.delete')
   end
 
   private

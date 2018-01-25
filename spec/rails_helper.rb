@@ -9,16 +9,22 @@ if Rails.env.production?
           in production mode!')
 end
 require 'rspec/rails'
+require 'capybara/rails'
+
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
+Capybara.default_driver = :selenium
+
 RSpec.configure do |config|
+  config.include AuthorizationHelper
+  config.include Capybara::DSL
+  config.include FactoryBot::Syntax::Methods
+
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   config.use_transactional_fixtures = true
-
   config.infer_spec_type_from_file_location!
-
   config.filter_rails_from_backtrace!
 
   Shoulda::Matchers.configure do |con|
