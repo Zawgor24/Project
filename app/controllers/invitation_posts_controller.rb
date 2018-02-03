@@ -53,6 +53,6 @@ class InvitationPostsController < ApplicationController
   end
 
   def post_params
-    params.require(:invitation_post).permit(:name, :info, :date, :user_id)
+    params.require(:invitation_post).permit(:date, :info, :name, :user_id)
   end
 end

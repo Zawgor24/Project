@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Sport do
-  permit_params :name, :info, :avatar
+  permit_params :avatar, :info, :name
 
   form do |f|
     f.inputs t(:required_info) do

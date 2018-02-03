@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register InvitationPost do
-  permit_params :name, :info, :sport_id, :date, :user_id
+  permit_params :date, :info, :name, :sport_id, :user_id
 
   form do |f|
     f.inputs t(:required_info) do

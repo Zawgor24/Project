@@ -9,11 +9,13 @@ class FollowsController < ApplicationController
 
   def create
     current_user.follow!(@sport)
+
     redirect_to request.referer, notice: I18n.t('follows.notice.follow')
   end
 
   def destroy
     current_user.unfollow!(@sport)
+
     redirect_to request.referer, notice: I18n.t('follows.notice.unfollow')
   end
 

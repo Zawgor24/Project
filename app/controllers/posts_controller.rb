@@ -5,9 +5,7 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.where(category_id: @category.subtree_ids).order(
-      updated_at: :desc
-    )
+    @posts = Post.by_subtree_categories(@category.subtree_ids)
   end
 
   def show; end
@@ -53,6 +51,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :avatar, :category_id)
+    params.require(:post).permit(:avatar, :body, :category_id, :title)
   end
 end
