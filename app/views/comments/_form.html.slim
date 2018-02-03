@@ -2,7 +2,7 @@
   - if commentable.errors.any?
     #error_explanation
       h2
-        = pluralize(commentable.errors.count, "error")
+        = pluralize(commentable.errors.count, 'error')
         | prohibited
         | this commentable from being saved:
       ul
@@ -17,19 +17,19 @@
         .form-group.row
           label.col-lg-3.col-form-label.form-control-label Title
           .col-lg-9
-            .input-group style=("margin-bottom: 25px")
+            .input-group style=('margin-bottom: 25px')
               span.input-group-addon
-                i.fa.fa-info-circle aria-hidden="true"
+                i.fa.fa-info-circle aria-hidden='true'
               = f.text_field :title, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Title'
         .form-group.row
           label.col-lg-3.col-form-label.form-control-label Body
           .col-lg-9
-            .input-group style=("margin-bottom: 25px")
+            .input-group style=('margin-bottom: 25px')
               span.input-group-addon
-                i.fa.fa-info-circle aria-hidden="true"
+                i.fa.fa-info-circle aria-hidden='true'
               = f.text_field :body, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Body'
         .form-group.row
           label.col-lg-3.col-form-label.form-control-label
           .col-lg-9
-            input.btn.btn-secondary type="reset" value="Reset" /
-            input.btn.btn-success type="submit" value="Submit" 
+            input.btn.btn-secondary type='reset' value='Reset' /
+            input.btn.btn-success type='submit' value='Submit' 

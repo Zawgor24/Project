@@ -2,7 +2,9 @@
 
 class CommentsController < ApplicationController
   before_action :find_comment, only: %i[edit update destroy]
-  before_action :find_commentable, only: %i[create update destroy edit]
+  before_action :commentable_article, only: :create
+  before_action :commentable_post, only: :create
+  before_action :commentable_invit_post, only: :create
 
   def new
     @comment = Comment.new
@@ -10,10 +12,11 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.new(comment_params_with_user)
+
     if @comment.save
-      redirect_to @commentable
+      redirect_to request.referer, notice: I18n.t('comments.notice.success')
     else
-      render :new
+      redirect_to request.referer, notice: I18n.t('comments.notice.error')
     end
   end
 
@@ -30,7 +33,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
 
-    redirect_to @comment.commentable
+    redirect_to request.referer, notice: I18n.t('comments.notice.delete')
   end
 
   private
@@ -39,9 +42,18 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
-  def find_commentable
+  def commentable_article
     @commentable = Article.find(params[:article_id]) if params[:article_id]
+  end
+
+  def commentable_post
     @commentable = Post.find(params[:post_id]) if params[:post_id]
+  end
+
+  def commentable_invit_post
+    if params[:invitation_post_id]
+      @commentable = InvitationPost.find(params[:invitation_post_id])
+    end
   end
 
   def comment_params

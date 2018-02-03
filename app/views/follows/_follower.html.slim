@@ -1,0 +1,6 @@
+- @followers.each do |follower|
+  tr
+    th scope="row"  = follower.id
+    td = link_to "#{follower.first_name.humanize} #{follower.last_name.humanize}", follower 
+    td = show_small_image(follower)
+    td = follower.email

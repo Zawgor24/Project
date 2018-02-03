@@ -1,0 +1,17 @@
+.col-md-9
+  .profile-content
+    | Full name: #{ @user.first_name.titleize } #{ @user.last_name.titleize }
+    br/
+    | Birthday: #{ @user.birthday }
+    br/
+    | Address: #{ @user.address }
+    br/
+    | Gender: #{ @user.sex.humanize if @user.sex }
+    br/
+    | Additional information: #{ @user.info }
+    br/
+    .sports
+      | All followed sports
+      - @user.followees(Sport).each do |sport|
+        li
+          = link_to sport.name, sport

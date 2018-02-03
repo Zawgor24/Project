@@ -5,7 +5,6 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
-    @categories = Category.all
   end
 
   def show; end
@@ -18,9 +17,9 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.new(article_params)
 
     if @article.save
-      redirect_to @article
+      redirect_to request.referer, notice: I18n.t('articles.notice.success')
     else
-      render :new
+      render :new, notice: I18n.t('articles.notice.error')
     end
   end
 

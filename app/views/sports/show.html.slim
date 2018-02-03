@@ -1,0 +1,18 @@
+.container
+  .row
+    .col
+      .leftimg
+        = show_image(@sport)
+      .post-title
+        | #{ @sport.name }
+        .follow
+          = render 'friendship'
+      h5
+        | #{ @sport.info }
+
+  = link_to 'Create invitation post', new_sport_invitation_post_path(@sport)
+
+  = render InvitationPost.where(sport_id: @sport.id)
+  br/
+
+  = link_to 'Followers', sport_followers_path(@sport)

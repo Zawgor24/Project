@@ -2,16 +2,35 @@
   - if @category.errors.any?
     #error_explanation
       h2
-        = pluralize(@category.errors.count, "error")
+        = pluralize(@category.errors.count, 'error')
         | prohibited
         | this category from being saved:
       ul
         - @category.errors.full_messages.each do |msg|
           li= msg
-
-  p
-    = f.label :name
-    = f.text :name
-
-  p
-    = f.submit
+  .col-md-8.offset-md-2 
+    hr.my-5/
+    .card.card-outline-secondary
+      .card-header 
+        h3.mb-0  Create category
+      .card-block
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label #{t(:name)}
+          .col-lg-9
+            .input-group style=('margin-bottom: 25px')
+              span.input-group-addon
+                i.fa.fa-info-circle aria-hidden='true'
+              = f.text_field :name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Name'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label #{t(:parent_id)}
+          .col-lg-9
+            .input-group style=('margin-bottom: 25px')
+              span.input-group-addon
+                i.fa.fa-info-circle aria-hidden='true'
+              = f.collection_select :parent_id, Category.order(:name),
+                :id, :name, { include_blank: true }, class: 'form-control'
+        .form-group.row
+          label.col-lg-3.col-form-label.form-control-label
+          .col-lg-9
+            input.btn.btn-secondary type='reset' value='Reset' /
+            input.btn.btn-success type='submit' value='Submit' 

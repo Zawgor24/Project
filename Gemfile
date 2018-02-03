@@ -28,6 +28,7 @@ gem 'rmagick'
 gem 'rubocop'
 gem 'sass-rails', '~> 5.0'
 gem 'slim'
+gem 'socialization'
 gem 'toastr-rails'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
@@ -36,8 +37,10 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
   gem 'factory_bot_rails'
+  gem 'guard-rspec', require: false
   gem 'rspec-rails', '~> 3.6'
   gem 'rspec_junit_formatter'
+  gem 'selenium-webdriver', '~> 2.53.4'
 end
 
 group :test do

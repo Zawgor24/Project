@@ -1,0 +1,27 @@
+.row
+  .col-md-9
+    .post-title
+      | #{ @invitation_post.name }
+
+
+    p align='right'
+      | Invitation post №#{ @invitation_post.id }
+      br/
+      | #{ link_to @invitation_post.user.email, user_path(@invitation_post.user) }
+    h5
+      | #{ @invitation_post.info }
+
+    - if @invitation_post.date.present?  
+      p
+        | Date of event #{ @invitation_post.date.strftime('%B %d, %Y') }
+
+    - if @invitation_post.comments.present?
+      h4 Comments
+      = render @invitation_post.comments
+    
+    = render partial: 'comments/form', locals: { commentable: @invitation_post }
+
+    = link_to 'Back', :back
+
+  .col-md-3
+    = render 'shared/submenu'

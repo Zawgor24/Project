@@ -5,8 +5,8 @@ class Article < ApplicationRecord
 
   has_many :comments, as: :commentable, dependent: :destroy
 
-  validates :title, :body, presence: true
   validates :title, length: { maximum: 20 }
+  validates :title, :body, presence: true
 
   mount_uploader :avatar, ImageUploader
 end

@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115163230) do
+ActiveRecord::Schema.define(version: 20180202205609) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +61,8 @@ ActiveRecord::Schema.define(version: 20180115163230) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -74,6 +77,38 @@ ActiveRecord::Schema.define(version: 20180115163230) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.string "follower_type"
+    t.integer "follower_id"
+    t.string "followable_type"
+    t.integer "followable_id"
+    t.datetime "created_at"
+    t.index ["followable_id", "followable_type"], name: "fk_followables"
+    t.index ["follower_id", "follower_type"], name: "fk_follows"
+  end
+
+  create_table "invitation_posts", force: :cascade do |t|
+    t.string "name"
+    t.string "info"
+    t.bigint "sport_id"
+    t.datetime "date"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sport_id"], name: "index_invitation_posts_on_sport_id"
+    t.index ["user_id"], name: "index_invitation_posts_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.string "liker_type"
+    t.integer "liker_id"
+    t.string "likeable_type"
+    t.integer "likeable_id"
+    t.datetime "created_at"
+    t.index ["likeable_id", "likeable_type"], name: "fk_likeables"
+    t.index ["liker_id", "liker_type"], name: "fk_likes"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -84,6 +119,19 @@ ActiveRecord::Schema.define(version: 20180115163230) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "sports", force: :cascade do |t|
+    t.string "name"
+    t.string "info"
+    t.string "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sports_users", id: false, force: :cascade do |t|
+    t.integer "sport_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,6 +162,8 @@ ActiveRecord::Schema.define(version: 20180115163230) do
 
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "invitation_posts", "sports"
+  add_foreign_key "invitation_posts", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
 end

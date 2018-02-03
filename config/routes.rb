@@ -15,6 +15,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :sports, only: %i[show destroy index] do
+    resource :follows, only: %i[create destroy]
+    get '/followers', to: 'follows#followers'
+
+    resources :invitation_posts, shallow: true do
+      resources :comments, except: %i[index show]
+    end
+  end
+
   resources :articles, only: :index
 
   resources :categories do

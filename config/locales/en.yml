@@ -7,3 +7,41 @@ en:
   categories: 'Categories'
   news: 'News'
   log_out: 'Log out'
+  log_in: 'Login'
+  sign_up: 'Sign Up'
+  comment: 'comment'
+  title: 'Title'
+  sign_in: 'Sign In'
+
+  articles:
+    notice:
+      success: 'Article successfully created'
+      error: 'Enter valid data'
+      delete: 'Article deleted'
+
+  comments:
+    notice:
+      success: 'Comment successfully created'
+      error: 'Enter valid data'
+      delete: 'Comment deleted'
+
+  follows:
+    notice:
+      follow: 'Followed'
+      unfollow: Unfollowed
+
+  posts:
+    notice:
+      success: 'Post successfully created'
+      error: 'Enter valid data'
+      delete: 'Post deleted'
+    edit:
+      creating: 'Creating new post'
+
+  profiles:
+    show:
+      profile: 'Edit profile'
+      delete: 'Delete account'
+    edit:
+      editing: 'Editing user'
+
