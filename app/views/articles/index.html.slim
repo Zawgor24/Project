@@ -1,10 +1,10 @@
-h3 align='center'
-  | All Categories
+.row
+  .col-md-9
+    .row
+      = render Sport.all
 
-= render @categories
+    h1.post-title All news
+    = render @articles
 
-div.news
-  h1 align='center'
-    | All News
-
-  = render @articles
+  .col-md-3
+    = render 'shared/submenu'

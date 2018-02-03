@@ -1,18 +1,26 @@
-h1
-  | Post №#{ @post.id }
+.row
+  .col-md-9
+    = render 'shared/breadcrumb', category: @post.category
 
-div.leftimg
-  = show_image(@post)
+    .post-title
+      | #{ @post.title }:
 
-h3
-  |<strong> #{ @post.title }: </strong>
+    p align='right'
+      | Post №#{ @post.id }
 
-h5
-  | #{ @post.body }
+    .leftimg
+      = show_image(@post)
 
-h3 Comments
+    h5
+      | #{ @post.body }
 
-= render @post.comments
-= render partial: 'comments/form', locals: { commentable: @post }
+    - if @post.comments.present?
+      h4 Comments
+      = render @post.comments
+    
+    = render partial: 'comments/form', locals: { commentable: @post }
 
-= link_to 'Back', :back
+    = link_to 'Back', :back
+
+  .col-md-3
+    = render 'shared/submenu'

@@ -8,15 +8,32 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     - if current_user.present?
+      - flash.each do |key, value|
+        div class="#{flash_class(key)}" 
+          = value
       nav.navbar.fixed-top.navbar-expand-sm.navbar-dark.bg-dark
         button.navbar-toggler aria-controls='nav-content' aria-expanded='false' aria-label=('Toggle navigation') data-target='#nav-content' data-toggle='collapse' type='button' 
           span.navbar-toggler-icon
         a.navbar-brand href='/'  Project
         #nav-content.collapse.navbar-collapse
           ul.navbar-nav
-            li.nav-item
-              = link_to 'Profile', current_user, class: 'nav-link'
-            li.nav-item
-              = link_to 'Edit profile', edit_user_path(current_user), class: 'nav-link'
-            button.logout.btn.navbar-btn= link_to 'Log out', destroy_user_session_path, method: :delete
+            .dropdown.show
+               a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle aria-expanded="false" aria-haspopup='true' data-toggle='dropdown' href='#' role='button' 
+                 | Account
+               .dropdown-menu aria-labelledby='dropdownMenuLink'
+                 a.dropdown-item #{ current_user.first_name } #{ current_user.last_name }
+                 = link_to 'Profile', current_user, class: 'dropdown-item'
+                 = link_to 'Edit profile', edit_user_path(current_user), class: 'dropdown-item'
+            .dropdown.show
+              a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                | Post
+              .dropdown-menu aria-labelledby="dropdownMenuLink" 
+                = link_to 'Create post', new_user_post_path(current_user), class: 'dropdown-item'
+            .dropdown.show
+              a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
+                | My sports
+              .dropdown-menu aria-labelledby="dropdownMenuLink" 
+                - current_user.followees(Sport).each do |sport|
+                  = link_to sport.name, sport, class: 'dropdown-item'
+        button.logout.btn.navbar-btn= link_to 'Log out', destroy_user_session_path, method: :delete
     = yield

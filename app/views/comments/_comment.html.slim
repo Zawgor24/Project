@@ -3,6 +3,7 @@ div.comment
   br/
   | #{ comment.body }
 
-= link_to 'Edit||', edit_comment_path(comment)
-= link_to 'Delete', comment, method: :delete,
+= link_to 'Edit comment', edit_comment_path(comment)
+br/
+= link_to 'Delete comment', comment, method: :delete,
                              data: {confirm: 'Sure?'}

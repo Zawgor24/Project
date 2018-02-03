@@ -2,7 +2,7 @@
   .container
     .well
       .media
-        a.pull-left href="#" 
+        a.pull-left 
           = show_image(post)
         .media-body
           h4.media-heading 
@@ -14,11 +14,11 @@
           ul.list-inline.list-unstyled
             li
               span
-                i.fa.fa-calendar aria-hidden="true" 
+                i.fa.fa-calendar aria-hidden='true' 
                 = post.created_at
             li
             span
-              i.fa.fa-comments aria-hidden="true" 
+              i.fa.fa-comments aria-hidden='true' 
               | #{ post.comments.count } comments
             li 
               span

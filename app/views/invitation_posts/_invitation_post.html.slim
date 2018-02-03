@@ -1,0 +1,27 @@
+.post
+  .container
+    .well
+      .media
+        .media-body
+          h4.media-heading 
+            = link_to invitation_post.name, invitation_post
+          p.text-right
+            | By #{ invitation_post.user.email }
+          p
+            = invitation_post.info
+          ul.list-inline.list-unstyled
+            li
+              span
+                i.fa.fa-calendar aria-hidden="true" 
+                = invitation_post.created_at
+            li
+            span
+              i.fa.fa-comments aria-hidden="true" 
+              | #{ invitation_post.comments.count } comments
+            li 
+              span
+                i.fa.fa-facebook-square
+              span
+                i.fa.fa-twitter-square
+              span
+                i.fa.fa-google-plus-square

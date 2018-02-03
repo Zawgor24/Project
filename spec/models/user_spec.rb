@@ -3,20 +3,20 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'associations' do
+  describe '#associations' do
     it { is_expected.to have_many(:articles).dependent(:destroy) }
     it { is_expected.to have_many(:posts).dependent(:destroy) }
   end
 
-  describe 'validations' do
+  describe '#validations' do
     it { is_expected.to validate_length_of(:info).is_at_most(256) }
   end
 
-  describe 'enum' do
+  describe '.enum' do
     it { is_expected.to define_enum_for(:sex).with(%i[male female]) }
   end
 
-  describe 'custom validations' do
+  describe '.custom_validations' do
     describe 'birthday validations' do
       subject { user.valid? }
 

@@ -2,7 +2,8 @@
 
 FactoryBot.define do
   factory :article do
-    title { Faker::Company.name }
+    title { Faker::Color.hex_color }
     body { Faker::HitchhikersGuideToTheGalaxy.quote }
+    avatar { Faker::Avatar.image }
   end
 end

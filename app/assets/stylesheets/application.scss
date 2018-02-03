@@ -1,26 +1,58 @@
-/*
- *= require_self
- */
-
 @import 'user';
 @import 'bootstrap';
 @import 'toastr';
-@import "font-awesome-sprockets";
-@import "font-awesome";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
 
 .post {
   margin-bottom: 80px;
 }
 
+.post-title {
+  font-size: 50px;
+  font-style: italic;
+  text-align: center;
+}
+
+.tag_cloud {
+  margin-top: 2em;
+}
+
+.subnav {
+  list-style: none;
+  padding-left: 0;
+}
+
+.dropdown.show {
+  margin-left: 10px;
+}
+
+.sports {
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.nested_nav {
+  padding-left: 1em;
+}
 .comment {
   margin: 7px 20px 20px 20px;
   background-color: Lavender;
 }
+.logout {
+  float: right;
+  background-color: #3e3d48;
+  border-color: blue;
+}
+
+.follow {
+  float: right;
+  border-color: blue;
+}
 
 .news {
   margin-left: 15%;
-  margin-right: 15%;
-  background-color: Lavender;
+  /*background-color: Lavender;*/
 }
 
 .leftimg {
@@ -48,13 +80,17 @@ body {
 
 .panel {
   width: 50%;
-  margin-top: 100px;
+  margin-top: 20px;
   margin-bottom: 20px;
   background-color: #fff;
   border: 3px solid transparent;
   border-color: #bce8f1;
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.panel-heading {
+  font-size: 22px;
 }
 
 .input-group-addon {

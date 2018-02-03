@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-user1 = User.create(email: '1@1.com', password: 123_123)
+user1 = User.create(email: '1@1.com', password: 123_123,
+                    first_name: 'igor', last_name: 'zawgor')
 
 post1 = user1.posts.create(title: 'first', body: 'post')
 post2 = user1.posts.create(title: 'second', body: 'post')
