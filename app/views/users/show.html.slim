@@ -15,12 +15,9 @@
         .profile-usermenu
           ul.nav
             li
-              = link_to 'Edit profile||', edit_user_path(@user)
+              = link_to 'Edit profile', edit_user_path(@user) if policy(@user).edit?
+          ul.nav
             li
-              = link_to 'Create post||', new_user_post_path(@user)
-            li
-              = link_to 'Create news', new_user_article_path(@user)
-            li
-              = link_to 'Delete account', @user, method: :delete,
-                                                 data: {confirm: 'Sure?'}
+              = link_to 'Delete account', @user, method: :delete, data: {confirm: 'Sure?'} if policy(@user).destroy?
+
     = render 'profile'

@@ -2,7 +2,8 @@
 
 class InvitationPostsController < ApplicationController
   before_action :find_invitation_post, only: %i[show edit update destroy]
-  before_action :find_sport, only: %i[create new destroy]
+  before_action :find_sport, only: %i[create new]
+  before_action :authorize_post, only: %i[edit update destroy]
 
   def index
     @invitation_posts = InvitationPost.all
@@ -20,9 +21,9 @@ class InvitationPostsController < ApplicationController
     )
 
     if @invitation_post.save
-      redirect_to @sport
+      redirect_to @sport, notice: I18n.t('posts.notice.success')
     else
-      render :new
+      render :new, notice: I18n.t('posts.notice.error')
     end
   end
 
@@ -30,22 +31,26 @@ class InvitationPostsController < ApplicationController
 
   def update
     if @invitation_post.update(post_params)
-      redirect_to @invitation_post
+      redirect_to @invitation_post, notice: I18n.t('posts.notice.update')
     else
-      render :edit
+      render :edit, notice: I18n.t('posts.notice.error')
     end
   end
 
   def destroy
     @invitation_post.destroy
 
-    redirect_to @sport
+    redirect_to @invitation_post.sport, notice: I18n.t('posts.notice.delete')
   end
 
   private
 
   def find_invitation_post
     @invitation_post = InvitationPost.find(params[:id])
+  end
+
+  def authorize_post
+    authorize @invitation_post
   end
 
   def find_sport

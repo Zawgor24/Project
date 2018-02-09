@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :find_user, only: %i[show edit update destroy]
+  before_action :authorize_user, only: %i[edit update destroy]
 
   def show; end
 
@@ -23,16 +24,16 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user
+      redirect_to @user, notice: I18n.t('profile.notice.update')
     else
-      render :edit
+      render :edit, notice: I18n.t('profile.notice.error')
     end
   end
 
   def destroy
     @user.destroy
 
-    redirect_to root_path
+    redirect_to root_path, notice: I18n.t('profile.notice.delete')
   end
 
   private
@@ -41,8 +42,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def authorize_user
+    authorize @user
+  end
+
   def user_params
-    params.require(:user).permit(:email, :password, :first_name, :last_name,
-      :birthday, :info, :address, :sex, :avatar)
+    params.require(:user).permit(:address, :avatar, :birthday, :email,
+      :first_name, :info, :last_name, :password, :sex)
   end
 end

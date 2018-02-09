@@ -11,5 +11,6 @@ FactoryBot.define do
     address { Faker::Address.city }
     sex { User.sexes.keys.sample }
     avatar { Faker::Avatar.image }
+    manager false
   end
 end

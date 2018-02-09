@@ -5,12 +5,6 @@ class SportsController < ApplicationController
 
   def show; end
 
-  def destroy
-    @sport.users.find(current_user.id).destroy
-
-    redirect_to @sport
-  end
-
   private
 
   def find_sport

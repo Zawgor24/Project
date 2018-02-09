@@ -2,6 +2,8 @@
 
 class CommentsController < ApplicationController
   before_action :find_comment, only: %i[edit update destroy]
+  before_action :authorize_comment, only: %i[edit update destroy]
+
   before_action :commentable_article, only: :create
   before_action :commentable_post, only: :create
   before_action :commentable_invit_post, only: :create
@@ -24,9 +26,9 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to @comment.commentable
+      redirect_to @comment.commentable, notice: I18n.t('comments.notice.update')
     else
-      render :edit
+      render :edit, notice: I18n.t('comments.notice.error')
     end
   end
 
@@ -40,6 +42,10 @@ class CommentsController < ApplicationController
 
   def find_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def authorize_comment
+    authorize @comment
   end
 
   def commentable_article

@@ -2,6 +2,8 @@
   .profile-content
     | Full name: #{ @user.first_name.titleize } #{ @user.last_name.titleize }
     br/
+    | Email: #{ @user.email }
+    br/
     | Birthday: #{ @user.birthday }
     br/
     | Address: #{ @user.address }

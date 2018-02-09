@@ -16,6 +16,6 @@ RSpec.describe Post, type: :model do
 
     it { is_expected.to respond_to(:avatar) }
 
-    it { is_expected.to validate_length_of(:title).is_at_most(20) }
+    it { is_expected.to validate_length_of(:title).is_at_most(40) }
   end
 end

@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  protect_from_forgery with: :exception
+  include Pundit
 
-  before_action :authenticate_user!
+  rescue_from Pundit::NotAuthorizedError do
+    redirect_to root_path, notice: I18n.t(:pundit_error)
+  end
+
+  protect_from_forgery with: :exception
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |u|

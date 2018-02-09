@@ -7,6 +7,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.5.0'
+
 gem 'active_admin_paranoia', '~> 1.0.11'
 gem 'activeadmin'
 gem 'ancestry'
@@ -23,6 +25,7 @@ gem 'paranoia', '~> 2.2'
 gem 'pg', '~> 0.18'
 gem 'popper_js', '~> 1.12.9'
 gem 'puma', '~> 3.7'
+gem 'pundit'
 gem 'rails', '~> 5.1.4'
 gem 'rmagick'
 gem 'rspec'
@@ -45,6 +48,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'pundit-matchers', '~> 1.4.1'
   gem 'shoulda-matchers', '~> 3.1'
 end
 

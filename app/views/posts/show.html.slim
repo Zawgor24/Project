@@ -7,7 +7,10 @@
 
     p align='right'
       | Post №#{ @post.id }
-
+      br/
+      = link_to 'Edit post', edit_post_path(@post) if policy(@post).edit?
+      br/
+      = link_to 'Delete post', @post, method: :delete, data: { confirm: 'Are you sure?' } if policy(@post).destroy?
     .leftimg
       = show_image(@post)
 

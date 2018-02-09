@@ -3,20 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Comment', type: :feature do
-  let(:comment) { build(:comment) }
+  let(:fake_user) { create(:user) }
   let(:user) { create(:user) }
-  let(:post) { create(:post, user_id: user.id) }
+  let(:post) { create(:post, user: user) }
+  let(:comment) { create(:comment, user: user, commentable: post) }
 
   subject { page }
 
-  before { sign_in(user) }
-
-  describe '#create at post' do
-    context "when user isn't authorized" do
-      let(:user) { build(:user) }
-
-      scenario { expect(page.has_no_content?(I18n.t(:log_out))).to be_truthy }
-    end
+  describe '#create' do
+    before { sign_in(user) }
 
     context 'when user is authorized' do
       before { visit post_path(post) }
@@ -25,7 +20,7 @@ RSpec.describe 'Comment', type: :feature do
 
       context 'when info is invalid' do
         scenario "doesn't create a comment" do
-          create_comment 'ROR' * 10, post.body
+          fill_in_comment_fields 'ROR' * 10, post.body
 
           is_expected.to have_content(I18n.t('comments.notice.error'))
         end
@@ -41,7 +36,7 @@ RSpec.describe 'Comment', type: :feature do
 
       context 'when info is valid' do
         scenario 'creates a comment' do
-          create_comment(post.title, post.body)
+          fill_in_comment_fields(post.title, post.body)
 
           is_expected.to have_content(I18n.t('comments.notice.success'))
         end
@@ -49,25 +44,112 @@ RSpec.describe 'Comment', type: :feature do
     end
   end
 
-  describe '#destroy at post' do
-    scenario 'removes the comment' do
-      visit post_path(post)
-      create_comment post.title, post.body
+  describe '#update' do
+    before { visit edit_comment_path(comment) }
 
-      click_link 'Delete comment'
+    context 'when user is author' do
+      before { sign_in(user) }
 
-      page.driver.browser.switch_to.alert.accept
+      scenario { is_expected.to have_content(I18n.t('comments.edit')) }
+    end
 
-      is_expected.to have_content(I18n.t('comments.notice.delete'))
+    context 'when user is not author' do
+      before { sign_in(fake_user) }
+
+      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+    end
+
+    context 'when user is manager' do
+      let(:user) { create(:user, manager: true) }
+
+      before { sign_in(user) }
+
+      scenario { is_expected.to have_content(I18n.t('comments.edit')) }
+
+      scenario 'updates comment' do
+        fill_in_comment_fields I18n.t(:hello), I18n.t(:hello)
+
+        is_expected.to have_content(I18n.t('comments.notice.update'))
+      end
     end
   end
 
-  private
+  describe '#show' do
+    before do
+      create(:comment, user: user, commentable: post)
+      visit post_path(post)
+    end
 
-  def create_comment(title, body)
+    context 'when user is author' do
+      before { sign_in(user) }
+
+      scenario { is_expected.to have_content(I18n.t('comments.edit')) }
+    end
+
+    context 'when user is not author' do
+      before { sign_in(fake_user) }
+
+      scenario { is_expected.not_to have_content(I18n.t('posts.edit')) }
+    end
+
+    context 'when user is manager' do
+      let(:user) { create(:user, manager: true) }
+
+      before { sign_in(user) }
+
+      scenario { is_expected.to have_content(I18n.t('comments.edit')) }
+    end
+  end
+
+  describe '#destroy' do
+    before do
+      create(:comment, user: user, commentable: post)
+      visit post_path(post)
+    end
+
+    context 'when user is author' do
+      before { sign_in(user) }
+
+      scenario { is_expected.to have_content(I18n.t('posts.delete')) }
+
+      scenario 'deletes comment' do
+        delete_comment
+
+        is_expected.to have_content(I18n.t('comments.notice.delete'))
+      end
+    end
+
+    context 'when user is not author' do
+      before { sign_in(fake_user) }
+
+      scenario { is_expected.not_to have_content(I18n.t('comments.delete')) }
+    end
+
+    context 'when user is manager' do
+      let(:user) { create(:user, manager: true) }
+
+      before { sign_in(user) }
+
+      scenario { is_expected.to have_content(I18n.t('comments.delete')) }
+
+      scenario 'deletes comment' do
+        delete_comment
+
+        is_expected.to have_content(I18n.t('comments.notice.delete'))
+      end
+    end
+  end
+
+  def fill_in_comment_fields(title, body)
     fill_in 'Title', with: title
     fill_in 'Body', with: body
 
     click_button 'Submit'
+  end
+
+  def delete_comment
+    click_link I18n.t('comments.delete')
+
+    page.driver.browser.switch_to.alert.accept
   end
 end

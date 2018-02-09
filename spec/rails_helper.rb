@@ -10,6 +10,7 @@ if Rails.env.production?
 end
 require 'rspec/rails'
 require 'capybara/rails'
+require 'pundit/matchers'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 

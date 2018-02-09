@@ -1,5 +1,8 @@
-.row  
+.row
   .col-md-9
+    .float-right
+      = link_to 'Delete category', @category, method: :delete, data: { confirm: 'Are you sure?' } if policy(@category).destroy?
+
     - if @posts.present?
       h1 align = 'center'
         | Category #{ @posts.first.category.name }

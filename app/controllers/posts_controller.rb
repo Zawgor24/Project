@@ -3,6 +3,7 @@
 class PostsController < ApplicationController
   before_action :find_category, only: :index
   before_action :find_post, only: %i[show edit update destroy]
+  before_action :authorize_post, only: %i[edit update destroy]
 
   def index
     @posts = Post.by_subtree_categories(@category.subtree_ids)
@@ -28,22 +29,26 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post
+      redirect_to @post, notice: I18n.t('posts.notice.update')
     else
-      render :edit
+      render :edit, notice: I18n.t('posts.notice.error')
     end
   end
 
   def destroy
     @post.destroy
 
-    redirect_to root_path, I18n.t('posts.notice.delete')
+    redirect_to root_path, notice: I18n.t('posts.notice.delete')
   end
 
   private
 
   def find_post
     @post = Post.find(params[:id])
+  end
+
+  def authorize_post
+    authorize @post
   end
 
   def find_category

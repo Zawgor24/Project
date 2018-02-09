@@ -2,12 +2,15 @@
   .col-md-9
     .post-title
       | #{ @invitation_post.name }
-
-
+      
     p align='right'
       | Invitation post №#{ @invitation_post.id }
       br/
-      | #{ link_to @invitation_post.user.email, user_path(@invitation_post.user) }
+      | #{ link_to @invitation_post.user.email, @invitation_post.user }
+      br/
+      = link_to 'Edit post', edit_invitation_post_path(@invitation_post) if policy(@invitation_post).edit?
+      br/
+      = link_to 'Delete post', @invitation_post, method: :delete, data: { confirm: 'Are you sure?' } if policy(@invitation_post).destroy?
     h5
       | #{ @invitation_post.info }
 

@@ -2,6 +2,7 @@
 
 class ArticlesController < ApplicationController
   before_action :find_article, only: %i[show edit update destroy]
+  before_action :authorize_article, only: %i[edit update destroy]
 
   def index
     @articles = Article.all
@@ -11,13 +12,17 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+
+    authorize @article
   end
 
   def create
     @article = current_user.articles.new(article_params)
 
+    authorize @article
+
     if @article.save
-      redirect_to request.referer, notice: I18n.t('articles.notice.success')
+      redirect_to root_path, notice: I18n.t('articles.notice.success')
     else
       render :new, notice: I18n.t('articles.notice.error')
     end
@@ -36,13 +41,17 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
 
-    redirect_to root_path
+    redirect_to root_path, notice: I18n.t('articles.notice.delete')
   end
 
   private
 
   def find_article
     @article = Article.find(params[:id])
+  end
+
+  def authorize_article
+    authorize @article
   end
 
   def article_params

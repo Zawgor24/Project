@@ -6,24 +6,45 @@ en:
   editing_user: 'Editing user'
   categories: 'Categories'
   news: 'News'
+  submit: 'Submit'
   log_out: 'Log out'
   log_in: 'Login'
   sign_up: 'Sign Up'
+  sign_in: 'Sign in'
   comment: 'comment'
   title: 'Title'
   sign_in: 'Sign In'
+  pundit_error: 'You do not have the right to take this action!'
+  error: 'error'
+  follow: 'Follow'
+  unfollow: 'Unfollow'
+  followers: 'Followers'
 
   articles:
     notice:
       success: 'Article successfully created'
       error: 'Enter valid data'
       delete: 'Article deleted'
+    edit: 'Edit article'
+    create: 'Create article'
+    delete: 'Delete article'
+
+  categories:
+    notice:
+      success: 'Category successfully created'
+      error: 'Enter valid data'
+      delete: 'Category deleted'
+    create: 'Create category'
+    delete: 'Delete category'
 
   comments:
     notice:
       success: 'Comment successfully created'
+      update: 'Comment successfully updated'
       error: 'Enter valid data'
       delete: 'Comment deleted'
+    edit: 'Edit comment'
+    delete: 'Delete comment'
 
   follows:
     notice:
@@ -33,15 +54,21 @@ en:
   posts:
     notice:
       success: 'Post successfully created'
+      update: 'Post successfully updated'
       error: 'Enter valid data'
       delete: 'Post deleted'
-    edit:
-      creating: 'Creating new post'
+    edit: 'Edit post'
+    creating: 'Creating new post'
+    editing: 'Editing post'
+    delete: 'Delete post'
 
   profiles:
+    notice:
+      update: 'Profile successfully updated'
+      error: 'Enter valid data'
+      delete: 'Profile deleted'
     show:
-      profile: 'Edit profile'
-      delete: 'Delete account'
+      edit: 'Edit profile'
     edit:
       editing: 'Editing user'
-
+    delete: 'Delete account'
