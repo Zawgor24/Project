@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validate :birthday_more_that_current_date,
     :user_older_than_minimum_age, if: -> { birthday.present? }
 
+  acts_as_followable
   acts_as_follower
 
   acts_as_paranoid

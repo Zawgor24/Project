@@ -2,9 +2,9 @@ h1
   | News №#{@article.id}
 p align='right'
       | Article №#{ @article.id }
-      br/
+      br
       = link_to 'Edit article', edit_article_path(@article) if policy(@article).edit?
-      br/
+      br
       = link_to 'Delete article', @article, method: :delete, data: { confirm: 'Are you sure?' } if policy(@article).destroy?
 = show_image(@article)
 

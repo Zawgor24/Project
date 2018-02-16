@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, shallow: true, except: %i[index create new] do
+    resource :follows, only: %i[create destroy]
+    get '/followers', to: 'follows#index'
+
     resources :posts, except: :index do
       resources :comments, except: %i[index show]
     end
@@ -17,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :sports, only: %i[show destroy index] do
     resource :follows, only: %i[create destroy]
-    get '/followers', to: 'follows#followers'
+    get '/followers', to: 'follows#index'
 
     resources :invitation_posts, shallow: true do
       resources :comments, except: %i[index show]

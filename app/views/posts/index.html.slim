@@ -6,7 +6,8 @@
     - if @posts.present?
       h1 align = 'center'
         | Category #{ @posts.first.category.name }
-      = render @posts
+      .card-deck
+        = render @posts
 
     - else
       | #{@category.name.titleize} category is empty. You can be first author of post this category.

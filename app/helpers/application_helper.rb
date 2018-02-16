@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def show_image(model)
-    image_tag(model.avatar_url(:thumb)) if model.avatar.present?
+  def show_image(object)
+    image_tag(object.avatar_url(:thumb)) if object.avatar.present?
   end
 
-  def show_small_image(model)
-    image_tag(model.avatar_url(:little)) if model.avatar.present?
+  def show_small_image(object)
+    if object.avatar.present?
+      image_tag(object.avatar_url(:little), class: 'rounded-circle')
+    end
   end
 
   def build_breadcrumb(category)
