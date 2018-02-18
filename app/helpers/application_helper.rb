@@ -7,8 +7,12 @@ module ApplicationHelper
 
   def show_small_image(object)
     if object.avatar.present?
-      image_tag(object.avatar_url(:little), class: 'rounded-circle')
+      image_tag(object.avatar, size: '100x100', class: 'rounded-circle')
     end
+  end
+
+  def full_name(user)
+    "#{user.first_name.titleize} #{user.last_name.titleize}"
   end
 
   def build_breadcrumb(category)

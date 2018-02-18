@@ -6,12 +6,12 @@
           = show_image(@user)
         .profile-usertitle
           .profile-usertitle-name
-            | #{ @user.first_name.titleize } #{ @user.last_name.titleize }
+            | #{full_name(@user)}
           .profile-usertitle-job
             | Status
         .profile-userbuttons
           = render 'friendship' unless current_user.eql?(@user)
-          button.btn.btn-primary.btn-sm type='button' Message
+          = render 'message'
           = link_to 'Followers', user_followers_path(@user), class: 'btn btn-outline-info'
         .profile-usermenu
           ul.nav

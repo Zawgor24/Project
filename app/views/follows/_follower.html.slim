@@ -1,10 +1,9 @@
 - @followers.each do |follower|
-  .col-sm-9
-    .card style=("width: 18rem;")
-      .card-img-top 
-        = show_small_image(follower)
-      .card-body
-        h5.card-title
-          = link_to "#{follower.first_name.humanize} #{follower.last_name.humanize}", follower
-        p.card-text 
-          = follower.email
+  .card.mt-3.mr-5 style=("width: 20rem;") 
+    .card-img-top 
+      = show_small_image(follower)
+    .card-body
+      h5.card-title
+        = link_to full_name(follower), follower
+      p.card-text 
+        = follower.email

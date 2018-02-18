@@ -1,5 +1,5 @@
 en:
-  hello: 'Hello world'
+  hello: 'Hello'
   member: 'Member'
   required_info: 'Required information'
   additional_info: 'Additional information'
@@ -19,6 +19,8 @@ en:
   follow: 'Follow'
   unfollow: 'Unfollow'
   followers: 'Followers'
+  time_ago: "%{time} ago"
+  greeting: 'Hi, my name is %{name}'
 
   articles:
     notice:

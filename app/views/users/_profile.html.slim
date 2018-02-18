@@ -1,6 +1,6 @@
 .col-md-9
   .profile-content
-    | Full name: #{ @user.first_name.titleize } #{ @user.last_name.titleize }
+    | Full name: #{full_name(@user)}
     br/
     | Email: #{ @user.email }
     br/

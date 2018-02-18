@@ -18,12 +18,16 @@ class User < ApplicationRecord
   acts_as_followable
   acts_as_follower
 
+  acts_as_messageable
+
   acts_as_paranoid
 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
 
   mount_uploader :avatar, ImageUploader
+
+  def mailboxer_email(object); end
 
   private
 

@@ -5,17 +5,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
 
-  resources :users, shallow: true, except: %i[index create new] do
-    resource :follows, only: %i[create destroy]
-    get '/followers', to: 'follows#index'
+  resources :articles, only: :index
 
-    resources :posts, except: :index do
-      resources :comments, except: %i[index show]
-    end
-
-    resources :articles, except: :index do
-      resources :comments, except: %i[index show]
-    end
+  resources :categories do
+    resources :posts, only: :index
   end
 
   resources :sports, only: %i[show destroy index] do
@@ -27,10 +20,21 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :articles, only: :index
+  resources :users, shallow: true, except: %i[index create new] do
+    resources :articles, except: :index do
+      resources :comments, except: %i[index show]
+    end
 
-  resources :categories do
-    resources :posts, only: :index
+    resources :conversations do
+      resources :messages
+    end
+
+    resource :follows, only: %i[create destroy]
+    get '/followers', to: 'follows#index'
+
+    resources :posts, except: :index do
+      resources :comments, except: %i[index show]
+    end    
   end
 
   root 'articles#index'

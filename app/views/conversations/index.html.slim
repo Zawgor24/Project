@@ -1,0 +1,17 @@
+h1.text-center Conversations
+.container
+  .row
+    - @conversations.each do |conversation|
+      .card.mt-3.mr-5 style=("width: 20rem;")
+        .card-body
+          p.card-title
+            = image_tag(companion(conversation).avatar, size: '70x70', class: 'rounded-circle')
+            = link_to image_tag('delete.png', size: '20x20'), conversation_path(conversation), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-con'
+          h5.card-text
+            i.fa.fa-hand-o-right
+              = link_to conversation.messages.last.body.truncate(50), conversation_path(conversation)
+          p.text-muted
+            a.fa.fa-envelope-o
+              = link_to full_name(companion(conversation)), companion(conversation)
+              br
+              = I18n.t(:time_ago, time: time_ago_in_words(conversation.updated_at))
