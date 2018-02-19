@@ -22,9 +22,9 @@ class ArticlesController < ApplicationController
     authorize @article
 
     if @article.save
-      redirect_to root_path, notice: I18n.t('articles.notice.success')
+      redirect_to root_path, success: t('notices.success', name: @article.title)
     else
-      render :new, notice: I18n.t('articles.notice.error')
+      render :new, warning: t('notices.error')
     end
   end
 
@@ -32,16 +32,16 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to @article
+      redirect_to @article, success: t('notices.update', name: @article.title)
     else
-      render :edit
+      render :edit, warning: t('notices.error')
     end
   end
 
   def destroy
     @article.destroy
 
-    redirect_to root_path, notice: I18n.t('articles.notice.delete')
+    redirect_to root_path, danger: t('notices.delete', name: @article.title)
   end
 
   private

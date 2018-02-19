@@ -16,13 +16,13 @@ RSpec.describe 'Comment', type: :feature do
     context 'when user is authorized' do
       before { visit post_path(post) }
 
-      scenario { is_expected.to have_content(I18n.t(:comment)) }
+      scenario { is_expected.to have_content(I18n.t('comments.create')) }
 
       context 'when info is invalid' do
         scenario "doesn't create a comment" do
-          fill_in_comment_fields 'ROR' * 10, post.body
+          fill_in_comment_fields Faker::Lorem.paragraph, Faker::Lorem.paragraph
 
-          is_expected.to have_content(I18n.t('comments.notice.error'))
+          is_expected.to have_content(I18n.t('notices.error'))
         end
       end
 
@@ -30,7 +30,7 @@ RSpec.describe 'Comment', type: :feature do
         scenario 'outputs an error' do
           click_button 'Submit'
 
-          is_expected.to have_content(I18n.t('comments.notice.error'))
+          is_expected.to have_content(I18n.t('notices.error'))
         end
       end
 
@@ -38,7 +38,8 @@ RSpec.describe 'Comment', type: :feature do
         scenario 'creates a comment' do
           fill_in_comment_fields(post.title, post.body)
 
-          is_expected.to have_content(I18n.t('comments.notice.success'))
+          is_expected.to have_content(I18n.t('notices.success',
+            name: post.title))
         end
       end
     end
@@ -56,7 +57,7 @@ RSpec.describe 'Comment', type: :feature do
     context 'when user is not author' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
     end
 
     context 'when user is manager' do
@@ -67,9 +68,9 @@ RSpec.describe 'Comment', type: :feature do
       scenario { is_expected.to have_content(I18n.t('comments.edit')) }
 
       scenario 'updates comment' do
-        fill_in_comment_fields I18n.t(:hello), I18n.t(:hello)
+        fill_in_comment_fields post.title, Faker::Lorem.word
 
-        is_expected.to have_content(I18n.t('comments.notice.update'))
+        is_expected.to have_content(I18n.t('notices.update', name: post.title))
       end
     end
   end
@@ -115,7 +116,7 @@ RSpec.describe 'Comment', type: :feature do
       scenario 'deletes comment' do
         delete_comment
 
-        is_expected.to have_content(I18n.t('comments.notice.delete'))
+        is_expected.not_to have_content(I18n.t('comment.edit'))
       end
     end
 
@@ -135,7 +136,7 @@ RSpec.describe 'Comment', type: :feature do
       scenario 'deletes comment' do
         delete_comment
 
-        is_expected.to have_content(I18n.t('comments.notice.delete'))
+        is_expected.not_to have_content(I18n.t('comment.edit'))
       end
     end
   end

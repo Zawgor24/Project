@@ -4,7 +4,7 @@ ActiveAdmin.register Category do
   permit_params :name
 
   form do |f|
-    f.inputs t(:required_info) do
+    f.inputs t('admin.required_info') do
       f.input :name
     end
     f.actions

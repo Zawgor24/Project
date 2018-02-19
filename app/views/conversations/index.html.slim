@@ -14,4 +14,4 @@ h1.text-center Conversations
             a.fa.fa-envelope-o
               = link_to full_name(companion(conversation)), companion(conversation)
               br
-              = I18n.t(:time_ago, time: time_ago_in_words(conversation.updated_at))
+              = t('messages.time_ago', time: time_ago_in_words(conversation.updated_at))

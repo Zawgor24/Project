@@ -16,9 +16,10 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params_with_user)
 
     if @comment.save
-      redirect_to request.referer, notice: I18n.t('comments.notice.success')
+      redirect_to request.referer,
+        success: t('notices.success', name: @comment.title)
     else
-      redirect_to request.referer, notice: I18n.t('comments.notice.error')
+      redirect_to request.referer, warning: t('notices.error')
     end
   end
 
@@ -26,16 +27,18 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to @comment.commentable, notice: I18n.t('comments.notice.update')
+      redirect_to @comment.commentable,
+        success: t('notices.update', name: @comment.title)
     else
-      render :edit, notice: I18n.t('comments.notice.error')
+      render :edit, warning: t('notices.error')
     end
   end
 
   def destroy
     @comment.destroy
 
-    redirect_to request.referer, notice: I18n.t('comments.notice.delete')
+    redirect_to request.referer,
+      danger: t('notices.delete', name: @comment.title)
   end
 
   private

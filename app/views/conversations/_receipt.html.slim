@@ -7,4 +7,4 @@
       h5.card-text
         = receipt.message.body
       p.text-muted
-        = I18n.t(:time_ago, time: time_ago_in_words(receipt.updated_at))
+        = t('messages.time_ago', time: time_ago_in_words(receipt.updated_at))

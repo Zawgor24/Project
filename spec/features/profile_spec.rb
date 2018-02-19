@@ -12,7 +12,9 @@ RSpec.describe 'Profile', type: :feature do
     context 'when user unauthorized' do
       let(:user) { build(:user) }
 
-      scenario { expect(page.has_no_content?(I18n.t(:log_out))).to be_truthy }
+      scenario 'stays at log in page' do
+        expect(page.has_no_content?(I18n.t('sessions.log_out'))).to be_truthy
+      end
     end
 
     context 'when user authorized' do
@@ -72,9 +74,9 @@ RSpec.describe 'Profile', type: :feature do
 
           page.select user.sex, from: 'user[sex]'
 
-          click_button I18n.t(:submit)
+          click_button I18n.t('buttons.submit')
 
-          is_expected.to have_content(I18n.t(:sign_in))
+          is_expected.to have_content(I18n.t('sessions.sign_in'))
         end
       end
 
@@ -82,17 +84,17 @@ RSpec.describe 'Profile', type: :feature do
         scenario 'does not update profile' do
           fill_in 'user[info]', with: 'abc' * 100
 
-          click_button I18n.t(:submit)
+          click_button I18n.t('buttons.submit')
 
-          is_expected.to have_content(I18n.t(:error))
+          is_expected.to have_content(I18n.t('user.editing'))
         end
       end
 
       context 'with empty fields' do
         scenario 'does not update profile' do
-          click_button I18n.t(:submit)
+          click_button I18n.t('buttons.submit')
 
-          is_expected.to have_content(I18n.t(:error))
+          is_expected.to have_content(I18n.t('user.editing'))
         end
       end
     end
@@ -100,7 +102,7 @@ RSpec.describe 'Profile', type: :feature do
     context 'when user is not owner' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
     end
 
     context 'when fake user is manager' do
@@ -108,7 +110,7 @@ RSpec.describe 'Profile', type: :feature do
 
       before { sign_in(manager) }
 
-      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
     end
   end
 
@@ -125,7 +127,7 @@ RSpec.describe 'Profile', type: :feature do
 
         page.driver.browser.switch_to.alert.accept
 
-        is_expected.to have_content(I18n.t(:sign_in))
+        is_expected.to have_content(I18n.t('sessions.sign_in'))
       end
     end
 

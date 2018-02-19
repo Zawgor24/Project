@@ -15,7 +15,7 @@ RSpec.describe 'Post', type: :feature do
     context 'when user unauthorized' do
       let(:user) { build(:user) }
 
-      scenario { expect(page.has_no_content?(I18n.t(:title))).to be_truthy }
+      scenario { is_expected.to have_content(I18n.t('sessions.sign_in')) }
     end
 
     context 'when user authorized' do
@@ -37,7 +37,7 @@ RSpec.describe 'Post', type: :feature do
 
       context 'when invalid data' do
         scenario "doesn't create a post" do
-          fill_in 'Title', with: 'ROR' * 10
+          fill_in 'Title', with: Faker::Lorem.paragraph
 
           click_button 'Submit'
 
@@ -65,7 +65,7 @@ RSpec.describe 'Post', type: :feature do
     context 'when user is not author' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
     end
 
     context 'when user is manager' do
@@ -112,7 +112,7 @@ RSpec.describe 'Post', type: :feature do
       scenario 'deletes post' do
         delete_post
 
-        is_expected.to have_content(I18n.t('posts.notice.delete'))
+        is_expected.to have_content(I18n.t('notices.delete', name: post.title))
       end
     end
 
@@ -132,7 +132,7 @@ RSpec.describe 'Post', type: :feature do
       scenario 'deletes post' do
         delete_post
 
-        is_expected.to have_content(I18n.t('posts.notice.delete'))
+        is_expected.to have_content(I18n.t('notices.delete', name: post.title))
       end
     end
   end

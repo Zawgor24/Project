@@ -24,16 +24,16 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: I18n.t('profile.notice.update')
+      redirect_to @user
     else
-      render :edit, notice: I18n.t('profile.notice.error')
+      render :edit, danger: t('notices.error')
     end
   end
 
   def destroy
     @user.destroy
 
-    redirect_to root_path, notice: I18n.t('profile.notice.delete')
+    redirect_to root_path
   end
 
   private

@@ -14,13 +14,13 @@ RSpec.describe 'Follow', type: :feature do
     context 'when user is owner' do
       before { sign_in(user) }
 
-      scenario { is_expected.not_to have_content(I18n.t(:follow)) }
+      scenario { is_expected.not_to have_content(I18n.t('follows.follow')) }
     end
 
     context 'when user is not owner' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.to have_link(I18n.t(:follow)) }
+      scenario { is_expected.to have_link(I18n.t('follows.follow')) }
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe 'Follow', type: :feature do
     before { sign_in(fake_user) }
 
     scenario 'follows user' do
-      click_button I18n.t(:follow)
+      click_button I18n.t('follows.follow')
 
       is_expected.to have_content(I18n.t('follows.notice.follow'))
     end
@@ -42,7 +42,7 @@ RSpec.describe 'Follow', type: :feature do
     end
 
     scenario 'unfollows user' do
-      click_button I18n.t(:unfollow)
+      click_button I18n.t('follows.unfollow')
 
       is_expected.to have_content(I18n.t('follows.notice.unfollow'))
     end
@@ -53,13 +53,13 @@ RSpec.describe 'Follow', type: :feature do
     context 'when user is owner' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t(:followers)) }
+      scenario { is_expected.to have_content(I18n.t('follows.followers')) }
     end
 
     context 'when user is not owner' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.to have_content(I18n.t(:followers)) }
+      scenario { is_expected.to have_content(I18n.t('follows.followers')) }
     end
   end
 end

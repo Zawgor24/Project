@@ -21,9 +21,10 @@ class InvitationPostsController < ApplicationController
     )
 
     if @invitation_post.save
-      redirect_to @sport, notice: I18n.t('posts.notice.success')
+      redirect_to @sport,
+        success: t('notices.success', name: @invitation_post.name)
     else
-      render :new, notice: I18n.t('posts.notice.error')
+      render :new, warning: t('notices.error')
     end
   end
 
@@ -31,16 +32,18 @@ class InvitationPostsController < ApplicationController
 
   def update
     if @invitation_post.update(post_params)
-      redirect_to @invitation_post, notice: I18n.t('posts.notice.update')
+      redirect_to @invitation_post,
+        success: t('notices.update', name: @invitation_post.name)
     else
-      render :edit, notice: I18n.t('posts.notice.error')
+      render :edit, warning: t('notices.error')
     end
   end
 
   def destroy
     @invitation_post.destroy
 
-    redirect_to @invitation_post.sport, notice: I18n.t('posts.notice.delete')
+    redirect_to @invitation_post.sport,
+      danger: t('notices.delete', name: @invitation_post.name)
   end
 
   private

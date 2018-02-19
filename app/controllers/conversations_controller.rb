@@ -14,7 +14,7 @@ class ConversationsController < ApplicationController
     recipient = User.find(params[:user_id])
 
     receipt = current_user.send_message(recipient,
-      I18n.t(:greeting, name: current_user.first_name), recipient.email)
+      t('messages.greeting', name: current_user.first_name), recipient.email)
 
     redirect_to conversation_path(receipt.conversation)
   end

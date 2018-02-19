@@ -12,12 +12,12 @@ RSpec.describe 'Registrations', type: :feature do
   context 'with invalid info' do
     before { click_button 'Submit' }
 
-    scenario { is_expected.to have_content(I18n.t(:sign_up)) }
+    scenario { is_expected.to have_content(I18n.t('sessions.sign_up')) }
   end
 
   context 'with valid info' do
     before { sign_up(user) }
 
-    scenario { is_expected.to have_content(I18n.t(:log_out)) }
+    scenario { is_expected.to have_content(I18n.t('sessions.log_out')) }
   end
 end

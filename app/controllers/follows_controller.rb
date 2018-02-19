@@ -10,13 +10,13 @@ class FollowsController < ApplicationController
   def create
     current_user.follow!(@followable)
 
-    redirect_to request.referer, notice: I18n.t('follows.notice.follow')
+    redirect_to request.referer, success: t('follows.notice.follow')
   end
 
   def destroy
     current_user.unfollow!(@followable)
 
-    redirect_to request.referer, notice: I18n.t('follows.notice.unfollow')
+    redirect_to request.referer, danger: t('follows.notice.unfollow')
   end
 
   private

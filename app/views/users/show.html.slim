@@ -12,7 +12,7 @@
         .profile-userbuttons
           = render 'friendship' unless current_user.eql?(@user)
           = render 'message'
-          = link_to 'Followers', user_followers_path(@user), class: 'btn btn-outline-info'
+          = link_to t('follows.followers'), user_followers_path(@user), class: 'btn btn-outline-info'
         .profile-usermenu
           ul.nav
             li

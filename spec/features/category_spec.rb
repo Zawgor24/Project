@@ -14,7 +14,7 @@ RSpec.describe 'Category', type: :feature do
     before { visit new_category_path }
 
     context 'when logged in as user' do
-      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
     end
 
     context 'when user is manager' do
@@ -27,7 +27,8 @@ RSpec.describe 'Category', type: :feature do
 
         click_button 'Submit'
 
-        is_expected.to have_content(I18n.t('categories.notice.success'))
+        is_expected.to have_content(I18n.t('notices.success',
+          name: category.name))
       end
     end
   end
@@ -36,7 +37,7 @@ RSpec.describe 'Category', type: :feature do
     before { visit edit_category_path(category) }
 
     context 'when logged in as user' do
-      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
     end
 
     context 'when user is manager' do
@@ -49,7 +50,8 @@ RSpec.describe 'Category', type: :feature do
 
         click_button 'Submit'
 
-        is_expected.to have_content(I18n.t('categories.notice.success'))
+        is_expected.to have_content(I18n.t('notices.update',
+          name: I18n.t(:hello)))
       end
     end
   end
@@ -71,7 +73,8 @@ RSpec.describe 'Category', type: :feature do
 
         page.driver.browser.switch_to.alert.accept
 
-        is_expected.to have_content(I18n.t('categories.notice.delete'))
+        is_expected.to have_content(I18n.t('notices.delete',
+          name: category.name))
       end
     end
   end

@@ -13,7 +13,9 @@ RSpec.describe 'Article', type: :feature do
   context "when user isn't authorized" do
     let(:user) { build(:user) }
 
-    scenario { expect(page.has_no_content?(I18n.t(:log_out))).to eq(true) }
+    scenario 'stays at log in page' do
+      expect(page.has_no_content?(I18n.t('sessions.log_out'))).to be_truthy
+    end
   end
 
   describe '#show' do
@@ -34,7 +36,7 @@ RSpec.describe 'Article', type: :feature do
     before { visit new_user_article_path(user) }
 
     context 'when logged in as user' do
-      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
     end
 
     context 'when user is manager' do
@@ -57,10 +59,12 @@ RSpec.describe 'Article', type: :feature do
   end
 
   describe '#update' do
+    let(:fake_article) { build(:article, user: user) }
+
     before { visit edit_article_path(article) }
 
     context 'when logged in as user' do
-      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
     end
 
     context 'when user is manager' do
@@ -69,15 +73,15 @@ RSpec.describe 'Article', type: :feature do
       scenario { is_expected.to have_content(I18n.t('articles.create')) }
 
       scenario 'updates article' do
-        fill_in 'Title', with: I18n.t(:hello)
-        fill_in 'Body', with: I18n.t(:hello)
+        fill_in 'Title', with: fake_article.title
+        fill_in 'Body', with: fake_article.body
 
         attach_file('article[avatar]', Rails.root.join('spec',
           'support', 'fixtures', 'default-post-image.jpg'))
 
         click_button 'Submit'
 
-        is_expected.to have_content(I18n.t(:hello))
+        is_expected.to have_content(fake_article[:title])
       end
     end
   end
@@ -99,7 +103,8 @@ RSpec.describe 'Article', type: :feature do
 
         page.driver.browser.switch_to.alert.accept
 
-        is_expected.to have_content(I18n.t('articles.notice.delete'))
+        is_expected.to have_content(I18n.t('notices.delete',
+          name: article.title))
       end
     end
   end

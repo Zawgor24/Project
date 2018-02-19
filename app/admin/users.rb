@@ -7,14 +7,14 @@ ActiveAdmin.register User do
   active_admin_paranoia
 
   form do |f|
-    f.inputs t(:required_info) do
+    f.inputs t('admin.required_info') do
       f.input :email
       f.input :password
       f.input :first_name
       f.input :last_name
     end
 
-    f.inputs t(:additional_info) do
+    f.inputs t('admin.additional_info') do
       f.input :address
       f.input :avatar
       f.input :birthday

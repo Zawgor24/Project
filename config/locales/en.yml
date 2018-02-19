@@ -1,76 +1,67 @@
 en:
-  hello: 'Hello'
-  member: 'Member'
-  required_info: 'Required information'
-  additional_info: 'Additional information'
-  editing_user: 'Editing user'
-  categories: 'Categories'
-  news: 'News'
-  submit: 'Submit'
-  log_out: 'Log out'
-  log_in: 'Login'
-  sign_up: 'Sign Up'
-  sign_in: 'Sign in'
-  comment: 'comment'
-  title: 'Title'
-  sign_in: 'Sign In'
-  pundit_error: 'You do not have the right to take this action!'
-  error: 'error'
-  follow: 'Follow'
-  unfollow: 'Unfollow'
-  followers: 'Followers'
-  time_ago: "%{time} ago"
-  greeting: 'Hi, my name is %{name}'
+  admin:
+    additional_info: Additional information
+    member: Member
+    required_info: Required information
 
   articles:
-    notice:
-      success: 'Article successfully created'
-      error: 'Enter valid data'
-      delete: 'Article deleted'
-    edit: 'Edit article'
-    create: 'Create article'
-    delete: 'Delete article'
+    create: Create article
+    delete: Delete article
+    edit: Edit article
+
+  buttons:
+    submit: Submit
 
   categories:
-    notice:
-      success: 'Category successfully created'
-      error: 'Enter valid data'
-      delete: 'Category deleted'
-    create: 'Create category'
-    delete: 'Delete category'
+    create: Create category
+    delete: Delete category
 
   comments:
-    notice:
-      success: 'Comment successfully created'
-      update: 'Comment successfully updated'
-      error: 'Enter valid data'
-      delete: 'Comment deleted'
-    edit: 'Edit comment'
-    delete: 'Delete comment'
+    create: Create comment
+    delete: Delete comment
+    edit: Edit comment
 
   follows:
+    follow: Follow
+    followers: Followers
+    unfollow: Unfollow
     notice:
-      follow: 'Followed'
+      follow: Followed
       unfollow: Unfollowed
 
+  hello: Hello
+
+  messages:
+    greeting: 'Hi, my name is %{name}'
+    time_ago: '%{time} ago'
+
+  notices:
+    success: '%{name} successfully created'
+    update: '%{name} successfully updated'
+    error: Enter valid data
+    delete: '%{name} deleted'
+
   posts:
-    notice:
-      success: 'Post successfully created'
-      update: 'Post successfully updated'
-      error: 'Enter valid data'
-      delete: 'Post deleted'
-    edit: 'Edit post'
-    creating: 'Creating new post'
-    editing: 'Editing post'
-    delete: 'Delete post'
+    creating: Creating new post
+    delete: Delete post
+    edit: Edit post
+    editing: Editing post
 
   profiles:
-    notice:
-      update: 'Profile successfully updated'
-      error: 'Enter valid data'
-      delete: 'Profile deleted'
-    show:
-      edit: 'Edit profile'
+    delete: Delete account
     edit:
-      editing: 'Editing user'
-    delete: 'Delete account'
+      editing: Editing user
+    show:
+      edit: Edit profile
+
+  pundit:
+    error: You do not have the right to take this action!
+
+  sessions:
+    log_in: Login
+    log_out: Log out
+    sign_in: Sign in
+    sign_up: Sign Up
+
+  user:
+    editing: Editing user

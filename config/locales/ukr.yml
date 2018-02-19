@@ -1,9 +1,0 @@
-ukr:
-  hello: 'Добрийдень світ'
-  member: 'Власник'
-  required_info: "Обов'язкова інформація"
-  additional_info: 'Додаткова інформація'
-  editing_user: 'Редагування користувача'
-  categories: 'Категорії'
-  news: 'Новини'
-  log_out: 'Вихід'

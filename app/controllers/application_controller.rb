@@ -4,10 +4,12 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  add_flash_types :danger, :warning, :success, :info
+
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError do
-    redirect_to root_path, notice: I18n.t(:pundit_error)
+    redirect_to root_path, warning: t('pundit.error')
   end
 
   protect_from_forgery with: :exception

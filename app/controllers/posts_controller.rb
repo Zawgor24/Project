@@ -19,9 +19,9 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     if @post.save
-      redirect_to @post, notice: I18n.t('posts.notice.success')
+      redirect_to @post, success: t('notices.success', name: @post.title)
     else
-      render :new, notice: I18n.t('posts.notice.error')
+      render :new, warning: t('notices.error')
     end
   end
 
@@ -29,16 +29,16 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: I18n.t('posts.notice.update')
+      redirect_to @post, success: t('notices.update', name: @post.title)
     else
-      render :edit, notice: I18n.t('posts.notice.error')
+      render :edit, warning: t('notices.error')
     end
   end
 
   def destroy
     @post.destroy
 
-    redirect_to root_path, notice: I18n.t('posts.notice.delete')
+    redirect_to root_path, danger: t('notices.delete', name: @post.title)
   end
 
   private

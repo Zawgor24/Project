@@ -20,9 +20,9 @@ class CategoriesController < ApplicationController
     authorize @category
 
     if @category.save
-      redirect_to root_path, notice: I18n.t('categories.notice.success')
+      redirect_to root_path, success: t('notices.success', name: @category.name)
     else
-      render :new
+      render :new, warning: t('notices.error')
     end
   end
 
@@ -30,16 +30,16 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      redirect_to root_path, notice: I18n.t('categories.notice.success')
+      redirect_to root_path, success: t('notices.update', name: @category.name)
     else
-      render :edit, notice: I18n.t('categories.notice.error')
+      render :edit, warning: t('notices.error')
     end
   end
 
   def destroy
     @category.destroy
 
-    redirect_to root_path, notice: I18n.t('categories.notice.delete')
+    redirect_to root_path, danger: t('notices.delete', name: @category.name)
   end
 
   private

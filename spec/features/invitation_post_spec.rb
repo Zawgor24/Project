@@ -16,7 +16,7 @@ RSpec.describe 'InvitationPost', type: :feature do
     context 'when user unauthorized' do
       let(:user) { build(:user) }
 
-      scenario { expect(page.has_no_content?(I18n.t(:title))).to be_truthy }
+      scenario { is_expected.to have_content(I18n.t('sessions.sign_in')) }
     end
 
     context 'when user authorized' do
@@ -26,13 +26,14 @@ RSpec.describe 'InvitationPost', type: :feature do
         scenario 'creates a post' do
           fill_in_post_fields post.name, post.info
 
-          is_expected.to have_content(I18n.t('posts.notice.success'))
+          is_expected.to have_content(I18n.t('notices.success',
+            name: post.name))
         end
       end
 
       context 'when invalid data' do
         scenario "doesn't create a post" do
-          fill_in 'Name', with: 'ROR' * 20
+          fill_in 'Name', with: Faker::Lorem.paragraph
 
           click_button 'Submit'
 
@@ -57,16 +58,17 @@ RSpec.describe 'InvitationPost', type: :feature do
       scenario { is_expected.to have_content(I18n.t('posts.editing')) }
 
       scenario 'updates post' do
-        fill_in_post_fields I18n.t(:hello), I18n.t(:hello)
+        fill_in_post_fields I18n.t(:hello), Faker::Lorem.word
 
-        is_expected.to have_content(I18n.t('posts.notice.update'))
+        is_expected.to have_content(I18n.t('notices.update',
+          name: I18n.t(:hello)))
       end
     end
 
     context 'when user is not author' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.to have_content(I18n.t(:pundit_error)) }
+      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
     end
 
     context 'when user is manager' do
@@ -113,7 +115,7 @@ RSpec.describe 'InvitationPost', type: :feature do
       scenario 'deletes post' do
         delete_post
 
-        is_expected.to have_content(I18n.t('posts.notice.delete'))
+        is_expected.to have_content(I18n.t('notices.delete', name: post.name))
       end
     end
 
@@ -133,7 +135,7 @@ RSpec.describe 'InvitationPost', type: :feature do
       scenario 'deletes post' do
         delete_post
 
-        is_expected.to have_content(I18n.t('posts.notice.delete'))
+        is_expected.to have_content(I18n.t('notices.delete', name: post.name))
       end
     end
   end
