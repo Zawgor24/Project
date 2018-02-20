@@ -11,6 +11,7 @@ end
 require 'rspec/rails'
 require 'capybara/rails'
 require 'pundit/matchers'
+require 'database_cleaner'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
@@ -37,5 +38,25 @@ RSpec.configure do |config|
       with.library :action_controller
       with.library :rails
     end
+  end
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
   end
 end

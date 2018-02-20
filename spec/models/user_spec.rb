@@ -25,14 +25,14 @@ RSpec.describe User, type: :model do
       subject { user.valid? }
 
       context 'user with valid birthday' do
-        let(:user) { FactoryBot.build(:user) }
+        let(:user) { build(:user) }
 
         it { is_expected.to be_truthy }
       end
 
       context 'user with invalid birthday' do
         let(:user) do
-          FactoryBot.build(:user, birthday: Faker::Date.birthday(1, 5))
+          build(:user, birthday: Faker::Date.birthday(1, 5))
         end
 
         it { is_expected.to be_falsy }

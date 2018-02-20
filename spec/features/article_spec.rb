@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Article', type: :feature do
+RSpec.describe Article, type: :feature do
   let(:user) { create(:user) }
   let(:article) { create(:article, user: user) }
 
@@ -10,7 +10,7 @@ RSpec.describe 'Article', type: :feature do
 
   subject { page }
 
-  context "when user isn't authorized" do
+  context 'when user is not authorized' do
     let(:user) { build(:user) }
 
     scenario 'stays at log in page' do
@@ -18,29 +18,53 @@ RSpec.describe 'Article', type: :feature do
     end
   end
 
-  describe '#show' do
-    before { visit article_path(article) }
+  context 'when logged in as user' do
+    describe '#show' do
+      scenario 'has not article edit content' do
+        visit article_path(article)
 
-    context 'when logged in as user' do
-      scenario { is_expected.not_to have_content(I18n.t('articles.edit')) }
+        is_expected.not_to have_content(I18n.t('articles.edit'))
+      end
     end
 
-    context 'when user is manager' do
-      let(:user) { create(:user, manager: true) }
+    describe '#create' do
+      scenario 'causes an error' do
+        visit new_user_article_path(user)
 
-      scenario { is_expected.to have_content(I18n.t('articles.edit')) }
+        is_expected.to have_content(I18n.t('pundit.error'))
+      end
+    end
+
+    describe '#update' do
+      scenario 'causes an error' do
+        visit edit_article_path(article)
+
+        is_expected.to have_content(I18n.t('pundit.error'))
+      end
+    end
+
+    describe '#destroy' do
+      scenario 'has not article delete content' do
+        visit article_path(article)
+
+        is_expected.not_to have_content(I18n.t('articles.delete'))
+      end
     end
   end
 
-  describe '#create' do
-    before { visit new_user_article_path(user) }
+  context 'when user is manager' do
+    let(:user) { create(:user, manager: true) }
 
-    context 'when logged in as user' do
-      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
+    describe '#show' do
+      scenario 'shows edit content' do
+        visit article_path(article)
+
+        is_expected.to have_content(I18n.t('articles.edit'))
+      end
     end
 
-    context 'when user is manager' do
-      let(:user) { create(:user, manager: true) }
+    describe '#create' do
+      before { visit new_user_article_path(user) }
 
       scenario { is_expected.to have_content(I18n.t('articles.create')) }
 
@@ -51,54 +75,36 @@ RSpec.describe 'Article', type: :feature do
         attach_file('article[avatar]', Rails.root.join('spec',
           'support', 'fixtures', 'default-post-image.jpg'))
 
-        click_button 'Submit'
+        click_button I18n.t('buttons.submit')
 
         is_expected.to have_content(article[:title])
       end
     end
-  end
 
-  describe '#update' do
-    let(:fake_article) { build(:article, user: user) }
-
-    before { visit edit_article_path(article) }
-
-    context 'when logged in as user' do
-      scenario { is_expected.to have_content(I18n.t('pundit.error')) }
-    end
-
-    context 'when user is manager' do
-      let(:user) { create(:user, manager: true) }
-
-      scenario { is_expected.to have_content(I18n.t('articles.create')) }
+    describe '#update' do
+      let(:fake_article) { build(:article, user: user) }
 
       scenario 'updates article' do
+        visit edit_article_path(article)
+
         fill_in 'Title', with: fake_article.title
         fill_in 'Body', with: fake_article.body
 
         attach_file('article[avatar]', Rails.root.join('spec',
           'support', 'fixtures', 'default-post-image.jpg'))
 
-        click_button 'Submit'
+        click_button I18n.t('buttons.submit')
 
         is_expected.to have_content(fake_article[:title])
       end
     end
-  end
 
-  describe '#destroy' do
-    before { visit article_path(article) }
-
-    context 'when logged in as user' do
-      scenario { is_expected.not_to have_content(I18n.t('articles.delete')) }
-    end
-
-    context 'when user is manager' do
-      let(:user) { create(:user, manager: true) }
+    describe '#destroy' do
+      before { visit article_path(article) }
 
       scenario { is_expected.to have_content(I18n.t('articles.delete')) }
 
-      scenario 'deletes post' do
+      scenario 'deletes article' do
         click_link I18n.t('articles.delete')
 
         page.driver.browser.switch_to.alert.accept

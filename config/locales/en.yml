@@ -10,11 +10,16 @@ en:
     edit: Edit article
 
   buttons:
+    message: Message
     submit: Submit
 
   categories:
     create: Create category
     delete: Delete category
+
+  conversations:
+    index: 'Conversations'
+    destroy: 'Conversation №%{number} successfully deleted!'
 
   comments:
     create: Create comment

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'InvitationPost', type: :feature do
+RSpec.describe InvitationPost, type: :feature do
   let(:fake_user) { create(:user) }
   let(:user) { create(:user) }
   let(:sport) { create(:sport) }

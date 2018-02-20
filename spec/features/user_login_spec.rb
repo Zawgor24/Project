@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Signins', type: :request do
+RSpec.describe 'Login', type: :request do
   let(:user) { create(:user) }
 
   subject { page }

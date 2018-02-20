@@ -11,10 +11,7 @@ class ConversationsController < ApplicationController
   def show; end
 
   def create
-    recipient = User.find(params[:user_id])
-
-    receipt = current_user.send_message(recipient,
-      t('messages.greeting', name: current_user.first_name), recipient.email)
+    receipt = current_user.send_message(recipient, body, recipient.email)
 
     redirect_to conversation_path(receipt.conversation)
   end
@@ -22,13 +19,22 @@ class ConversationsController < ApplicationController
   def destroy
     @conversation.destroy
 
-    redirect_to user_conversations_path(current_user)
+    redirect_to user_conversations_path(current_user),
+      danger: t('conversations.destroy', number: @conversation.id)
   end
 
   private
 
   def find_receipts
     @receipts = @conversation.receipts_for(current_user).order(:created_at)
+  end
+
+  def recipient
+    User.find(params[:user_id])
+  end
+
+  def body
+    t('messages.greeting', name: current_user.first_name)
   end
 
   def find_conversation

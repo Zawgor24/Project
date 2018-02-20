@@ -52,17 +52,15 @@ class CommentsController < ApplicationController
   end
 
   def commentable_article
-    @commentable = Article.find(params[:article_id]) if params[:article_id]
+    @commentable ||= Article.find_by(id: params[:article_id])
   end
 
   def commentable_post
-    @commentable = Post.find(params[:post_id]) if params[:post_id]
+    @commentable ||= Post.find_by(id: params[:post_id])
   end
 
   def commentable_invit_post
-    if params[:invitation_post_id]
-      @commentable = InvitationPost.find(params[:invitation_post_id])
-    end
+    @commentable ||= InvitationPost.find_by(id: params[:invitation_post_id])
   end
 
   def comment_params

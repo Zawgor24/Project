@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Category', type: :feature do
+RSpec.describe Category, type: :feature do
   let(:user) { create(:user) }
   let(:category) { create(:category) }
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Follow', type: :feature do
+RSpec.describe Follow, type: :feature do
   let(:user) { create(:user) }
   let(:fake_user) { create(:user) }
 

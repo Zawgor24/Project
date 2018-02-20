@@ -8,11 +8,11 @@
       ul
         - @article.errors.full_messages.each do |msg|
           li= msg
-  .col-md-8.offset-md-2 
+  .col-md-8.offset-md-2
     hr.my-5/
     .card.card-outline-secondary
-      .card-header 
-        h3.mb-0  Create article
+      .card-header
+        h3.mb-0  = t('articles.create')
       .card-block
         .form-group.row
           label.col-lg-3.col-form-label.form-control-label Title
@@ -39,4 +39,4 @@
           label.col-lg-3.col-form-label.form-control-label
           .col-lg-9
             input.btn.btn-secondary type='reset' value='Reset' /
-            input.btn.btn-success type='submit' value='Submit' 
+            input.btn.btn-success type='submit' value='Submit'

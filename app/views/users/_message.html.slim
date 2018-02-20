@@ -1,4 +1,4 @@
 - if conversation(@user).present?
-  = link_to 'Message', conversation_path(conversation(@user)), class: 'btn btn-primary btn-sm'
+  = link_to t('buttons.message'), conversation_path(conversation(@user)), class: 'btn btn-primary btn-sm'
 - else
-  = link_to 'Message', user_conversations_path(@user), method: :post, class: 'btn btn-primary btn-sm'
+  = link_to t('buttons.message'), user_conversations_path(@user), method: :post, class: 'btn btn-primary btn-sm'

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Post', type: :feature do
+RSpec.describe Post, type: :feature do
   let(:fake_user) { create(:user) }
   let(:user) { create(:user) }
   let(:post) { create(:post, user: user) }
