@@ -1,18 +1,22 @@
-h1
-  | News №#{@article.id}
-p align='right'
-      | Article №#{ @article.id }
-      br
-      = link_to 'Edit article', edit_article_path(@article) if policy(@article).edit?
-      br
-      = link_to 'Delete article', @article, method: :delete, data: { confirm: 'Are you sure?' } if policy(@article).destroy?
-= show_image(@article)
+.conteiner
+  p.text-right
+        | Article №#{ @article.id }
+        br
+        - if policy(@article).edit?
+          = link_to t('articles.edit'), edit_article_path(@article),
+            class: 'btn btn-warning mr-2'
 
-h3
-  |<strong> #{ @article.title }: </strong>
+        - if policy(@article).destroy?
+          = link_to t('articles.delete'), @article, method: :delete,
+            data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+  .leftimg
+    = show_image(@article)
 
-h5
-  | #{ @article.body }
+  h3
+    = @article.title
+
+  h5
+    = @article.body
 
 h3 Comments
 

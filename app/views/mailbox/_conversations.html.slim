@@ -1,0 +1,19 @@
+- conversations.each do |conversation|
+  .card
+    .card-block
+      .card-body
+        p
+          = link_to image_tag('delete.png', size: '20x20'), conversation_path(conversation), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-con'
+        p.card-title.leftimg
+          = image_tag(companion(conversation).avatar, size: '100x100', class: 'rounded-circle')
+        h5.card-text.h3
+          i.fa.fa-hand-o-right
+            = link_to "#{conversation.messages.last.sender.first_name}:  #{conversation.messages.last.body.truncate(50)}", conversation_path(conversation)
+        p.text-muted.mt-3
+          a.fa.fa-envelope-o.mr-1
+            = link_to full_name(companion(conversation)), companion(conversation)
+            br
+            = t('messages.time_ago', time: time_ago_in_words(conversation.updated_at))
+        .col-md-6.text-right
+        - if conversation.is_trashed?(current_user)
+          = link_to 'Untrash', conversation_untrash_path(conversation), class: 'btn btn-info', method: :post

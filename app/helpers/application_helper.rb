@@ -15,6 +15,10 @@ module ApplicationHelper
     "#{user.first_name.titleize} #{user.last_name.titleize}"
   end
 
+  def active_page(active_page)
+    @active == active_page ? 'active' : ''
+  end
+
   def build_breadcrumb(category)
     result = []
 
@@ -35,5 +39,9 @@ module ApplicationHelper
       success: 'alert alert-success',
       error:   'alert alert-error'
     }[level.to_sym] || level.to_s
+  end
+
+  def unread_messages_count
+    current_user.mailbox.inbox(unread: true).count
   end
 end

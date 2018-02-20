@@ -1,6 +1,6 @@
 = form_tag conversation_messages_path(@conversation), method: :post do
-  .form-group.mt-2
+  .form-group
     = text_area_tag :body, nil, class: 'form-control', autofocus: true, placeholder: 'Print your message...'
-  p.mb-5
-    = submit_tag 'Send message', class: 'btn btn-success'
+  p
+    = submit_tag t('buttons.send_message'), class: 'btn btn-success'
     input.btn.btn-secondary.ml-2 type='reset' value='Reset'

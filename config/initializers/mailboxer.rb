@@ -10,4 +10,6 @@ Mailboxer.setup do |config|
   config.search_engine = :solr
   config.subject_max_length = 255
   config.body_max_length = 32_000
+  config.email_method = :mailboxer_email
+  config.name_method = :mailboxer_name
 end

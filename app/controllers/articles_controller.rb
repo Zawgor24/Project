@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   before_action :authorize_article, only: %i[edit update destroy]
 
   def index
-    @articles = Article.all
+    @articles = Article.order(updated_at: :desc)
   end
 
   def show; end

@@ -1,7 +1,12 @@
-.container
-  .row
-    .col-2
-    .col-9
-      = render 'receipt', locals: { receipts: @receipts }
-      
-      = render 'form'
+.row
+  .spacer
+  .col-md-4
+    .panel.panel-default.w-100
+      .panel-body
+        = render 'mailbox/folders'
+  .col-md-8.w-75
+    .panel.panel-default
+      .panel-body
+        = render 'receipt', locals: { receipts: @receipts }
+  .message-form.col-md-4
+    = render 'form'

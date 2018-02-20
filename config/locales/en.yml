@@ -11,6 +11,7 @@ en:
 
   buttons:
     message: Message
+    send_message: Send message
     submit: Submit
 
   categories:
@@ -18,8 +19,11 @@ en:
     delete: Delete category
 
   conversations:
-    index: 'Conversations'
     destroy: 'Conversation №%{number} successfully deleted!'
+    inbox: Inbox
+    index: Conversations
+    sentbox: Sentbox
+    trash: Trash
 
   comments:
     create: Create comment

@@ -1,4 +1,4 @@
 - if current_user.follows?(@sport)
-  = button_to 'Unfollow', sport_follows_path(@sport), method: :delete, class: 'btn btn-default'
+  = button_to t('follows.unfollow'), sport_follows_path(@sport), method: :delete, class: 'btn btn-default'
 - else
-  = button_to 'Follow', sport_follows_path(@sport), class: 'btn btn-primary'
+  = button_to t('follows.follow'), sport_follows_path(@sport), class: 'btn btn-primary'

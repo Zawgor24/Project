@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'mailbox/inbox', to: 'mailbox#inbox'
+  get 'mailbox/sentbox', to: 'mailbox#sentbox'
+  get 'mailbox/trash', to: 'mailbox#trash'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
@@ -27,14 +31,16 @@ Rails.application.routes.draw do
 
     resources :conversations do
       resources :messages
+      post '/untrash', to: 'conversations#untrash'
     end
+
 
     resource :follows, only: %i[create destroy]
     get '/followers', to: 'follows#index'
 
     resources :posts, except: :index do
       resources :comments, except: %i[index show]
-    end    
+    end
   end
 
   root 'articles#index'

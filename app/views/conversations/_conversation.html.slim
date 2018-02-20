@@ -1,0 +1,16 @@
+- @conversations.each do |conversation|
+  .card.mb-2
+    .card-block
+      .card-body
+        p
+          = link_to image_tag('delete.png', size: '20x20'), conversation_path(conversation), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-con'
+        p.card-title.leftimg
+          = show_small_image(companion(conversation))
+        h5.card-text.h3
+          i.fa.fa-hand-o-right
+            = link_to "#{conversation.last_sender.first_name}:  #{conversation.last_message.body.truncate(50)}", conversation_path(conversation)
+        p.text-muted.mt-3
+          a.fa.fa-envelope-o.mr-1
+            = link_to full_name(companion(conversation)), companion(conversation)
+            br
+            = t('messages.time_ago', time: time_ago_in_words(conversation.updated_at))

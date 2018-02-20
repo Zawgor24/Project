@@ -27,7 +27,13 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, ImageUploader
 
-  def mailboxer_email(object); end
+  def mailboxer_name
+    first_name
+  end
+
+  def mailboxer_email(_object)
+    email
+  end
 
   private
 

@@ -15,4 +15,4 @@
   = render InvitationPost.where(sport_id: @sport.id)
   br
 
-  = link_to 'Followers', sport_followers_path(@sport)
+  = link_to t('follows.followers'), sport_followers_path(@sport)

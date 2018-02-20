@@ -1,13 +1,11 @@
-.container
-  | News №#{article.id}
-  .row
-    .col
-      div.leftimg
-        = show_image(article)
-
-      h3
-        | #{ link_to article.title, article }:
-
-      h5
-        | #{ article.body }
-      br/
+.col.mb-5
+  .card.text-center
+    .card-header
+      = show_image(article)
+    .card-body
+      h2.card-title 
+        = link_to article.title, article
+      p.card-text 
+        = article.body.truncate_words(25)
+    .card-footer.text-muted
+      = t('messages.time_ago', time: time_ago_in_words(article.updated_at))
