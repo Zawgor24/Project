@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   before_action :find_category, only: :index
   before_action :find_post, only: %i[show edit update destroy]
   before_action :authorize_post, only: %i[edit update destroy]
+  before_action :set_categories, only: %i[index show]
 
   def index
     @posts = Post.by_subtree_categories(@category.subtree_ids)
@@ -49,6 +50,10 @@ class PostsController < ApplicationController
 
   def authorize_post
     authorize @post
+  end
+
+  def set_categories
+    @categories = Category.order(name: :asc)
   end
 
   def find_category

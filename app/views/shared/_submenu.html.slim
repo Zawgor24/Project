@@ -3,7 +3,7 @@ div.submenu
 
   table.table
     tbody
-    - Category.roots.each do |category|
+    - @categories.roots.each do |category|
       tr
         = link_to category.name, category_posts_path(category), class: "nav-link #{'active' if current_page?(category_path(category)) || @post.present? && @post.category == category }"
 

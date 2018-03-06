@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
   private
 
   def find_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find_by(id: params[:id])
   end
 
   def authorize_comment

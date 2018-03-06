@@ -3,11 +3,13 @@
 class SportsController < ApplicationController
   before_action :find_sport
 
-  def show; end
+  def show
+    @posts = @sport.invitation_posts.by_updated_time
+  end
 
   private
 
   def find_sport
-    @sport = Sport.find(params[:id])
+    @sport = Sport.find_by(id: params[:id])
   end
 end

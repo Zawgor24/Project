@@ -3,6 +3,8 @@
 class ArticlesController < ApplicationController
   before_action :find_article, only: %i[show edit update destroy]
   before_action :authorize_article, only: %i[edit update destroy]
+  before_action :set_categories, only: :index
+  before_action :set_sports, only: :index
 
   def index
     @articles = Article.order(updated_at: :desc)
@@ -47,7 +49,15 @@ class ArticlesController < ApplicationController
   private
 
   def find_article
-    @article = Article.find(params[:id])
+    @article = Article.find_by(id: params[:id])
+  end
+
+  def set_categories
+    @categories = Category.order(name: :asc)
+  end
+
+  def set_sports
+    @sports = Sport.order(name: :asc)
   end
 
   def authorize_article

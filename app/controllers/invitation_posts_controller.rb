@@ -4,10 +4,7 @@ class InvitationPostsController < ApplicationController
   before_action :find_invitation_post, only: %i[show edit update destroy]
   before_action :find_sport, only: %i[create new]
   before_action :authorize_post, only: %i[edit update destroy]
-
-  def index
-    @invitation_posts = InvitationPost.all
-  end
+  before_action :set_categories, only: :show
 
   def show; end
 
@@ -49,7 +46,7 @@ class InvitationPostsController < ApplicationController
   private
 
   def find_invitation_post
-    @invitation_post = InvitationPost.find(params[:id])
+    @invitation_post = InvitationPost.find_by(id: params[:id])
   end
 
   def authorize_post
@@ -58,6 +55,10 @@ class InvitationPostsController < ApplicationController
 
   def find_sport
     @sport ||= Sport.find(params[:sport_id])
+  end
+
+  def set_categories
+    @categories = Category.order(name: :asc)
   end
 
   def post_params

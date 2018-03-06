@@ -46,7 +46,8 @@ class ConversationsController < ApplicationController
   end
 
   def find_receipts
-    @receipts = @conversation.receipts_for(current_user).order(:created_at)
+    @receipts = @conversation.receipts_for(current_user)
+      .order(:created_at).includes(:message)
   end
 
   def find_trash_conversation
@@ -56,6 +57,6 @@ class ConversationsController < ApplicationController
   end
 
   def recipient
-    User.find(params[:user_id])
+    User.find_by(id: params[:user_id])
   end
 end

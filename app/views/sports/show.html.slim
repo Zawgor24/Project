@@ -12,7 +12,7 @@
 
   = link_to 'Create invitation post', new_sport_invitation_post_path(@sport)
 
-  = render InvitationPost.where(sport_id: @sport.id)
+  = render @posts
   br
 
   = link_to t('follows.followers'), sport_followers_path(@sport)

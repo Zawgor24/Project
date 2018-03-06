@@ -1,10 +1,4 @@
 - @receipts.each do |receipt|
   .card.mt-1.5
     .card-body
-      p.card-title
-        = image_tag(receipt.message.sender.avatar, size: '50x50', class: 'rounded-circle')
-        = link_to full_name(receipt.message.sender), receipt.message.sender
-      h5.card-text
-        = receipt.message.body
-      p.text-muted
-        = t('messages.time_ago', time: time_ago_in_words(receipt.updated_at))
+      = render 'message',  message: receipt.message, receipt: receipt

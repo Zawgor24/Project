@@ -22,8 +22,8 @@ class FollowsController < ApplicationController
   private
 
   def find_followable
-    @followable = Sport.find_by(id: params[:sport_id])
+    @followable ||= Sport.find_by(id: params[:sport_id])
 
-    @followable = User.find_by(id: params[:user_id])
+    @followable ||= User.find_by(id: params[:user_id])
   end
 end

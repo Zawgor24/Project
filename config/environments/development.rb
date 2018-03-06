@@ -1,9 +1,14 @@
 Rails.application.configure do
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+
+    Bullet.add_whitelist type: :n_plus_one_query,
+      class_name: 'Mailboxer::Message', association: :sender
+  end
 
   config.cache_classes = false
-
   config.eager_load = false
-
   config.consider_all_requests_local = true
 
   if Rails.root.join('tmp/caching-dev.txt').exist?
@@ -15,23 +20,15 @@ Rails.application.configure do
     }
   else
     config.action_controller.perform_caching = false
-
     config.cache_store = :null_store
   end
 
   config.action_mailer.raise_delivery_errors = false
-
   config.action_mailer.perform_caching = false
-
   config.active_support.deprecation = :log
-
   config.active_record.migration_error = :page_load
-
   config.assets.debug = true
-
   config.assets.quiet = true
-
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
