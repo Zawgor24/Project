@@ -8,5 +8,5 @@ class Sport < ApplicationRecord
 
   acts_as_followable
 
-  mount_uploader :avatar, ImageUploader
+  mount_uploader :avatar, SportImageUploader
 end

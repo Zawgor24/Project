@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ImageUploader < CarrierWave::Uploader::Base
+class PostImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   storage :file
@@ -10,7 +10,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def default_url(*_args)
-    ActionController::Base.helpers.asset_path('default_avatar.jpg')
+    ActionController::Base.helpers.asset_path('default-news-image.jpg')
   end
 
   version :thumb do

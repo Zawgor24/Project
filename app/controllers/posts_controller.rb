@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i[show edit update destroy]
   before_action :authorize_post, only: %i[edit update destroy]
   before_action :set_categories, only: %i[index show]
+  before_action :set_comments, only: :show
 
   def index
     @posts = Post.by_subtree_categories(@category.subtree_ids)
@@ -45,11 +46,15 @@ class PostsController < ApplicationController
   private
 
   def find_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
   end
 
   def authorize_post
     authorize @post
+  end
+
+  def set_comments
+    @comments = @post.comments.includes(:user)
   end
 
   def set_categories

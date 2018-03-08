@@ -2,25 +2,25 @@
   .container
     .well
       .media
-        a.pull-left 
+        a.pull-left
           = show_image(post)
-        .media-body
-          h4.media-heading 
+        .media-body.ml-3
+          h4.media-heading
             = link_to post.title, post
-          p.text-right 
+          p.text-right
             | By #{ post.user.email }
           p
             = post.body
           ul.list-inline.list-unstyled
             li
               span
-                i.fa.fa-calendar aria-hidden='true' 
+                i.fa.fa-calendar aria-hidden='true'
                 = post.created_at
             li
             span
-              i.fa.fa-comments aria-hidden='true' 
+              i.fa.fa-comments aria-hidden='true'
               | #{ post.comments.count } comments
-            li 
+            li
               span
                 i.fa.fa-facebook-square
               span

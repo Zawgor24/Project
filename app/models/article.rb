@@ -8,5 +8,5 @@ class Article < ApplicationRecord
   validates :title, length: { maximum: 20 }
   validates :title, :body, presence: true
 
-  mount_uploader :avatar, ImageUploader
+  mount_uploader :avatar, ArticleImageUploader
 end

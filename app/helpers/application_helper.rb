@@ -2,13 +2,11 @@
 
 module ApplicationHelper
   def show_image(object)
-    image_tag(object.avatar_url(:thumb)) if object.avatar.present?
+    image_tag(object.avatar_url(:thumb))
   end
 
   def show_small_image(object)
-    if object.avatar.present?
-      image_tag(object.avatar, size: '100x100', class: 'rounded-circle')
-    end
+    image_tag(object.avatar, size: '100x100', class: 'rounded-circle')
   end
 
   def full_name(user)
