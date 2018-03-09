@@ -19,7 +19,8 @@
 
     - if @post.comments.present?
       h4 Comments
-      = render @post.comments
+
+      = render @comments
 
     = render partial: 'comments/form', locals: { commentable: @post }
 

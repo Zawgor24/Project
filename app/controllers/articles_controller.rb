@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
   before_action :authorize_article, only: %i[edit update destroy]
   before_action :set_categories, only: :index
   before_action :set_sports, only: :index
+  before_action :set_comments, only: :show
 
   def index
     @articles = Article.order(updated_at: :desc)
@@ -54,6 +55,10 @@ class ArticlesController < ApplicationController
 
   def set_categories
     @categories = Category.order(name: :asc)
+  end
+
+  def set_comments
+    @comments = @article.comments.includes(:user)
   end
 
   def set_sports

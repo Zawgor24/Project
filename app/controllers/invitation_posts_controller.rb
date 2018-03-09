@@ -5,6 +5,7 @@ class InvitationPostsController < ApplicationController
   before_action :find_sport, only: %i[create new]
   before_action :authorize_post, only: %i[edit update destroy]
   before_action :set_categories, only: :show
+  before_action :set_comments, only: :show
 
   def show; end
 
@@ -51,6 +52,10 @@ class InvitationPostsController < ApplicationController
 
   def authorize_post
     authorize @invitation_post
+  end
+
+  def set_comments
+    @comments = @invitation_post.comments.includes(:user)
   end
 
   def find_sport

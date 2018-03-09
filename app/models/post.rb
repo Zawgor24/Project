@@ -13,5 +13,5 @@ class Post < ApplicationRecord
   validates :title, :body, presence: true
   validates :title, length: { maximum: 40 }
 
-  mount_uploader :avatar, ImageUploader
+  mount_uploader :avatar, PostImageUploader
 end
