@@ -82,7 +82,9 @@
 
 body {
   margin-top: 80px;
-  background: #edeef0;
+  background: linear-gradient(
+    -180deg,#2fae90 0,#5185d3 34%,#5286d4 51%,#4b89cd 100%
+  );
 }
 .panel-heading {
   color: #31708f;

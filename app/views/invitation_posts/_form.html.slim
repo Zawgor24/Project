@@ -1,14 +1,14 @@
-= form_for [@sport, @invitation_post] do |f|
-  - if @invitation_post.errors.any?
+= form_for [sport, invitation_post] do |f|
+  - if invitation_post.errors.any?
     #error_explanation
       h2
-        = pluralize(@invitation_post.errors.count, "error")
+        = pluralize(invitation_post.errors.count, "error")
         | prohibited
         | this post from being saved:
       ul
-        - @invitation_post.errors.full_messages.each do |msg|
+        - invitation_post.errors.full_messages.each do |msg|
           li= msg
-  .col-md-8.offset-md-2 
+  .col-md-8.offset-md-2
     hr.my-5/
     .card.card-outline-secondary
       .card-block
@@ -37,4 +37,4 @@
           label.col-lg-3.col-form-label.form-control-label
           .col-lg-9
             input.btn.btn-secondary type="reset" value="Reset" /
-            input.btn.btn-success type="submit" value="Submit" 
+            input.btn.btn-success type="submit" value="Submit"

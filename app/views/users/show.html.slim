@@ -3,22 +3,22 @@
     .col-md-3
       .profile-sidebar
         .profile-userpic
-          = show_image(@user)
+          = show_image(user)
         .profile-usertitle
           .profile-usertitle-name
-            | #{full_name(@user)}
+            | #{full_name(user)}
           .profile-usertitle-job
             | Status
         .profile-userbuttons
-          = render 'friendship' unless current_user.eql?(@user)
+          = render 'friendship' unless current_user.eql?(user)
           = render 'message'
-          = link_to t('follows.followers'), user_followers_path(@user), class: 'btn btn-outline-info'
+          = link_to t('follows.followers'), user_followers_path(user), class: 'btn btn-outline-info'
         .profile-usermenu
           ul.nav
             li
-              = link_to t('profiles.show.edit'), edit_user_path(@user) if policy(@user).edit?
+              = link_to t('profiles.show.edit'), edit_user_path(user) if policy(user).edit?
           ul.nav
             li
-              = link_to t('profiles.delete'), @user, method: :delete, data: {confirm: 'Sure?'} if policy(@user).destroy?
+              = link_to t('profiles.delete'), user, method: :delete, data: {confirm: 'Sure?'} if policy(user).destroy?
 
     = render 'profile'

@@ -2,17 +2,17 @@
   .row
     .col
       .leftimg
-        = show_image(@sport)
+        = show_image(sport)
       .post-title
-        | #{ @sport.name }
+        | #{ sport.name }
         .follow
           = render 'friendship'
       h5
-        | #{ @sport.info }
+        | #{ sport.info }
 
-  = link_to 'Create invitation post', new_sport_invitation_post_path(@sport)
+  = link_to 'Create invitation post', new_sport_invitation_post_path(sport)
 
   = render @posts
   br
 
-  = link_to t('follows.followers'), sport_followers_path(@sport)
+  = link_to t('follows.followers'), sport_followers_path(sport)

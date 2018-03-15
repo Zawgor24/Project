@@ -1,72 +1,46 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  before_action :find_article, only: %i[show edit update destroy]
-  before_action :authorize_article, only: %i[edit update destroy]
-  before_action :set_categories, only: :index
-  before_action :set_sports, only: :index
-  before_action :set_comments, only: :show
+  expose :article
+  expose :articles, -> { Article.order(updated_at: :desc) }
+  expose :comments, -> { article.comments.includes(:user) }
+  expose :sports,   -> { Sport.order(name: :asc) }
 
-  def index
-    @articles = Article.order(updated_at: :desc)
-  end
+  before_action :authorize_article, except: %i[index show]
+  before_action :set_categories, only: :index
+
+  def index; end
 
   def show; end
 
-  def new
-    @article = Article.new
-
-    authorize @article
-  end
-
   def create
-    @article = current_user.articles.new(article_params)
+    article = current_user.articles.new(article_params)
 
-    authorize @article
-
-    if @article.save
-      redirect_to root_path, success: t('notices.success', name: @article.title)
+    if article.save
+      redirect_to root_path, success: t('notices.success', name: article.title)
     else
       render :new, warning: t('notices.error')
     end
   end
 
-  def edit; end
-
   def update
-    if @article.update(article_params)
-      redirect_to @article, success: t('notices.update', name: @article.title)
+    if article.update(article_params)
+      redirect_to article, success: t('notices.update', name: article.title)
     else
       render :edit, warning: t('notices.error')
     end
   end
 
   def destroy
-    @article.destroy
+    article.destroy
 
-    redirect_to root_path, danger: t('notices.delete', name: @article.title)
+    redirect_to root_path, danger: t('notices.delete', name: article.title)
   end
 
   private
 
-  def find_article
-    @article = Article.find_by(id: params[:id])
-  end
-
-  def set_categories
-    @categories = Category.order(name: :asc)
-  end
-
-  def set_comments
-    @comments = @article.comments.includes(:user)
-  end
-
-  def set_sports
-    @sports = Sport.order(name: :asc)
-  end
-
   def authorize_article
-    authorize @article
+    authorize article
   end
 
   def article_params

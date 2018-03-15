@@ -1,28 +1,28 @@
 .row
   .col-md-9
-    = render 'shared/breadcrumb', category: @post.category
+    = render 'shared/breadcrumb', category: post.category
 
     .post-title
-      | #{ @post.title }:
+      | #{ post.title }:
 
     p align='right'
-      | Post №#{ @post.id }
+      | Post №#{ post.id }
       br/
-      = link_to t('posts.edit'), edit_post_path(@post) if policy(@post).edit?
+      = link_to t('posts.edit'), edit_post_path(post) if policy(post).edit?
       br/
-      = link_to t('posts.delete'), @post, method: :delete, data: { confirm: 'Are you sure?' } if policy(@post).destroy?
+      = link_to t('posts.delete'), post, method: :delete, data: { confirm: 'Are you sure?' } if policy(post).destroy?
     .leftimg
-      = show_image(@post)
+      = show_image(post)
 
     h5
-      | #{ @post.body }
+      | #{ post.body }
 
-    - if @post.comments.present?
+    - if post.comments.present?
       h4 Comments
 
-      = render @comments
+      = render comments
 
-    = render partial: 'comments/form', locals: { commentable: @post }
+    = render partial: 'comments/form', locals: { commentable: post }
 
     = link_to 'Back', :back
 

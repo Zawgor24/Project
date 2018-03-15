@@ -1,19 +1,19 @@
 .col-md-9
   .profile-content
-    | Full name: #{full_name(@user)}
+    | Full name: #{full_name(user)}
     br/
-    | Email: #{ @user.email }
+    | Email: #{ user.email }
     br/
-    | Birthday: #{ @user.birthday }
+    | Birthday: #{ user.birthday }
     br/
-    | Address: #{ @user.address }
+    | Address: #{ user.address }
     br/
-    | Gender: #{ @user.sex.humanize if @user.sex }
+    | Gender: #{ user.sex.humanize if user.sex }
     br/
-    | Additional information: #{ @user.info }
+    | Additional information: #{ user.info }
     br/
     .sports
       | All followed sports
-      - @user.followees(Sport).each do |sport|
+      - user.followees(Sport).each do |sport|
         li
           = link_to sport.name, sport

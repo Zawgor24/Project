@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :articles, only: :index
 
-  resources :categories do
+  resources :categories, except: %i[index show] do
     resources :posts, only: :index
   end
 

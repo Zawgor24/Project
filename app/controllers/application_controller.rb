@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_categories
+    @categories = Category.by_name
+  end
+
   def mailbox
     @mailbox ||= current_user.mailbox
   end

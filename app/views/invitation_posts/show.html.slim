@@ -1,28 +1,28 @@
 .row
   .col-md-9
     .post-title
-      | #{ @invitation_post.name }
+      | #{ invitation_post.name }
 
     p align='right'
-      | Invitation post №#{ @invitation_post.id }
+      | Invitation post №#{ invitation_post.id }
       br/
-      | #{ link_to @invitation_post.user.email, @invitation_post.user }
+      | #{ link_to invitation_post.user.email, invitation_post.user }
       br/
-      = link_to t('posts.edit'), edit_invitation_post_path(@invitation_post) if policy(@invitation_post).edit?
+      = link_to t('posts.edit'), edit_invitation_post_path(invitation_post) if policy(invitation_post).edit?
       br/
-      = link_to t('posts.delete'), @invitation_post, method: :delete, data: { confirm: 'Are you sure?' } if policy(@invitation_post).destroy?
+      = link_to t('posts.delete'), invitation_post, method: :delete, data: { confirm: 'Are you sure?' } if policy(invitation_post).destroy?
     h5
-      | #{ @invitation_post.info }
+      | #{ invitation_post.info }
 
-    - if @invitation_post.date.present?
+    - if invitation_post.date.present?
       p
-        | Date of event #{ @invitation_post.date.strftime('%B %d, %Y') }
+        | Date of event #{ invitation_post.date.strftime('%B %d, %Y') }
 
-    - if @invitation_post.comments.present?
+    - if invitation_post.comments.present?
       h4 Comments
-      = render @comments
+      = render comments
 
-    = render partial: 'comments/form', locals: { commentable: @invitation_post }
+    = render partial: 'comments/form', locals: { commentable: invitation_post }
 
     = link_to 'Back', :back
 
