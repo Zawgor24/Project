@@ -111,7 +111,7 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
-    childprocess (0.8.0)
+    childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
@@ -124,6 +124,8 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.3)
     database_cleaner (1.6.2)
+    decent_exposure (3.0.0)
+      activesupport (>= 4.0)
     devise (4.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -196,7 +198,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.1.1)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.12)
@@ -218,7 +220,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
     nio4r (2.2.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -403,6 +405,7 @@ DEPENDENCIES
   carrierwave (~> 1.0)
   coffee-rails (~> 4.2)
   database_cleaner
+  decent_exposure (= 3.0.0)
   devise
   factory_bot_rails
   faker!

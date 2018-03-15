@@ -1,27 +1,23 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  before_action :find_category, only: :index
-  before_action :find_post, only: %i[show edit update destroy]
+  expose :post
+  expose :category, id: :category_id
+  expose :comments, -> { post.comments.includes(:user) }
+  expose :posts,    -> { Post.by_subtree_categories(category.subtree_ids) }
+
   before_action :authorize_post, only: %i[edit update destroy]
   before_action :set_categories, only: %i[index show]
-  before_action :set_comments, only: :show
 
-  def index
-    @posts = Post.by_subtree_categories(@category.subtree_ids)
-  end
+  def index; end
 
   def show; end
 
-  def new
-    @post = Post.new
-  end
-
   def create
-    @post = current_user.posts.new(post_params)
+    post = current_user.posts.new(post_params)
 
-    if @post.save
-      redirect_to @post, success: t('notices.success', name: @post.title)
+    if post.save
+      redirect_to post, success: t('notices.success', name: post.title)
     else
       render :new, warning: t('notices.error')
     end
@@ -30,39 +26,23 @@ class PostsController < ApplicationController
   def edit; end
 
   def update
-    if @post.update(post_params)
-      redirect_to @post, success: t('notices.update', name: @post.title)
+    if post.update(post_params)
+      redirect_to post, success: t('notices.update', name: post.title)
     else
       render :edit, warning: t('notices.error')
     end
   end
 
   def destroy
-    @post.destroy
+    post.destroy
 
-    redirect_to root_path, danger: t('notices.delete', name: @post.title)
+    redirect_to root_path, danger: t('notices.delete', name: post.title)
   end
 
   private
 
-  def find_post
-    @post = Post.find_by(id: params[:id])
-  end
-
   def authorize_post
-    authorize @post
-  end
-
-  def set_comments
-    @comments = @post.comments.includes(:user)
-  end
-
-  def set_categories
-    @categories = Category.order(name: :asc)
-  end
-
-  def find_category
-    @category ||= Category.find(params[:category_id])
+    authorize post
   end
 
   def post_params

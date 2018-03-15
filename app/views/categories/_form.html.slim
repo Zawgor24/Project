@@ -1,17 +1,17 @@
-= form_for @category do |f|
-  - if @category.errors.any?
+= form_for category do |f|
+  - if category.errors.any?
     #error_explanation
       h2
-        = pluralize(@category.errors.count, 'error')
+        = pluralize(category.errors.count, 'error')
         | prohibited
         | this category from being saved:
       ul
-        - @category.errors.full_messages.each do |msg|
+        - category.errors.full_messages.each do |msg|
           li= msg
-  .col-md-8.offset-md-2 
+  .col-md-8.offset-md-2
     hr.my-5/
     .card.card-outline-secondary
-      .card-header 
+      .card-header
         h3.mb-0  Create category
       .card-block
         .form-group.row
@@ -33,4 +33,4 @@
           label.col-lg-3.col-form-label.form-control-label
           .col-lg-9
             input.btn.btn-secondary type='reset' value='Reset' /
-            input.btn.btn-success type='submit' value='Submit' 
+            input.btn.btn-success type='submit' value='Submit'
