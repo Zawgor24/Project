@@ -6,7 +6,7 @@ class ConversationsController < ApplicationController
   before_action :find_trash_conversation, only: :untrash
 
   def index
-    @conversations = mailbox.sentbox
+    @conversations = decorate_mailboxer(mailbox.sentbox)
   end
 
   def show
@@ -42,7 +42,7 @@ class ConversationsController < ApplicationController
   end
 
   def find_conversation
-    @conversation ||= mailbox.conversations.find(params[:id])
+    @conversation ||= mailbox.conversations.find(params[:id]).decorate
   end
 
   def find_receipts

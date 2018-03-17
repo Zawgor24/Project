@@ -3,13 +3,7 @@
     .float-right
       = link_to t('categories.delete'), category, method: :delete, data: { confirm: 'Are you sure?' } if policy(category).destroy?
 
-    - if posts.present?
-      h1 align = 'center'
-        | Category #{ posts.first.category.name }
-      .card-deck
-        = render posts
+    = render 'posts'
 
-    - else
-      | #{category.name.titleize} category is empty. You can be first author of post this category.
   .col-md-3
     = render 'shared/submenu'

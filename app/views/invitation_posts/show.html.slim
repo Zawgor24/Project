@@ -12,19 +12,11 @@
       br/
       = link_to t('posts.delete'), invitation_post, method: :delete, data: { confirm: 'Are you sure?' } if policy(invitation_post).destroy?
     h5
-      | #{ invitation_post.info }
+      = invitation_post.info
 
-    - if invitation_post.date.present?
-      p
-        | Date of event #{ invitation_post.date.strftime('%B %d, %Y') }
+    = invitation_post.event_date
 
-    - if invitation_post.comments.present?
-      h4 Comments
-      = render comments
-
-    = render partial: 'comments/form', locals: { commentable: invitation_post }
-
-    = link_to 'Back', :back
+    = render 'invitation_post_comments'
 
   .col-md-3
     = render 'shared/submenu'

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class InvitationPostsController < ApplicationController
-  expose :invitation_post
+  expose :invitation_post, decorate: lambda { |invitation_post|
+    InvitationPostDecorator.new(invitation_post)
+  }
   expose :comments, -> { invitation_post.comments.includes(:user) }
   expose :sport, id: :sport_id
 

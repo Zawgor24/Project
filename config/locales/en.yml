@@ -52,9 +52,12 @@ en:
 
   posts:
     creating: Creating new post
+    date: 'Date of event %{date}'
     delete: Delete post
     edit: Edit post
     editing: Editing post
+    empty_category: '%{category} category is empty.
+      You can be first author of post this category.'
 
   profiles:
     delete: Delete account
