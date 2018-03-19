@@ -23,14 +23,14 @@ RSpec.describe 'Profile', type: :feature do
       context 'when user is owner' do
         before { sign_in(user) }
 
-        scenario { is_expected.to have_content(I18n.t('profiles.show.edit')) }
+        scenario { is_expected.to have_content(I18n.t('users.show.edit')) }
       end
 
       context 'when user is not owner' do
         before { sign_in(fake_user) }
 
         scenario 'has edit content' do
-          is_expected.not_to have_content(I18n.t('profiles.show.edit'))
+          is_expected.not_to have_content(I18n.t('users.show.edit'))
         end
       end
 
@@ -40,7 +40,7 @@ RSpec.describe 'Profile', type: :feature do
         before { sign_in(manager) }
 
         scenario 'has not edit content' do
-          is_expected.not_to have_content(I18n.t('profiles.show.edit'))
+          is_expected.not_to have_content(I18n.t('users.show.edit'))
         end
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe 'Profile', type: :feature do
         let(:user_attrs) { attributes_for(:user, :full) }
 
         scenario 'has editing content' do
-          is_expected.to have_content(I18n.t('profiles.edit.editing'))
+          is_expected.to have_content(I18n.t('users.form.editing'))
         end
 
         scenario 'edits user information' do
@@ -74,7 +74,7 @@ RSpec.describe 'Profile', type: :feature do
 
           page.select user.sex, from: 'user[sex]'
 
-          click_button I18n.t('buttons.submit')
+          click_button 'Submit'
 
           is_expected.to have_content(I18n.t('sessions.sign_in'))
         end
@@ -84,17 +84,17 @@ RSpec.describe 'Profile', type: :feature do
         scenario 'does not update profile' do
           fill_in 'user[info]', with: 'abc' * 100
 
-          click_button I18n.t('buttons.submit')
+          click_button 'Submit'
 
-          is_expected.to have_content(I18n.t('user.editing'))
+          is_expected.to have_content(I18n.t('users.form.editing'))
         end
       end
 
       context 'with empty fields' do
         scenario 'does not update profile' do
-          click_button I18n.t('buttons.submit')
+          click_button 'Submit'
 
-          is_expected.to have_content(I18n.t('user.editing'))
+          is_expected.to have_content(I18n.t('users.form.editing'))
         end
       end
     end
@@ -120,7 +120,7 @@ RSpec.describe 'Profile', type: :feature do
     context 'when user is owner' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('profiles.delete')) }
+      scenario { is_expected.to have_content(I18n.t('users.show.delete')) }
 
       scenario 'removes the profile' do
         click_link 'Delete account'
@@ -134,7 +134,7 @@ RSpec.describe 'Profile', type: :feature do
     context 'when user is not owner' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.not_to have_content(I18n.t('profiles.delete')) }
+      scenario { is_expected.not_to have_content(I18n.t('users.show.delete')) }
     end
 
     context 'when fake user is manager' do
@@ -142,7 +142,7 @@ RSpec.describe 'Profile', type: :feature do
 
       before { sign_in(manager) }
 
-      scenario { is_expected.not_to have_content(I18n.t('profiles.delete')) }
+      scenario { is_expected.not_to have_content(I18n.t('users.show.delete')) }
     end
   end
 end

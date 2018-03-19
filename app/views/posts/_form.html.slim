@@ -9,42 +9,43 @@
         - post.errors.full_messages.each do |msg|
           li= msg
   .col-md-8.offset-md-2
-    hr.my-5/
     .card.card-outline-secondary
-      .card-header
-        h3.mb-0 = t('posts.create')
+      .card-header.text-center
+        h2.mb-0 = t('.create')
       .card-block
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Title
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
+          .col-2
+          .col-lg-8.mt-4
+            .input-group.indent-bottom
               span.input-group-addon
                 i.fa.fa-info-circle aria-hidden='true'
-              = f.text_field :title, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Title'
+              = f.text_field :title, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.title')
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Body
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
+          .col-2
+          .col-lg-8
+            .input-group.indent-bottom
               span.input-group-addon
                 i.fa.fa-info-circle aria-hidden='true'
-              = f.text_field :body, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Body'
+              = f.text_area :body, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.body')
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Image
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
+          .col-2
+          .col-lg-8
+            .input-group.indent-bottom
               span.input-group-addon
                 i.fa.fa-info-circle aria-hidden='true'
-              = f.file_field :avatar, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Image'
+              = f.file_field :avatar, autofocus: true, autocomplete: 'off', class: 'form-control'
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Category
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
+          .col-2
+          .col-2
+            = t '.category'
+          .col-lg-5
+            .input-group.indent-bottom
               span.input-group-addon
                 i.fa.fa-info-circle aria-hidden='true'
               = f.collection_select :category_id, Category.order(:name), :id, :name,
                                          { include_blank: true }, class: 'form-control'
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label
-          .col-lg-9
-            input.btn.btn-secondary type='reset' value='Reset' /
+          .col-2
+          .col-lg-8
+            input.btn.btn-secondary.mr-2 type='reset' value='Reset'
             input.btn.btn-success type='submit' value='Submit'

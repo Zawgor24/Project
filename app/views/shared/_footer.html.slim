@@ -1,0 +1,40 @@
+section#footer
+  .container
+    .row.text-center.text-xs-center.text-sm-left.text-md-left
+      .col-xs-12.col-sm-4.col-md-4.mt-2
+        h5 = t('footer.links')
+        ul.list-unstyled.quick-links
+          li
+            a href="javascript:void();"
+              i.fa.fa-angle-double-right
+              = link_to t('footer.home'), root_path
+          li
+            a href="javascript:void();"
+              i.fa.fa-angle-double-right
+              = link_to t('footer.profile'), current_user
+          li
+            a href="javascript:void();"
+              i.fa.fa-angle-double-right
+              = link_to t('footer.conversations'), user_conversations_path(current_user)
+          li
+            a href="javascript:void();"
+              i.fa.fa-angle-double-right
+              = link_to t('follows.followers'), user_followers_path(current_user)
+    .row
+      .col-xs-12.col-sm-12.col-md-12
+        ul.list-unstyled.list-inline.social.text-center
+          li.list-inline-item.mr-3
+            a href="https://github.com/Zawgor24/Project"
+              i.fa.fa-github
+          li.list-inline-item.mr-3
+            a href="https://www.instagram.com/zawgorodskiy_igor/"
+              i.fa.fa-instagram
+          li.list-inline-item.mr-3
+            a href="https://vk.com/id91340306"
+              i.fa.fa-vk
+          li.list-inline-item.mr-3
+            a href="https://plus.google.com/u/0/105748819771831860885"
+              i.fa.fa-google-plus
+          li.list-inline-item
+            a href="https://zawgorodskiy.2012@gmail.com" target="_blank"
+              i.fa.fa-envelope

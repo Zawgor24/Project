@@ -37,14 +37,16 @@ RSpec.describe InvitationPost, type: :feature do
 
           click_button 'Submit'
 
-          is_expected.to have_content(I18n.t('posts.create'))
+          is_expected.to have_content(I18n.t('invitation_posts.new.create'))
         end
       end
 
       context 'when empty data' do
         before { click_button 'Submit' }
 
-        scenario { is_expected.to have_content(I18n.t('posts.create')) }
+        scenario 'does not create post' do
+          is_expected.to have_content(I18n.t('invitation_posts.new.create'))
+        end
       end
     end
   end
@@ -55,8 +57,9 @@ RSpec.describe InvitationPost, type: :feature do
     context 'when user is author' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.editing')) }
-
+      scenario 'edits post' do
+        is_expected.to have_content(I18n.t('invitation_posts.edit.name'))
+      end
       scenario 'updates post' do
         fill_in_post_fields I18n.t(:hello), Faker::Lorem.word
 
@@ -76,7 +79,9 @@ RSpec.describe InvitationPost, type: :feature do
 
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.editing')) }
+      scenario 'edits post' do
+        is_expected.to have_content(I18n.t('invitation_posts.edit.name'))
+      end
     end
   end
 
@@ -86,13 +91,17 @@ RSpec.describe InvitationPost, type: :feature do
     context 'when user is author' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.edit')) }
+      scenario 'edits post' do
+        is_expected.to have_content(I18n.t('invitation_posts.show.edit'))
+      end
     end
 
     context 'when user is not author' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.not_to have_content(I18n.t('posts.edit')) }
+      scenario 'does not edit post' do
+        is_expected.not_to have_content(I18n.t('invitation_posts.show.edit'))
+      end
     end
 
     context 'when user is manager' do
@@ -100,7 +109,9 @@ RSpec.describe InvitationPost, type: :feature do
 
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.edit')) }
+      scenario 'edits post' do
+        is_expected.to have_content(I18n.t('invitation_posts.show.edit'))
+      end
     end
   end
 
@@ -110,7 +121,9 @@ RSpec.describe InvitationPost, type: :feature do
     context 'when user is author' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.delete')) }
+      scenario 'deletes post' do
+        is_expected.to have_content(I18n.t('invitation_posts.show.delete'))
+      end
 
       scenario 'deletes post' do
         delete_post
@@ -122,7 +135,9 @@ RSpec.describe InvitationPost, type: :feature do
     context 'when user is not author' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.not_to have_content(I18n.t('posts.delete')) }
+      scenario 'does not delete post' do
+        is_expected.not_to have_content(I18n.t('invitation_posts.show.delete'))
+      end
     end
 
     context 'when user is manager' do
@@ -130,7 +145,9 @@ RSpec.describe InvitationPost, type: :feature do
 
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.delete')) }
+      scenario 'deletes post' do
+        is_expected.to have_content(I18n.t('invitation_posts.show.delete'))
+      end
 
       scenario 'deletes post' do
         delete_post
@@ -141,14 +158,14 @@ RSpec.describe InvitationPost, type: :feature do
   end
 
   def delete_post
-    click_link I18n.t('posts.delete')
+    click_link I18n.t('invitation_posts.show.delete')
 
     page.driver.browser.switch_to.alert.accept
   end
 
   def fill_in_post_fields(name, info)
     fill_in 'Name', with: name
-    fill_in 'Info', with: info
+    fill_in 'Information', with: info
 
     click_button 'Submit'
   end

@@ -1,13 +1,13 @@
 @import 'user';
+@import 'side_menu';
 @import 'message';
+@import 'footer';
 @import 'bootstrap';
 @import 'toastr';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
-.post {
-  margin-bottom: 80px;
-}
+.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
 
 .alert {
   margin-left: 12%;
@@ -17,6 +17,14 @@
   border-top: 1px solid#888;
   padding-top:15px;
   font-size:85%;
+}
+
+.aricle-show {
+  background-color: white;
+}
+
+.article-header {
+  margin-bottom: 15px;
 }
 
 .post-title {
@@ -29,8 +37,40 @@
   width: 80%;
 }
 
+.panel-body {
+  padding-top: 30px;
+}
+
+.battery-category {
+  margin-top: 25%;
+  font-size: 250px;
+}
+
 .message-form {
   left: 45%;
+}
+
+.form-group {
+  margin-top: 10px;
+}
+
+.reg-footer {
+  border-top: 1px solid #999;
+  padding-top: 20px;
+}
+
+.sign-in-footer {
+  border-top: 1px solid#888;
+  padding-top:15px;
+  font-size: 85%;
+}
+
+.width-card {
+  width: 20rem;
+}
+
+.profile-content {
+  font-size: 18px;
 }
 
 .tag_cloud {
@@ -42,26 +82,34 @@
   padding-left: 0;
 }
 
-.delete-con {
-  float: right;
+.comment-size {
+  font-size: 28px;
 }
 
-.sports {
-  margin-left: 10px;
-  margin-top: 20px;
+.delete-con {
+  float: right;
 }
 
 .nested_nav {
   padding-left: 1em;
 }
+
 .comment {
   margin: 7px 20px 20px 20px;
   background-color: Lavender;
 }
+
 .logout {
   float: right;
   background-color: #3e3d48;
   border-color: blue;
+}
+
+.login-link {
+  float: right;
+  font-size: 85%;
+  position: relative;
+  top: -10px;
 }
 
 .follow {
@@ -86,12 +134,29 @@
   float: right;
 }
 
-body {
-  margin-top: 80px;
-  background: linear-gradient(
-    -180deg,#2fae90 0,#5185d3 34%,#5286d4 51%,#4b89cd 100%
-  );
+.content {
+    flex-grow: 1;
 }
+
+html, body {
+    height: 100%;
+}
+
+.empty-post {
+  margin-bottom: 10%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  background-color: Lavender;
+}
+
+.margin-conversation {
+  margin: 1.5px 1.5px 1.5px 1.5px;
+}
+
 .panel-heading {
   color: #31708f;
   background-color: #d9edf7;
@@ -127,6 +192,10 @@ body {
   background-color: #eee;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.indent-bottom {
+  margin-bottom: 25px;
 }
 
 #btn-fblogin {

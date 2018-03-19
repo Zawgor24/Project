@@ -1,17 +1,19 @@
 .col-md-9
   .profile-content
+    hr
     | Full name: #{full_name(user)}
-    br/
+    br
     | Email: #{ user.email }
-    br/
+    br
     | Birthday: #{ user.birthday }
-    br/
+    br
     | Address: #{ user.address }
     br/
     | Gender: #{ user.gender_type }
-    br/
+    hr
     | Additional information: #{ user.info }
-    br/
-    .sports
-      | All followed sports
+    hr
+    .container.mt-4
+      = t('.followed_sport')
       = render 'followed_sport'
+    hr

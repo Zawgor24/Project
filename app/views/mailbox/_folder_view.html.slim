@@ -1,10 +1,11 @@
-.row
-  .spacer
-  .col-md-4
-    .panel.panel-default
-      .panel-body
-        = render 'mailbox/folders'
-  .col-md-8
-    .panel.panel-default
-      .panel-body
-        = render 'mailbox/conversations', conversations: messages
+.container
+  .row
+    .spacer
+    .col-md-4
+      .panel.panel-default
+        .panel-body
+          = render 'mailbox/folders'
+    .col-md-8
+      .panel.panel-default
+        .panel-body
+          = render 'mailbox/conversations', conversations: messages

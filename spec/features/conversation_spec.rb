@@ -23,7 +23,7 @@ RSpec.describe 'Conversation', type: :feature do
     end
 
     scenario 'creates new conversation' do
-      click_link I18n.t('buttons.message')
+      click_link I18n.t('users.message.message')
 
       is_expected.to have_content(I18n.t('messages.greeting',
         name: user.first_name))
@@ -93,7 +93,9 @@ RSpec.describe 'Conversation', type: :feature do
         visit user_conversations_path(user)
       end
 
-      scenario { is_expected.to have_content(I18n.t('conversations.index')) }
+      scenario 'shows conversations' do
+        is_expected.to have_content(I18n.t('conversations.index.conversations'))
+      end
     end
 
     context 'when logged in as companion' do
@@ -102,7 +104,9 @@ RSpec.describe 'Conversation', type: :feature do
         visit user_conversations_path(companion)
       end
 
-      scenario { is_expected.to have_content(I18n.t('conversations.index')) }
+      scenario 'shows conversations' do
+        is_expected.to have_content(I18n.t('conversations.index.conversations'))
+      end
     end
   end
 

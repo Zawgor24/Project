@@ -16,18 +16,12 @@ RSpec.describe Comment, type: :feature do
     context 'when user is authorized' do
       before { visit post_path(post) }
 
-      scenario { is_expected.to have_content(I18n.t('comments.create')) }
-
-      context 'when info is invalid' do
-        scenario "doesn't create a comment" do
-          fill_in_comment_fields Faker::Lorem.paragraph, Faker::Lorem.paragraph
-
-          is_expected.to have_content(I18n.t('notices.error'))
-        end
+      scenario 'shows comment section' do
+        is_expected.to have_content(I18n.t('comments.form.leave_comment'))
       end
 
       context 'when info is blank' do
-        scenario 'outputs an error' do
+        scenario 'does not save comment' do
           click_button 'Submit'
 
           is_expected.to have_content(I18n.t('notices.error'))
@@ -36,10 +30,9 @@ RSpec.describe Comment, type: :feature do
 
       context 'when info is valid' do
         scenario 'creates a comment' do
-          fill_in_comment_fields(post.title, post.body)
+          fill_in_comment_fields I18n.t(:hello)
 
-          is_expected.to have_content(I18n.t('notices.success',
-            name: post.title))
+          is_expected.to have_content(I18n.t(:hello))
         end
       end
     end
@@ -51,7 +44,7 @@ RSpec.describe Comment, type: :feature do
     context 'when user is author' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('comments.edit')) }
+      scenario { is_expected.to have_content(I18n.t('comments.edit.edit')) }
     end
 
     context 'when user is not author' do
@@ -65,12 +58,12 @@ RSpec.describe Comment, type: :feature do
 
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('comments.edit')) }
+      scenario { is_expected.to have_content(I18n.t('comments.edit.edit')) }
 
       scenario 'updates comment' do
-        fill_in_comment_fields post.title, Faker::Lorem.word
+        fill_in_comment_fields I18n.t(:hello)
 
-        is_expected.to have_content(I18n.t('notices.update', name: post.title))
+        is_expected.to have_content(I18n.t(:hello))
       end
     end
   end
@@ -84,13 +77,13 @@ RSpec.describe Comment, type: :feature do
     context 'when user is author' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('comments.edit')) }
+      scenario { is_expected.to have_content(I18n.t('comments.edit.edit')) }
     end
 
     context 'when user is not author' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.not_to have_content(I18n.t('posts.edit')) }
+      scenario { is_expected.not_to have_content(I18n.t('posts.edit.edit')) }
     end
 
     context 'when user is manager' do
@@ -98,7 +91,7 @@ RSpec.describe Comment, type: :feature do
 
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('comments.edit')) }
+      scenario { is_expected.to have_content(I18n.t('comments.edit.edit')) }
     end
   end
 
@@ -111,19 +104,23 @@ RSpec.describe Comment, type: :feature do
     context 'when user is author' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.delete')) }
+      scenario 'shows delete button' do
+        is_expected.to have_content(I18n.t('comments.comment.delete'))
+      end
 
       scenario 'deletes comment' do
         delete_comment
 
-        is_expected.not_to have_content(I18n.t('comment.edit'))
+        is_expected.not_to have_content(I18n.t('comment.edit.edit'))
       end
     end
 
     context 'when user is not author' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.not_to have_content(I18n.t('comments.delete')) }
+      scenario 'hides delete button' do
+        is_expected.not_to have_content(I18n.t('comments.comment.delete'))
+      end
     end
 
     context 'when user is manager' do
@@ -131,25 +128,26 @@ RSpec.describe Comment, type: :feature do
 
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('comments.delete')) }
+      scenario 'shows delete button' do
+        is_expected.to have_content(I18n.t('comments.comment.delete'))
+      end
 
       scenario 'deletes comment' do
         delete_comment
 
-        is_expected.not_to have_content(I18n.t('comment.edit'))
+        is_expected.not_to have_content(I18n.t('comment.edit.edit'))
       end
     end
   end
 
-  def fill_in_comment_fields(title, body)
-    fill_in 'Title', with: title
-    fill_in 'Body', with: body
+  def fill_in_comment_fields(body)
+    fill_in 'comment[body]', with: body
 
     click_button 'Submit'
   end
 
   def delete_comment
-    click_link I18n.t('comments.delete')
+    click_link I18n.t('comments.comment.delete')
 
     page.driver.browser.switch_to.alert.accept
   end

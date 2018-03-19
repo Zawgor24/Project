@@ -11,20 +11,19 @@
   .col-md-8.offset-md-2
     hr.my-5/
     .card.card-outline-secondary
-      .card-header
-        h3.mb-0  Create category
+      .card-header = t '.create'
       .card-block
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label #{t(:name)}
+          label.col-lg-3.col-form-label.form-control-label = t '.name'
           .col-lg-9
-            .input-group style=('margin-bottom: 25px')
+            .input-group.indent-bottom
               span.input-group-addon
                 i.fa.fa-info-circle aria-hidden='true'
-              = f.text_field :name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Name'
+              = f.text_field :name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.name')
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label #{t(:parent_id)}
+          label.col-lg-3.col-form-label.form-control-label = t '.parent'
           .col-lg-9
-            .input-group style=('margin-bottom: 25px')
+            .input-group.indent-bottom
               span.input-group-addon
                 i.fa.fa-info-circle aria-hidden='true'
               = f.collection_select :parent_id, Category.order(:name),
@@ -32,5 +31,5 @@
         .form-group.row
           label.col-lg-3.col-form-label.form-control-label
           .col-lg-9
-            input.btn.btn-secondary type='reset' value='Reset' /
+            input.btn.btn-secondary.mr-2 type='reset' value='Reset'
             input.btn.btn-success type='submit' value='Submit'

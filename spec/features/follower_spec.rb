@@ -14,7 +14,7 @@ RSpec.describe Follow, type: :feature do
     context 'when user is owner' do
       before { sign_in(user) }
 
-      scenario { is_expected.not_to have_content(I18n.t('follows.follow')) }
+      scenario { is_expected.not_to have_button(I18n.t('follows.follow')) }
     end
 
     context 'when user is not owner' do

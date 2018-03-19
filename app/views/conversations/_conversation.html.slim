@@ -1,9 +1,9 @@
 - @conversations.each do |conversation|
-  .card.mb-2
+  .card.mb-2.margin-conversation
     .card-block
       .card-body
         p
-          = link_to image_tag('delete.png', size: '20x20'), conversation_path(conversation), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-con'
+          = link_to image_tag('delete.png', size: '20x20'), conversation_path(conversation), method: :delete, data: { confirm: t('confirm') }, class: 'delete-con'
         p.card-title.leftimg
           = show_small_image(companion(conversation))
         h5.card-text.h3
@@ -13,4 +13,4 @@
           a.fa.fa-envelope-o.mr-1
             = link_to full_name(companion(conversation)), companion(conversation)
             br
-            = t('messages.time_ago', time: time_ago_in_words(conversation.updated_at))
+            = t('.time_ago', time: time_ago_in_words(conversation.updated_at))

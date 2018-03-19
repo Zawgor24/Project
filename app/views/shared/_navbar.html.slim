@@ -1,0 +1,37 @@
+nav.navbar.fixed-top.navbar-expand-sm.navbar-dark.bg-dark
+  button.navbar-toggler aria-controls='nav-content' aria-expanded='false' aria-label=('Toggle navigation') data-target='#nav-content' data-toggle='collapse' type='button'
+    span.navbar-toggler-icon
+  a.navbar-brand.fa.fa-diamond href='/' = t('.project_name')
+  #nav-content.collapse.navbar-collapse
+    ul.navbar-nav
+      .dropdown.show.ml-3
+        a#dropdownMenuLink1.btn.btn-secondary.dropdown-toggle aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' href='#' role='button'
+          = t('.account')
+        .dropdown-menu aria-labelledby='dropdownMenuLink1'
+          a.dropdown-item #{ full_name(current_user) }
+          = link_to t('.profile'), current_user, class: 'dropdown-item'
+          = link_to t('.edit_profile'), edit_user_path(current_user), class: 'dropdown-item'
+      .dropdown.show.ml-3
+        a#dropdownMenuLink2.btn.btn-secondary.dropdown-toggle aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' href='#' role='button'
+          = t('.post')
+        .dropdown-menu aria-labelledby='dropdownMenuLink2'
+          = link_to t('.create_post'), new_user_post_path(current_user), class: 'dropdown-item'
+      .dropdown.show.ml-3
+        a#dropdownMenuLink3.btn.btn-secondary.dropdown-toggle aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' href='#' role='button'
+          = t('.sports')
+        .dropdown-menu aria-labelledby='dropdownMenuLink3'
+          - current_user.followees(Sport).each do |sport|
+            = link_to sport.name, sport, class: 'dropdown-item'
+      - if current_user.manager?
+        .ml-3
+        = link_to t('.create_article'), new_user_article_path(current_user), class: 'btn btn-secondary'
+      .ml-3
+        = link_to t('.conversations'), user_conversations_path(current_user), class: 'btn btn-secondary'
+  .dropdown.show.mr-3
+    a#dropdownMenuLink4.btn.btn-secondary.dropdown-toggle aria-expanded='false' aria-haspopup='true' data-toggle='dropdown' href='#' role='button'
+      | Inbox messages #{ unread_messages_count }
+    .dropdown-menu aria-labelledby='dropdownMenuLink3'
+      = link_to t('.inbox'), mailbox_inbox_path, class: 'dropdown-item'
+      = link_to t('.sentbox'), mailbox_sentbox_path, class: 'dropdown-item'
+      = link_to t('.trash'), mailbox_trash_path, class: 'dropdown-item'
+  button.logout.btn.navbar-btn= link_to 'Log out', destroy_user_session_path, method: :delete

@@ -5,40 +5,122 @@ en:
     required_info: Required information
 
   articles:
-    create: Create article
-    delete: Delete article
-    edit: Edit article
-
-  buttons:
-    message: Message
-    send_message: Send message
-    submit: Submit
+    edit:
+      edit: Edit article
+      body: Body
+      create: Create article
+      title: Title
+      image: Image
+      submit: Submit
+    form:
+      body: Body
+      create: Create article
+      title: Title
+      image: Image
+      submit: Submit
+    index:
+      sports: Sports
+      news: All news
+    show:
+      comment: Leave a Comment
+      delete: Delete article
+      edit: Edit article
+      id: 'Article №%{id}'
+      posted_at: 'Posted %{time} ago'
 
   categories:
-    create: Create category
-    delete: Delete category
+    form:
+      create: Create category
+      parent: Parent
+      name: Name
+
+  confirm: 'Are you sure?'
 
   conversations:
-    destroy: 'Conversation №%{number} successfully deleted!'
-    inbox: Inbox
-    index: Conversations
-    sentbox: Sentbox
-    trash: Trash
+    conversation:
+      time_ago: '%{time} ago'
+    form:
+      send_message: Send message
+      message: Print your message...
+    index:
+      conversations: Conversations
 
   comments:
-    create: Create comment
-    delete: Delete comment
-    edit: Edit comment
+    comment:
+      edit: Edit
+      delete: Delete
+    edit:
+      body: Body
+      edit: Edit
+    form:
+      leave_comment: Leave a Comment
+      leave_comment_here: Leave a comment here...
+
+  devise:
+    registrations:
+      new:
+        email: Email
+        first_name: First name
+        last_name: Last name
+        log_in: Log in
+        password: Password
+        sign_up: Sign Up
+        to_log_in: Click here if you have an account!
+    sessions:
+      new:
+        email: Email
+        remember: Remember me
+        password: Password
+        sign_in: Sing in
+        without_account: Don't have an account! Click here!
+
+  footer:
+    conversations: Conversations
+    home: Home
+    links: Quick links
+    profile: Profile
 
   follows:
     follow: Follow
     followers: Followers
-    unfollow: Unfollow
     notice:
       follow: Followed
       unfollow: Unfollowed
+    index:
+      followers: Followers
+    unfollow: Unfollow
 
   hello: Hello
+
+  invitation_posts:
+    edit:
+      name: Name
+      info: Information
+      date: Date of event
+    form:
+      name: Name
+      info: Information
+      date: Date of event
+    invitation_post:
+      comments_count: '%{count} comments'
+    new:
+      create: Create post
+    show:
+      categories: Categories
+      comment: Leave a Comment
+      delete: Delete post
+      edit: Edit post
+      id: 'Post №%{id}'
+      posted_at: 'Posted %{time} ago'
+
+  mailbox:
+    conversations:
+      time_ago: '%{time} ago'
+      untrash: Untrash
+    folders:
+      inbox: Inbox
+      sentbox: Sentbox
+      trash: Trash
 
   messages:
     greeting: 'Hi, my name is %{name}'
@@ -51,20 +133,30 @@ en:
     delete: '%{name} deleted'
 
   posts:
-    create: Create new post
-    date: 'Date of event %{date}'
-    delete: Delete post
-    edit: Edit post
-    editing: Editing post
-    empty_category: '%{category} category is empty.
-      You can be first author of post this category.'
-
-  profiles:
-    delete: Delete account
+    controll_buttons:
+      delete: Delete post
+      edit: Edit post
     edit:
-      editing: Editing user
+      category: Choose category
+      editing: Editing post
+    form:
+      body: Body
+      category: Choose category
+      create: Create post
+      title: Title
+      image: Image
+    index:
+      delete_category: Delete category
+    post:
+      creator: 'Created by: %{name}'
+      comments_count: '%{count} comments'
+    posts:
+      category: 'Category %{name}'
+      empty: '%{name} category is empty.'
     show:
-      edit: Edit profile
+      categories: Categories
+      comment: Leave a Comment
+      posted_at: 'Posted %{time} ago'
 
   pundit:
     error: You do not have the right to take this action!
@@ -75,5 +167,52 @@ en:
     sign_in: Sign in
     sign_up: Sign Up
 
-  user:
-    editing: Editing user
+  shared:
+    navbar:
+      account: Account
+      create_article: Create article
+      create_post: Create post
+      conversations: Conversations
+      edit_profile: Edit profile
+      inbox: Inbox
+      post: Post
+      profile: Profile
+      project_name: Project
+      sentbox: Sentbox
+      sports: My sports
+      trash: Trash
+    submenu:
+      categories: Categories
+
+  sports:
+    friendship:
+      follow: Follow
+      unfollow: Unfollow
+    shop:
+      create_post: Create invitation post
+      followers: Followers
+
+  users:
+    form:
+      address: Address
+      avatar: Avatar
+      birthday: Birthday
+      editing: Editing user
+      email: Email
+      first_name: First name
+      gender: Gender
+      info: Additional information
+      last_name: Last name
+      password: Password
+    friendship:
+      follow: Follow
+      unfollow: Unfollow
+    message:
+      message: message
+    profile:
+      followed_sport: All followed sports
+    show:
+      delete: Delete account
+      edit: Edit profile
+      followers: Followers
+      status: Status

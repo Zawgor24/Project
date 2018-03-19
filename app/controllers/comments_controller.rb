@@ -13,32 +13,26 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @commentable.comments.new(comment_params_with_user)
+    @comment = @commentable.comments.create(comment_params_with_user)
 
-    if @comment.save
-      redirect_to request.referer,
-        success: t('notices.success', name: @comment.title)
-    else
-      redirect_to request.referer, warning: t('notices.error')
-    end
+    flash[:warning] = t('notices.error') unless @comment.save
+    redirect_to request.referer
   end
 
   def edit; end
 
   def update
     if @comment.update(comment_params)
-      redirect_to @comment.commentable,
-        success: t('notices.update', name: @comment.title)
+      redirect_to @comment.commentable
     else
-      render :edit, warning: t('notices.error')
+      render :edit
     end
   end
 
   def destroy
     @comment.destroy
 
-    redirect_to request.referer,
-      danger: t('notices.delete', name: @comment.title)
+    redirect_to request.referer
   end
 
   private

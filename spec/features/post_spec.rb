@@ -41,14 +41,14 @@ RSpec.describe Post, type: :feature do
 
           click_button 'Submit'
 
-          is_expected.to have_content(I18n.t('posts.create'))
+          is_expected.to have_content(I18n.t('posts.form.create'))
         end
       end
 
       context 'when empty data' do
         before { click_button 'Submit' }
 
-        scenario { is_expected.to have_content(I18n.t('posts.create')) }
+        scenario { is_expected.to have_content(I18n.t('posts.form.create')) }
       end
     end
   end
@@ -59,7 +59,7 @@ RSpec.describe Post, type: :feature do
     context 'when user is author' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.edit')) }
+      scenario { is_expected.to have_content(I18n.t('posts.edit.editing')) }
     end
 
     context 'when user is not author' do
@@ -73,7 +73,7 @@ RSpec.describe Post, type: :feature do
 
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.edit')) }
+      scenario { is_expected.to have_content(I18n.t('posts.edit.editing')) }
     end
   end
 
@@ -83,13 +83,17 @@ RSpec.describe Post, type: :feature do
     context 'when user is author' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.edit')) }
+      scenario 'shows controll buttons' do
+        is_expected.to have_content(I18n.t('posts.controll_buttons.edit'))
+      end
     end
 
     context 'when user is not author' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.not_to have_content(I18n.t('posts.edit')) }
+      scenario 'does not show controll buttons' do
+        is_expected.not_to have_content(I18n.t('posts.controll_buttons.edit'))
+      end
     end
 
     context 'when user is manager' do
@@ -97,7 +101,9 @@ RSpec.describe Post, type: :feature do
 
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.edit')) }
+      scenario 'shows controll buttons' do
+        is_expected.to have_content(I18n.t('posts.controll_buttons.edit'))
+      end
     end
   end
 
@@ -107,7 +113,9 @@ RSpec.describe Post, type: :feature do
     context 'when user is author' do
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.delete')) }
+      scenario 'deletes post' do
+        is_expected.to have_content(I18n.t('posts.controll_buttons.delete'))
+      end
 
       scenario 'deletes post' do
         delete_post
@@ -119,7 +127,9 @@ RSpec.describe Post, type: :feature do
     context 'when user is not author' do
       before { sign_in(fake_user) }
 
-      scenario { is_expected.not_to have_content(I18n.t('posts.delete')) }
+      scenario 'does not delete post' do
+        is_expected.not_to have_content(I18n.t('posts.controll_buttons.delete'))
+      end
     end
 
     context 'when user is manager' do
@@ -127,7 +137,9 @@ RSpec.describe Post, type: :feature do
 
       before { sign_in(user) }
 
-      scenario { is_expected.to have_content(I18n.t('posts.delete')) }
+      scenario 'deletes post' do
+        is_expected.to have_content(I18n.t('posts.controll_buttons.delete'))
+      end
 
       scenario 'deletes post' do
         delete_post
@@ -138,7 +150,7 @@ RSpec.describe Post, type: :feature do
   end
 
   def delete_post
-    click_link I18n.t('posts.delete')
+    click_link I18n.t('posts.controll_buttons.delete')
 
     page.driver.browser.switch_to.alert.accept
   end

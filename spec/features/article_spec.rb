@@ -23,7 +23,7 @@ RSpec.describe Article, type: :feature do
       scenario 'has not article edit content' do
         visit article_path(article)
 
-        is_expected.not_to have_content(I18n.t('articles.edit'))
+        is_expected.not_to have_content(I18n.t('articles.show.edit'))
       end
     end
 
@@ -47,7 +47,7 @@ RSpec.describe Article, type: :feature do
       scenario 'has not article delete content' do
         visit article_path(article)
 
-        is_expected.not_to have_content(I18n.t('articles.delete'))
+        is_expected.not_to have_content(I18n.t('articles.show.delete'))
       end
     end
   end
@@ -59,14 +59,14 @@ RSpec.describe Article, type: :feature do
       scenario 'shows edit content' do
         visit article_path(article)
 
-        is_expected.to have_content(I18n.t('articles.edit'))
+        is_expected.to have_content(I18n.t('articles.edit.edit'))
       end
     end
 
     describe '#create' do
       before { visit new_user_article_path(user) }
 
-      scenario { is_expected.to have_content(I18n.t('articles.create')) }
+      scenario { is_expected.to have_content(I18n.t('articles.form.create')) }
 
       scenario 'creates article' do
         fill_in 'Title', with: article.title
@@ -75,7 +75,7 @@ RSpec.describe Article, type: :feature do
         attach_file('article[avatar]', Rails.root.join('spec',
           'support', 'fixtures', 'default-post-image.jpg'))
 
-        click_button I18n.t('buttons.submit')
+        click_button I18n.t('articles.form.submit')
 
         is_expected.to have_content(article[:title])
       end
@@ -93,7 +93,7 @@ RSpec.describe Article, type: :feature do
         attach_file('article[avatar]', Rails.root.join('spec',
           'support', 'fixtures', 'default-post-image.jpg'))
 
-        click_button I18n.t('buttons.submit')
+        click_button I18n.t('articles.form.submit')
 
         is_expected.to have_content(fake_article[:title])
       end
@@ -102,10 +102,10 @@ RSpec.describe Article, type: :feature do
     describe '#destroy' do
       before { visit article_path(article) }
 
-      scenario { is_expected.to have_content(I18n.t('articles.delete')) }
+      scenario { is_expected.to have_content(I18n.t('articles.show.delete')) }
 
       scenario 'deletes article' do
-        click_link I18n.t('articles.delete')
+        click_link I18n.t('articles.show.delete')
 
         page.driver.browser.switch_to.alert.accept
 

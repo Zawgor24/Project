@@ -1,23 +1,32 @@
-.row
-  .col-md-9
-    = render 'shared/breadcrumb', category: post.category
+.conteiner
+  .row
+    .col-2
+    .col-lg-7
+      = render 'shared/breadcrumb', category: post.category
+      .aricle-show
+        p.text-right.mr-2.mt-2
+          | №#{ post.id }
+        .delete-con.mr-2
+          = render 'controll_buttons'
+        h1.mt-4.ml-4
+          = post.title
+        hr
+        p.ml-4
+          = t('.posted_at', time: time_ago_in_words(post.updated_at))
+        hr
+        .text-center
+          = show_image(post)
+        hr
+        p.lead.ml-4.mr-4
+          = post.body
+        .row
+          .col-2
+          .col-8
+            .card.my-4
+              h5.card-header = t '.comment'
+              .card-body
+                = render 'comments/form', commentable: post
 
-    .post-title
-      | #{ post.title }:
-
-    p align='right'
-      | Post №#{ post.id }
-      br/
-      = render 'controll_buttons'
-    .leftimg
-      = show_image(post)
-
-    h5
-      | #{ post.body }
-
-    = render 'post_comments'
-
-    = link_to 'Back', :back
-
-  .col-md-3
-    = render 'shared/submenu'
+          = render comments
+    .col-3
+      = render 'shared/categories'
