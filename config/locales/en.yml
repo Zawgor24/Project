@@ -51,7 +51,7 @@ en:
     delete: '%{name} deleted'
 
   posts:
-    creating: Creating new post
+    create: Create new post
     date: 'Date of event %{date}'
     delete: Delete post
     edit: Edit post

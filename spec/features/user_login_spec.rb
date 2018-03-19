@@ -16,13 +16,13 @@ RSpec.describe 'Login', type: :request do
   context 'when email is invalid' do
     before { sign_in_with 'invalid_email', 'password' }
 
-    scenario { is_expected.to have_link(I18n.t('sessions.log_in')) }
+    scenario { is_expected.to have_link(I18n.t('sessions.sign_in')) }
   end
 
   context 'when password is blank' do
     before { sign_in_with user.email, '' }
 
-    scenario { is_expected.to have_link(I18n.t('sessions.log_in')) }
+    scenario { is_expected.to have_link(I18n.t('sessions.sign_in')) }
   end
 
   def sign_in_with(email, password)

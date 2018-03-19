@@ -1,37 +1,36 @@
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .container align='center' 
+  .container align='center'
     .panel.panel-info
       .panel-heading
         .panel-title Sign In
-        div style=('float:right; font-size: 80%; position: relative; top:-10px') 
-      .panel-body style='padding-top:30px' 
-        #login-alert.alert.alert-danger.col-sm-12 style='display:none' 
-        form#loginform.form-horizontal role='form' 
+      .panel-body.mt-4
+        #login-alert.alert.alert-danger.col-sm-12 style='display:none'
+        form#loginform.form-horizontal role='form'
           .form-group
             label.col-md-3.control-label for='email'
             .col-md-9
-              .input-group style=('margin-bottom: 25px')
+              .input-group
                 span.input-group-addon
                   i.fa.fa-user-circle aria-hidden='true'
                 = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Email'
           .form-group
             label.col-md-3.control-label for='password'
             .col-md-9
-              .input-group style=('margin-bottom: 25px') 
+              .input-group.mb-25
                 span.input-group-addon
-                  i.fa.fa-briefcase aria-hidden='true' 
+                  i.fa.fa-briefcase aria-hidden='true'
                 = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Password'
           .input-group
             .checkbox
               label
                 input#login-remember name='remember' type='checkbox' value='1' /
                 | Remember me
-          .form-group style='margin-top:10px' 
+          .form-group
             .col-sm-12.controls
               = f.button 'Sign in', class: 'btn btn-success', data: { disable_with: "<i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Signin in..." }
-              a#btn-fblogin.btn.btn-primary href='#'  Login with Facebook
+              = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-primary ml-2'
           .form-group
             .col-md-12.control
-              div style=('border-top: 1px solid#888; padding-top:15px; font-size:85%') 
+              .sign-in-footer
                 | Don't have an account!
                 = link_to 'Sign up', new_registration_path(resource_name)

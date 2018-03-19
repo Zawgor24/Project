@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :invitation_posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :info, length: { maximum: 256 }
   validates :first_name, :last_name, presence: true
@@ -23,7 +24,8 @@ class User < ApplicationRecord
   acts_as_paranoid
 
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable,
+    :omniauthable, omniauth_providers: [:facebook]
 
   mount_uploader :avatar, ImageUploader
 

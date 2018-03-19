@@ -37,14 +37,14 @@ RSpec.describe InvitationPost, type: :feature do
 
           click_button 'Submit'
 
-          is_expected.to have_content(I18n.t('posts.creating'))
+          is_expected.to have_content(I18n.t('posts.create'))
         end
       end
 
       context 'when empty data' do
         before { click_button 'Submit' }
 
-        scenario { is_expected.to have_content(I18n.t('posts.creating')) }
+        scenario { is_expected.to have_content(I18n.t('posts.create')) }
       end
     end
   end
