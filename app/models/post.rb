@@ -6,7 +6,7 @@ class Post < ApplicationRecord
 
   has_many :comments, as: :commentable, dependent: :destroy
 
-  scope :by_subtree_categories, lambda { |ids|
+  scope :by_subtree_category, lambda { |ids|
     order(updated_at: :desc).where(category_id: ids).includes(:user, :category)
   }
 

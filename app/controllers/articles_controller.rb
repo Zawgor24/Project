@@ -2,7 +2,7 @@
 
 class ArticlesController < ApplicationController
   expose :article, decorate: ->(article) { decorate(article) }
-  expose :articles, -> { Article.by_update.map { |article| decorate(article) } }
+  expose :articles, -> { Article.by_update.paginate(page: params[:page]) }
   expose :comments, -> { article.comments.includes(:user) }
   expose :sports,   -> { Sport.order(name: :asc) }
 

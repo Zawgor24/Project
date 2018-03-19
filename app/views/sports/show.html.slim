@@ -1,18 +1,23 @@
 .container
-  .row
+  .row.aricle-show
     .col
       .leftimg
         = show_image(sport)
-      .post-title
-        = sport.name
+      h1.mr-3
+        = sport.name.humanize
         .follow
+          = link_to t('.create_post'), new_sport_invitation_post_path(sport), class: 'btn btn-primary btn-sm'
           = render 'friendship'
-      h5
+          = link_to t('.followers'), sport_followers_path(sport), class: 'btn btn-outline-info'
+      h5.ml-3.mr-4
         = sport.info
 
-  = link_to 'Create invitation post', new_sport_invitation_post_path(sport)
+.container
+  .row.article-header
+    .col
+  .row
+    .col-2
+    .col-8.aricle-show
+      = render @posts
 
-  = render @posts
-  br
 
-  = link_to t('follows.followers'), sport_followers_path(sport)

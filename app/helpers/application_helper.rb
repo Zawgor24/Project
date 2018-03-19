@@ -1,20 +1,14 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def show_image(object)
-    image_tag(object.avatar_url(:thumb))
-  end
-
-  def show_small_image(object)
-    image_tag(object.avatar, size: '100x100', class: 'rounded-circle')
-  end
-
-  def full_name(user)
-    "#{user.first_name.titleize} #{user.last_name.titleize}"
-  end
+  TRUNCATED_WORDS = 40
 
   def active_page(active_page)
     @active == active_page ? 'active' : ''
+  end
+
+  def appointed_time(object)
+    object.date.strftime('Appointed time %m/%d/%Y')
   end
 
   def build_breadcrumb(category)
@@ -39,11 +33,27 @@ module ApplicationHelper
     }[level.to_sym] || level.to_s
   end
 
-  def unread_messages_count
-    current_user.mailbox.inbox(unread: true).count
+  def full_name(user)
+    "#{user.first_name.titleize} #{user.last_name.titleize}"
+  end
+
+  def limit_body(object)
+    object.body.truncate_words(TRUNCATED_WORDS)
   end
 
   def message(conversation)
     "#{conversation.sender_name}:  #{conversation.message}"
+  end
+
+  def show_image(object)
+    image_tag(object.avatar_url, height: '300')
+  end
+
+  def show_small_image(object)
+    image_tag(object.avatar, size: '100x100', class: 'rounded-circle')
+  end
+
+  def unread_messages_count
+    current_user.mailbox.inbox(unread: true).count
   end
 end

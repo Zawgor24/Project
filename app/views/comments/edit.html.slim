@@ -1,6 +1,3 @@
-h3 
-  | Editing comment №#{ @comment.id }
-
 = form_for @comment do |f|
   - if @comment.errors.any?
     #error_explanation
@@ -11,28 +8,21 @@ h3
       ul
         - @comment.errors.full_messages.each do |msg|
           li= msg
-  .col-md-8.offset-md-2 
+  .col-md-8.offset-md-2
     hr.my-5/
     .card.card-outline-secondary
-      .card-header 
-        h3.mb-0  Edit comment
+      .card-header
+        h3.mb-0 = t('.edit')
       .card-block
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Title
+          label.col-lg-3.col-form-label.form-control-label = t '.body'
           .col-lg-9
             .input-group style=('margin-bottom: 25px')
               span.input-group-addon
                 i.fa.fa-info-circle aria-hidden='true'
-              = f.text_field :title, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Title'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Body
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-info-circle aria-hidden='true'
-              = f.text_field :body, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Body'
+              = f.text_area :body, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.body')
         .form-group.row
           label.col-lg-3.col-form-label.form-control-label
           .col-lg-9
-            input.btn.btn-secondary type='reset' value='Reset' /
-            input.btn.btn-success type='submit' value='Submit' 
+            input.btn.btn-secondary type='reset' value='Reset'
+            input.btn.btn-success type='submit' value='Submit'

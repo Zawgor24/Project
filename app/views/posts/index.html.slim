@@ -1,9 +1,12 @@
-.row
-  .col-md-9
-    .float-right
-      = link_to t('categories.delete'), category, method: :delete, data: { confirm: 'Are you sure?' } if policy(category).destroy?
+.container
+  .row
+    .col-md-9
+      .row
+        .col-9
+          = render 'posts'
+        .col
+          .float-right
+            = link_to t('.delete_category'), category, method: :delete, data: { confirm: t('confirm') }, class: 'btn btn-danger' if policy(category).destroy?
 
-    = render 'posts'
-
-  .col-md-3
-    = render 'shared/submenu'
+    .col-md-3
+      = render 'shared/categories'

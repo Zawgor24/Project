@@ -20,7 +20,7 @@ gem 'devise'
 gem 'draper'
 gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
 gem 'figaro'
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '~> 4.7.0'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'loofah', '~> 2.2', '>= 2.2.1'
@@ -41,7 +41,7 @@ gem 'socialization'
 gem 'toastr-rails'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-
+gem 'will_paginate-bootstrap'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'

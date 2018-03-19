@@ -1,7 +1,7 @@
 p.card-title
-  = image_tag(message.sender.avatar, size: '50x50', class: 'rounded-circle')
+  = avatar_sender(message.sender)
   = link_to full_name(message.sender), message.sender
 h5.card-text
   = message.body
 p.text-muted
-  = t('messages.time_ago', time: time_ago_in_words(receipt.updated_at))
+  = t('.time_ago', time: time_ago_in_words(receipt.updated_at))

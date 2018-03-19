@@ -1,5 +1,4 @@
-- if invitation_post.comments.present?
-  h4 Comments
-  = render comments
-
-= render 'comments/form', commentable: invitation_post
+.card.my-4
+  h5.card-header = t '.comment'
+  .card-body
+    = render 'comments/form', commentable: invitation_post

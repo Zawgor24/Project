@@ -1,26 +1,35 @@
 .conteiner
-  p.text-right
-    | Article №#{ article.id }
-    br
-    - if policy(article).edit?
-      = link_to t('articles.edit'), edit_article_path(article),
-        class: 'btn btn-warning mr-2'
+  .row
+    .col-2
+    .col-lg-7
+      .aricle-show
+        p.text-right.mr-2.mt-2
+          = t('.id', id: article.id)
+        .delete-con.mr-2
+          - if policy(article).edit?
+            = link_to t('.edit'), edit_article_path(article),
+              class: 'btn btn-warning mr-2'
 
-    - if policy(article).destroy?
-      = link_to t('articles.delete'), article, method: :delete,
-        data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-  .leftimg
-    = show_image(article)
+          - if policy(article).destroy?
+            = link_to t('.delete'), article, method: :delete,
+              data: { confirm: t('confirm') }, class: 'btn btn-danger'
+        h1.mt-4.ml-4
+          = article.title
+        hr
+        p.ml-4
+          = t('.posted_at', time: time_ago_in_words(article.updated_at))
+        hr
+        .text-center
+          = show_image(article)
+        hr
+        p.lead.ml-4
+          = article.body
+        .row
+          .col-2
+          .col-8
+            .card.my-4
+              h5.card-header = t('.comment')
+              .card-body
+                = render 'comments/form', commentable: article
 
-  h3
-    = article.title
-
-  h5
-    = article.body
-
-h3 Comments
-
-= render comments
-= render 'comments/form', commentable: article
-
-= link_to 'Back', :back
+          = render comments

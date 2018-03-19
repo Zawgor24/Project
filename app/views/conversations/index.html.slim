@@ -1,11 +1,10 @@
 h1.text-center = t '.conversations'
-.row
-  .spacer
-  .col-md-4.ml
-    .panel.panel-default
-      .panel-body
-        = render 'mailbox/folders'
-  .col-md-8
-    .panel.panel-default
-      .panel-body
-        = render 'conversations/conversation'
+.container
+  .row
+    .spacer
+    .col-md-4.ml
+      .panel.panel-default
+          = render 'mailbox/folders'
+    .col-md-8
+      .panel.panel-default
+          = render 'conversations/conversation'

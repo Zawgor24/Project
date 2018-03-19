@@ -1,17 +1,17 @@
 ul.nav.nav-pills.nav-stacked.list-group
-  li class="#{active_page(:inbox)} list-group-item"
+  li class="#{active_page(:inbox)} list-group-item mt-2 mr-1 ml-1"
     = link_to mailbox_inbox_path do
       .text-danger.pull-right
         = unread_messages_count
       em.fa.fa-inbox.fa-lg.mr-2
-      span = t('conversations.inbox')
+      span = t('.inbox')
 
-  li class="#{active_page(:sent)} list-group-item"
+  li class="#{active_page(:sent)} list-group-item mt-2 mr-1 ml-1"
     = link_to mailbox_sentbox_path do
       em.fa.fa-paper-plane-o.fa-lg.mr-2
-      span = t('conversations.sentbox')
+      span = t('.sentbox')
 
-  li class="#{active_page(:trash)} list-group-item"
+  li class="#{active_page(:trash)} list-group-item mb-2 mt-2 mr-1 ml-1"
     = link_to mailbox_trash_path do
       em.fa.fa-trash-o.fa-lg.mr-2
-      span = t('conversations.trash')
+      span = t('.trash')

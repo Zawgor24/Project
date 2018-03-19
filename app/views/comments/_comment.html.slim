@@ -1,8 +1,25 @@
-div.comment
-  | #{ comment.title }:
-  br/
-  | #{ comment.body }
+.container
+  .media.md-4.mt-4.mr-5.ml-5
+    .d-flex.mr-3
+      = small_rounded_image(comment)
+    .media-body
+      .delete-con
+        - if policy(comment).edit?
+          = link_to edit_comment_path(comment) do
+            = t '.edit'
+            i.material-icons.ml-1 mode_edit
+        br
+        - if policy(comment).destroy?
+          = link_to comment, method: :delete, data: { confirm: t('confirm') } do
+            = t '.delete'
+            i.fa.fa-times-circle.ml-1.comment-size
 
-= link_to t('comments.edit'), edit_comment_path(comment) if policy(comment).edit?
-      br/
-= link_to t('comments.delete'), comment, method: :delete, data: { confirm: 'Are you sure?' } if policy(comment).destroy?
+      .h5.mt-0
+        = link_to full_name(comment.user), comment.user
+      h4
+        = comment.body
+        br
+      span
+        i.fa.fa-calendar aria-hidden='true'
+        = comment.created_at
+      hr

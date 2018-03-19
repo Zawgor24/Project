@@ -2,29 +2,30 @@
   .container align='center'
     .panel.panel-info
       .panel-heading
-        .panel-title Sign In
-      .panel-body.mt-4
+        .panel-title = t '.sign_in'
+        .login-link
+      .panel-body
         #login-alert.alert.alert-danger.col-sm-12 style='display:none'
         form#loginform.form-horizontal role='form'
           .form-group
-            label.col-md-3.control-label for='email'
+            label.col-md-3.control-label
             .col-md-9
-              .input-group
+              .input-group.indent-bottom
                 span.input-group-addon
                   i.fa.fa-user-circle aria-hidden='true'
-                = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Email'
+                = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: t('.email')
           .form-group
             label.col-md-3.control-label for='password'
             .col-md-9
-              .input-group.mb-25
+              .input-group.indent-bottom
                 span.input-group-addon
                   i.fa.fa-briefcase aria-hidden='true'
-                = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Password'
-          .input-group
+                = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.password')
+          .input-group.ml-3
             .checkbox
               label
                 input#login-remember name='remember' type='checkbox' value='1' /
-                | Remember me
+                = t '.remember'
           .form-group
             .col-sm-12.controls
               = f.button 'Sign in', class: 'btn btn-success', data: { disable_with: "<i class='fa fa-circle-o-notch fa-spin' style='font-size:24px'></i> Signin in..." }
@@ -32,5 +33,4 @@
           .form-group
             .col-md-12.control
               .sign-in-footer
-                | Don't have an account!
-                = link_to 'Sign up', new_registration_path(resource_name)
+                = link_to t('.without_account'), new_registration_path(resource_name)

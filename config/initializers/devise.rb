@@ -27,5 +27,5 @@ Devise.setup do |config|
   config.sign_out_via = :delete
 
   config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET_KEY'],
-    callback_url: 'http://localhost:3000/users/auth/facebook/callback'
+    callback_url: 'http://mysterious-earth-61882.herokuapp.com/users/auth/facebook/callback'
 end

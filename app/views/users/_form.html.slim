@@ -1,83 +1,82 @@
-.col-md-8.offset-md-2
-  span#formUserEdit.anchor
-  hr.my-5/
-  .card.card-outline-secondary
-    .card-header
-      h3.mb-0 align='center'
-        = t('user.editing')
-    .card-block
-      = form_for user do |f|
-        - if user.errors.any?
-          #error_explanation
-            h2
-              = pluralize(user.errors.count, 'error ')
-              | prohibited
-              |  this user from being saved:
-            ul
-              - user.errors.full_messages.each do |msg|
-                li= msg
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label First name
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-info-circle aria-hidden='true'
-              = f.text_field :first_name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'First name'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Last name
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-info aria-hidden='true'
-              = f.text_field :last_name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Last name'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Additional information
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-address-card aria-hidden='true'
-              = f.text_field :info, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Additional information'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Birthday
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-birthday-cake aria-hidden='true'
-              = f.date_field :birthday, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Birthday'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Address
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-address-book-o aria-hidden='true'
-              = f.text_field :address, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Address'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Gender
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-transgender aria-hidden='true'
-              = f.select :sex, User.sexes.keys
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Avatar
-          .col-lg-9
-            = f.file_field :avatar, class: 'form-control', placeholder: 'Avatar'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Email
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-user-circle aria-hidden='true'
-              = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Email'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Password
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-bomb aria-hidden='true'
-              = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Password'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label
-          .col-lg-9
-            input.btn.btn-secondary type='reset' value='Reset' /
-            input.btn.btn-success type='submit' value='Submit'
+.container
+  .col-md-8.offset-md-2.mt-2
+    .card.card-outline-secondary
+      .card-header
+        h3.mb-0 align='center'
+          = t('.editing')
+      .card-block
+        = form_for user do |f|
+          - if user.errors.any?
+            #error_explanation
+              h2
+                = pluralize(user.errors.count, 'error ')
+                | prohibited
+                |  this user from being saved:
+              ul
+                - user.errors.full_messages.each do |msg|
+                  li= msg
+          .form-group.row.ml-3.mr-3.ml-3.mr-3
+            label.col-lg-3.col-form-label.form-control-label = t '.first_name'
+            .col-lg-9
+              .input-group.indent-bottom
+                span.input-group-addon
+                  i.fa.fa-info-circle aria-hidden='true'
+                = f.text_field :first_name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.first_name')
+          .form-group.row.ml-3.mr-3
+            label.col-lg-3.col-form-label.form-control-label = t '.last_name'
+            .col-lg-9
+              .input-group.indent-bottom
+                span.input-group-addon
+                  i.fa.fa-info aria-hidden='true'
+                = f.text_field :last_name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.last_name')
+          .form-group.row.ml-3.mr-3
+            label.col-lg-3.col-form-label.form-control-label = t '.info'
+            .col-lg-9
+              .input-group.indent-bottom
+                span.input-group-addon
+                  i.fa.fa-address-card aria-hidden='true'
+                = f.text_field :info, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.info')
+          .form-group.row.ml-3.mr-3
+            label.col-lg-3.col-form-label.form-control-label = t '.birthday'
+            .col-lg-9
+              .input-group.indent-bottom
+                span.input-group-addon
+                  i.fa.fa-birthday-cake aria-hidden='true'
+                = f.date_field :birthday, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.birthday')
+          .form-group.row.ml-3.mr-3
+            label.col-lg-3.col-form-label.form-control-label = t '.address'
+            .col-lg-9
+              .input-group.indent-bottom
+                span.input-group-addon
+                  i.fa.fa-address-book-o aria-hidden='true'
+                = f.text_field :address, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.address')
+          .form-group.row.ml-3.mr-3
+            label.col-lg-3.col-form-label.form-control-label = t '.gender'
+            .col-lg-9
+              .input-group.indent-bottom
+                span.input-group-addon
+                  i.fa.fa-transgender aria-hidden='true'
+                = f.select :sex, User.sexes.keys
+          .form-group.row.ml-3.mr-3
+            label.col-lg-3.col-form-label.form-control-label = t '.avatar'
+            .col-lg-9
+              = f.file_field :avatar, class: 'form-control'
+          .form-group.row.ml-3.mr-3
+            label.col-lg-3.col-form-label.form-control-label = t '.email'
+            .col-lg-9
+              .input-group.indent-bottom
+                span.input-group-addon
+                  i.fa.fa-user-circle aria-hidden='true'
+                = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: t('.email')
+          .form-group.row.ml-3.mr-3
+             label.col-lg-3.col-form-label.form-control-label = t '.password'
+             .col-lg-9
+               .input-group.indent-bottom
+                 span.input-group-addon
+                   i.fa.fa-bomb aria-hidden='true'
+                 = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.password')
+          .form-group.row
+            label.col-lg-3.col-form-label.form-control-label
+            .col-lg-9
+              input.btn.btn-secondary.mr-2 type='reset' value='Reset'
+              input.btn.btn-success type='submit' value='Submit'

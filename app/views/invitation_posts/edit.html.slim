@@ -1,6 +1,3 @@
-h1
-  | Editing post
-
 = form_for invitation_post do |f|
   - if invitation_post.errors.any?
     #error_explanation
@@ -16,28 +13,28 @@ h1
     .card.card-outline-secondary
       .card-block
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Name
+          label.col-lg-3.col-form-label.form-control-label = t('.name')
           .col-lg-9
-            .input-group style=("margin-bottom: 25px")
+            .input-group.indent-bottom
               span.input-group-addon
-                i.fa.fa-info-circle aria-hidden="true"
-              = f.text_field :name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Name'
+                i.fa.fa-info-circle aria-hidden='true'
+              = f.text_field :name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.name')
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Info
+          label.col-lg-3.col-form-label.form-control-label = t('.info')
           .col-lg-9
-            .input-group style=("margin-bottom: 25px")
+            .input-group.indent-bottom
               span.input-group-addon
-                i.fa.fa-info-circle aria-hidden="true"
-              = f.text_field :info, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Info'
+                i.fa.fa-info-circle aria-hidden='true'
+              = f.text_field :info, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.info')
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Date
+          label.col-lg-3.col-form-label.form-control-label = t('.date')
           .col-lg-9
-            .input-group style=("margin-bottom: 25px")
+            .input-group.indent-bottom
               span.input-group-addon
-                i.fa.fa-info-circle aria-hidden="true"
-              = f.date_field :date, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: 'Date'
+                i.fa.fa-info-circle aria-hidden='true'
+              = f.date_field :date, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.date')
         .form-group.row
           label.col-lg-3.col-form-label.form-control-label
           .col-lg-9
-            input.btn.btn-secondary type="reset" value="Reset" /
-            input.btn.btn-success type="submit" value="Submit"
+            input.btn.btn-secondary.ml-2 type='reset' value='Reset'
+            input.btn.btn-success type='submit' value='Submit'

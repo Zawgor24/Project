@@ -1,10 +1,20 @@
-.row
-  .col-md-9
-    .row
-      = render sports
+.container
+  .row.article-header
+    .col
+  .row
+    .col-2
+      .row
+        .col-md-12
+          .nav-side-menu
+            h2.text-center = t '.sports'
+            = render sports
+    .col-7.aricle-show
+      h1.post-title = t '.news'
+      = render articles
 
-    h1.post-title All news
-    = render articles
-
-  .col-md-3
-    = render 'shared/submenu'
+    .col-3
+      = render 'shared/submenu'
+  .row
+    .col-4
+    .col.mt-2.ml-5
+      = will_paginate articles

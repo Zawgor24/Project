@@ -7,7 +7,9 @@ class Article < ApplicationRecord
 
   scope :by_update, -> { order(updated_at: :desc) }
 
-  validates :title, length: { maximum: 20 }
+  self.per_page = 5
+
+  validates :title, length: { maximum: 50 }
   validates :title, :body, presence: true
 
   mount_uploader :avatar, ArticleImageUploader

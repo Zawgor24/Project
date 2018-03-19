@@ -8,28 +8,14 @@
       ul
         - commentable.errors.full_messages.each do |msg|
           li= msg
-  .col-md-8.offset-md-2 
-    hr.my-5/
-    .card.card-outline-secondary
-      .card-header 
-        h3.mb-0  Create comment
+  .col-md-12
       .card-block
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Title
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-info-circle aria-hidden='true'
-              = f.text_field :title, autocomplete: 'off', class: 'form-control', placeholder: 'Title'
+          .col-lg-12
+            .form-group
+              = f.text_area :body, autocomplete: 'off', class: 'form-control', placeholder: t('.leave_comment_here')
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label Body
-          .col-lg-9
-            .input-group style=('margin-bottom: 25px')
-              span.input-group-addon
-                i.fa.fa-info-circle aria-hidden='true'
-              = f.text_field :body, autocomplete: 'off', class: 'form-control', placeholder: 'Body'
-        .form-group.row
-          label.col-lg-3.col-form-label.form-control-label
-          .col-lg-9
-            input.btn.btn-secondary.mr-2 type='reset' value='Reset' /
-            input.btn.btn-success type='submit' value='Submit' 
+          label.col-lg-4.col-form-label.form-control-label
+          .col-5
+            input.btn.btn-secondary.mr-2 type='reset' value='Reset'
+            input.btn.btn-success type='submit' value='Submit'

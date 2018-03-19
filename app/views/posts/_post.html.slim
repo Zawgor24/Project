@@ -1,16 +1,16 @@
-.post
-  .container
-    .well
-      .media
-        a.pull-left
-          = show_image(post)
-        .media-body.ml-3
-          h4.media-heading
+.container
+  .row
+    .col.mb-2
+      .card.text-center
+        .card-header
+          .article-picture
+            = show_image(post)
+        .card-body
+          h2.card-title
             = link_to post.title, post
-          p.text-right
-            | By #{ post.user.email }
-          p
-            = post.body
+          p.card-text
+            = limit_body(post)
+        .card-footer.text-muted
           ul.list-inline.list-unstyled
             li
               span
@@ -18,12 +18,16 @@
                 = post.created_at
             li
             span
+              i.fa.fa-user aria-hidden='true'
+              = link_to t('.creator', name: full_name(post.user)), post.user
+            li
+            span
               i.fa.fa-comments aria-hidden='true'
-              | #{ post.comments.count } comments
+              = t('.comments_count', count: post.comments.count)
             li
               span
-                i.fa.fa-facebook-square
+                i.fa.fa-facebook-square.mr-1
               span
-                i.fa.fa-twitter-square
+                i.fa.fa-twitter-square.mr-1
               span
                 i.fa.fa-google-plus-square

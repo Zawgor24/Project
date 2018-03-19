@@ -1,8 +1,14 @@
 - if posts.present?
-  h1 align = 'center'
-    | Category #{ posts.first.category.name }
+  h1.text-center
+    = t('.category', name: posts.first.category.name)
   .card-deck
     = render posts
 
 - else
-  = t('posts.empty_category', category: category.name.titleize)
+  .empty-post
+    h3
+      = t('.empty', name: category.name.titleize)
+    .row
+      .col-4
+      .col
+        i.fa.fa-frown-o.battery-category

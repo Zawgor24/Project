@@ -8,17 +8,22 @@
           .profile-usertitle-name
             = full_name(user)
           .profile-usertitle-job
-            | Status
+            = t '.status'
         .profile-userbuttons
-          = render 'friendship' unless current_user.eql?(user)
-          = render 'message'
-          = link_to t('follows.followers'), user_followers_path(user), class: 'btn btn-outline-info'
-        .profile-usermenu
-          ul.nav
-            li
-              = link_to t('profiles.show.edit'), edit_user_path(user) if policy(user).edit?
-          ul.nav
-            li
-              = link_to t('profiles.delete'), user, method: :delete, data: {confirm: 'Sure?'} if policy(user).destroy?
+          - unless current_user.eql?(user)
+            = render 'friendship'
+            = render 'message'
+          = link_to t('.followers'), user_followers_path(user), class: 'btn btn-outline-info'
+        .container
+          .profile-usermenu
+            .row
+              .col
+                ul.nav
+                  li
+                    = link_to t('.edit'), edit_user_path(user) if policy(user).edit?
+              .col
+                ul.nav
+                  li
+                    = link_to t('.delete'), user, method: :delete, data: {confirm: t('confirm')} if policy(user).destroy?
 
     = render 'profile'

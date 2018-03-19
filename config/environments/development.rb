@@ -1,12 +1,4 @@
 Rails.application.configure do
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.alert = true
-
-    Bullet.add_whitelist type: :n_plus_one_query,
-      class_name: 'Mailboxer::Message', association: :sender
-  end
-
   config.cache_classes = false
   config.eager_load = false
   config.consider_all_requests_local = true
