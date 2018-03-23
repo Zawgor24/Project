@@ -7,6 +7,6 @@
       h2.card-title
         = link_to article.title, article
       p.card-text
-        = article.body.truncate_words(25)
+        = article.limit_body
     .card-footer.text-muted
       = t('messages.time_ago', time: time_ago_in_words(article.updated_at))

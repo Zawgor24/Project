@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-  expose :article
-  expose :articles, -> { Article.order(updated_at: :desc) }
+  expose :article, decorate: ->(article) { decorate(article) }
+  expose :articles, -> { Article.by_update.map { |article| decorate(article) } }
   expose :comments, -> { article.comments.includes(:user) }
   expose :sports,   -> { Sport.order(name: :asc) }
 
@@ -41,6 +41,10 @@ class ArticlesController < ApplicationController
 
   def authorize_article
     authorize article
+  end
+
+  def decorate(object)
+    ArticleDecorator.new(object)
   end
 
   def article_params

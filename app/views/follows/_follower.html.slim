@@ -1,9 +1,9 @@
 - @followers.each do |follower|
-  .card.mt-3.mr-5 style=("width: 20rem;") 
-    .card-img-top 
+  .card.mt-3.mr-5 style=("width: 20rem;")
+    .card-img-top
       = show_small_image(follower)
     .card-body
       h5.card-title
         = link_to full_name(follower), follower
-      p.card-text 
+      p.card-text
         = follower.email

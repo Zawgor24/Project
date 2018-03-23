@@ -42,4 +42,8 @@ module ApplicationHelper
   def unread_messages_count
     current_user.mailbox.inbox(unread: true).count
   end
+
+  def message(conversation)
+    "#{conversation.sender_name}:  #{conversation.message}"
+  end
 end

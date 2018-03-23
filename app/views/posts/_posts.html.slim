@@ -1,0 +1,8 @@
+- if posts.present?
+  h1 align = 'center'
+    | Category #{ posts.first.category.name }
+  .card-deck
+    = render posts
+
+- else
+  = t('posts.empty_category', category: category.name.titleize)

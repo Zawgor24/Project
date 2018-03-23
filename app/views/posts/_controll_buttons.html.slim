@@ -1,0 +1,7 @@
+- if policy(post).edit?
+  = link_to t('posts.edit'), edit_post_path(post),
+    class: 'btn btn-warning mr-2'
+
+- if policy(post).destroy?
+  = link_to t('posts.delete'), post, method: :delete,
+    data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

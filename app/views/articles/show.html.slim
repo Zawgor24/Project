@@ -1,14 +1,14 @@
 .conteiner
   p.text-right
-        | Article №#{ article.id }
-        br
-        - if policy(article).edit?
-          = link_to t('articles.edit'), edit_article_path(article),
-            class: 'btn btn-warning mr-2'
+    | Article №#{ article.id }
+    br
+    - if policy(article).edit?
+      = link_to t('articles.edit'), edit_article_path(article),
+        class: 'btn btn-warning mr-2'
 
-        - if policy(article).destroy?
-          = link_to t('articles.delete'), article, method: :delete,
-            data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    - if policy(article).destroy?
+      = link_to t('articles.delete'), article, method: :delete,
+        data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
   .leftimg
     = show_image(article)
 
@@ -21,6 +21,6 @@
 h3 Comments
 
 = render comments
-= render partial: 'comments/form', locals: { commentable: article }
+= render 'comments/form', commentable: article
 
 = link_to 'Back', :back

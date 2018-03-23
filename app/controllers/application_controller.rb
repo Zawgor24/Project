@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def decorate_mailboxer(object)
+    Mailboxer::ConversationDecorator.decorate_collection(object)
+  end
+
   def set_categories
     @categories = Category.by_name
   end

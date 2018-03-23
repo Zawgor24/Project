@@ -4,11 +4,11 @@
       .leftimg
         = show_image(sport)
       .post-title
-        | #{ sport.name }
+        = sport.name
         .follow
           = render 'friendship'
       h5
-        | #{ sport.info }
+        = sport.info
 
   = link_to 'Create invitation post', new_sport_invitation_post_path(sport)
 

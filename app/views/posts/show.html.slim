@@ -8,21 +8,14 @@
     p align='right'
       | Post №#{ post.id }
       br/
-      = link_to t('posts.edit'), edit_post_path(post) if policy(post).edit?
-      br/
-      = link_to t('posts.delete'), post, method: :delete, data: { confirm: 'Are you sure?' } if policy(post).destroy?
+      = render 'controll_buttons'
     .leftimg
       = show_image(post)
 
     h5
       | #{ post.body }
 
-    - if post.comments.present?
-      h4 Comments
-
-      = render comments
-
-    = render partial: 'comments/form', locals: { commentable: post }
+    = render 'post_comments'
 
     = link_to 'Back', :back
 

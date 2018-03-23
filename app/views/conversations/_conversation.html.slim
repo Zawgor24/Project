@@ -8,7 +8,7 @@
           = show_small_image(companion(conversation))
         h5.card-text.h3
           i.fa.fa-hand-o-right
-            = link_to "#{conversation.last_sender.first_name}:  #{conversation.last_message.body.truncate(50)}", conversation_path(conversation)
+            = link_to message(conversation), conversation_path(conversation)
         p.text-muted.mt-3
           a.fa.fa-envelope-o.mr-1
             = link_to full_name(companion(conversation)), companion(conversation)

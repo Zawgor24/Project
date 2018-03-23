@@ -8,7 +8,7 @@
           = image_tag(companion(conversation).avatar, size: '100x100', class: 'rounded-circle')
         h5.card-text.h3
           i.fa.fa-hand-o-right
-            = link_to "#{conversation.messages.last.sender.first_name}:  #{conversation.messages.last.body.truncate(50)}", conversation_path(conversation)
+            = link_to message(conversation), conversation_path(conversation)
         p.text-muted.mt-3
           a.fa.fa-envelope-o.mr-1
             = link_to full_name(companion(conversation)), companion(conversation)

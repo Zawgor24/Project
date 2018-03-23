@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  expose :user
+  expose :user, decorate: ->(user) { UserDecorator.new(user) }
 
   before_action :authorize_user, only: %i[edit update destroy]
 

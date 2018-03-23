@@ -8,12 +8,10 @@
     br/
     | Address: #{ user.address }
     br/
-    | Gender: #{ user.sex.humanize if user.sex }
+    | Gender: #{ user.gender_type }
     br/
     | Additional information: #{ user.info }
     br/
     .sports
       | All followed sports
-      - user.followees(Sport).each do |sport|
-        li
-          = link_to sport.name, sport
+      = render 'followed_sport'

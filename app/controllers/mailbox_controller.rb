@@ -2,14 +2,14 @@
 
 class MailboxController < ApplicationController
   def inbox
-    @inbox = mailbox.inbox
+    @inbox = decorate_mailboxer(mailbox.inbox)
   end
 
   def sentbox
-    @sentbox = mailbox.sentbox
+    @sentbox = decorate_mailboxer(mailbox.sentbox)
   end
 
   def trash
-    @trash = mailbox.trash
+    @trash = decorate_mailboxer(mailbox.trash)
   end
 end
