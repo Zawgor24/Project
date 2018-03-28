@@ -34,4 +34,6 @@ Rails.application.configure do
   end
 
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { host: 'mysterious-earth-61882.herokuapp.com' }
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Mailboxer.setup do |config|
-  config.uses_emails = true
+  config.uses_emails = false
   config.default_from = 'no-reply@mailboxer.com'
   config.email_method = :mailboxer_email
   config.name_method = :name
