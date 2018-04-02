@@ -46,11 +46,11 @@ module ApplicationHelper
   end
 
   def show_image(object)
-    image_tag(object.avatar_url, height: '300')
+    image_tag(object.avatar_url(:full_size))
   end
 
   def show_small_image(object)
-    image_tag(object.avatar, size: '100x100', class: 'rounded-circle')
+    image_tag(object.avatar_url(:small_image), class: 'rounded-circle')
   end
 
   def unread_messages_count

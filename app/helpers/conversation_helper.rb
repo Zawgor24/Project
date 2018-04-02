@@ -2,7 +2,7 @@
 
 module ConversationHelper
   def avatar_sender(user)
-    image_tag(user.avatar, size: '50x50', class: 'rounded-circle')
+    image_tag(user.avatar_url(:small_picture), class: 'rounded-circle')
   end
 
   def companion(conversation)

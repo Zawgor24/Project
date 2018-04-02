@@ -44,6 +44,8 @@ en:
       message: Print your message...
     index:
       conversations: Conversations
+    message:
+      time_ago: '%{time} ago'
 
   comments:
     comment:

@@ -1,23 +1,32 @@
 # frozen_string_literal: true
 
 class ArticleImageUploader < CarrierWave::Uploader::Base
-  include CarrierWave::RMagick
+  if Rails.env.production?
+    include Cloudinary::CarrierWave
 
-  storage :file
+  else
+    include CarrierWave::RMagick
 
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    storage :file
+
+    def store_dir
+      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
   end
 
-  def default_url(*_args)
+  def default_url
     ActionController::Base.helpers.asset_path('default-news-image.jpg')
   end
 
-  version :thumb do
-    process resize_to_fit: [250, 250]
+  version :full_size do
+    process resize_to_fit: [350, 400]
   end
 
-  version :little do
-    process resize_to_fit: [180, 180]
+  version :small_image do
+    process resize_to_fit: [100, 100]
+  end
+
+  version :small_picture do
+    process resize_to_fit: [50, 50]
   end
 end
