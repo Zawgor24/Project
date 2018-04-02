@@ -9,25 +9,28 @@
         - invitation_post.errors.full_messages.each do |msg|
           li= msg
   .col-md-8.offset-md-2
-    hr.my-5/
+    hr
     .card.card-outline-secondary
       .card-block
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label = t('.name')
+          .col
+          label.col-lg-2.col-form-label.form-control-label = t('.name')
           .col-lg-9
             .input-group.indent-bottom
               span.input-group-addon
                 i.fa.fa-info-circle aria-hidden='true'
               = f.text_field :name, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.name')
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label = t('.info')
+          .col
+          label.col-lg-2.col-form-label.form-control-label = t('.info')
           .col-lg-9
             .input-group.indent-bottom
               span.input-group-addon
                 i.fa.fa-info-circle aria-hidden='true'
               = f.text_field :info, autofocus: true, autocomplete: 'off', class: 'form-control', placeholder: t('.info')
         .form-group.row
-          label.col-lg-3.col-form-label.form-control-label = t('.date')
+          .col
+          label.col-lg-2.col-form-label.form-control-label = t('.date')
           .col-lg-9
             .input-group.indent-bottom
               span.input-group-addon

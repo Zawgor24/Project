@@ -10,6 +10,8 @@
     | Address: #{ user.address }
     br/
     | Gender: #{ user.gender_type }
+    br
+    = render 'private_info' if policy(user).manager_or_owner?
     hr
     | Additional information: #{ user.info }
     hr

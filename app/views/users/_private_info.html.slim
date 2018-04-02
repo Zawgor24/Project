@@ -1,0 +1,3 @@
+= link_to t('.verify'), new_phone_verification_path if policy(PhoneVerificationsController).create?
+br
+= t('.phone_number', number: user.phone_number) if user.phone_number.present?

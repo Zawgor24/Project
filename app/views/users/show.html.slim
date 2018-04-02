@@ -10,7 +10,7 @@
           .profile-usertitle-job
             = t '.status'
         .profile-userbuttons
-          - unless current_user.eql?(user)
+          - unless policy(user).destroy?
             = render 'friendship'
             = render 'message'
           = link_to t('.followers'), user_followers_path(user), class: 'btn btn-outline-info'

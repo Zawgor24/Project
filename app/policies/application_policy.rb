@@ -54,4 +54,8 @@ class ApplicationPolicy
   def manager_or_owner?
     manager? || owner?
   end
+
+  def phone_number?
+    user.phone_number.nil?
+  end
 end

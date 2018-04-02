@@ -1,0 +1,34 @@
+.container
+  .row
+    .col-4
+    .col-mb-2.mt-4.mb-4
+      h1 = t '.verify_number'
+      = form_tag(phone_verifications_path, method: :post) do
+        - if @response
+          - @response.errors.each do |key, message|
+            = message
+        .card.text-center
+          .card-header
+            .row
+              .col-4
+                = label_tag 'authy-countries', t('.country_code')
+              .col-8
+                = select_tag 'authy-countries', nil, name: 'country_code', 'data-show-as': 'number'
+            hr
+            .row
+              .col-4
+                = label_tag :phone_number, t('.number')
+              .col-8
+                = telephone_field_tag :phone_number, nil, name: 'phone_number'
+
+          .div
+            h5 = t '.verification_method'
+            .row
+              .col-3
+              .col-3
+                = label_tag :method_sms, t('.sms')
+                = radio_button_tag :method, 'sms'
+              .col-3
+                = label_tag :method_call, t('.call')
+                = radio_button_tag :method_call, 'call'
+          = button_tag 'Verify', class: 'btn btn-secondary'

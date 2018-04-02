@@ -1,0 +1,15 @@
+.container
+  .empty-post.mt-2
+    .card.text-center
+      .card-header
+        h1 = t('.checking')
+
+        = form_tag(verify_phone_verifications_path, method: :post) do
+          - if @response
+            - @response.errors.each do |key, message|
+              = message
+          .div
+            = label_tag :code, t('.enter_code')
+            = text_field_tag :code
+          .div
+            = button_tag t('.verify'), class: 'btn btn-success'

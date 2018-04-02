@@ -4,7 +4,7 @@
       .card-body
         p
           = link_to image_tag('delete.png', size: '20x20'), conversation_path(conversation), method: :delete, data: { confirm: t('confirm') }, class: 'delete-con'
-        p.card-title.leftimg
+        .conversation-userpic
           = show_small_image(companion(conversation))
         h5.card-text.h3
           i.fa.fa-hand-o-right

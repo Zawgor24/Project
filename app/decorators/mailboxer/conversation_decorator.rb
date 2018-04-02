@@ -3,6 +3,7 @@
 module Mailboxer
   class ConversationDecorator < ApplicationDecorator
     WORDS_COUNT = 50
+
     delegate_all
 
     def sender_name
