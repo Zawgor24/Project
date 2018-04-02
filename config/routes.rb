@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'mailbox/inbox', to: 'mailbox#inbox'
-  get 'mailbox/sentbox', to: 'mailbox#sentbox'
-  get 'mailbox/trash', to: 'mailbox#trash'
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  get 'mailbox/inbox', to: 'mailbox#inbox'
+  get 'mailbox/sentbox', to: 'mailbox#sentbox'
+  get 'mailbox/trash', to: 'mailbox#trash'
 
   resources :articles, only: :index
 
@@ -21,6 +21,14 @@ Rails.application.routes.draw do
 
     resources :invitation_posts, shallow: true do
       resources :comments, except: %i[index show]
+    end
+  end
+
+  resources :phone_verifications, only: %i[new create] do
+    collection do
+      get 'challenge'
+      post 'verify'
+      get 'success'
     end
   end
 
